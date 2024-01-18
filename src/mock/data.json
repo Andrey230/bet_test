@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Btc prediction",
+    "image": "https://g.foolcdn.com/editorial/images/656751/bitcoin-bull-and-bear.jpg",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "tag": "top",
+    "tags": ["crypto", "btc"],
+    "volume": "53.4",
+    "endDate": "6 hours",
+    "address": "EQCDHvcYknF43tZFlow9NOKMzF75KAVwCqiMKsT1oQxD0vYf",
+    "options": ["under 14k","14k - 26k", "more that 26k"],
+    "totalTickets": 1454,
+    "ticketOption": [346, 594, 514],
+    "price" : 5
+  },
+  {
+    "title": "Barcelona vs Real Madrid",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "image": "https://i.guim.co.uk/img/media/0e1e094fd68e1f5a7062314b8e92f6f34f13aa15/702_388_3047_1827/master/3047.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=46413f3a9fc77a2569a2be403f5727ff",
+    "tag": "top",
+    "tags": ["sport", "football"],
+    "volume": "21.5",
+    "endDate": "4 days",
+    "address": "kQAJ-UcbVTILqvfyqfCj4csWGJeQDLhyREXqdbGtF17J35rb",
+    "options": ["Barcelona","draw", "Real Madrid"],
+    "totalTickets": 1219,
+    "ticketOption": [417, 256, 546],
+    "price" : 4
+  },
+  {
+    "title": "2024 United States presidential election",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "image": "https://dynaimage.cdn.cnn.com/cnn/c_fill,g_auto,w_1200,h_675,ar_16:9/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F200717182316-20200717-election-explainer-main.jpg",
+    "tag": "top",
+    "tags": ["politics", "USA"],
+    "volume": "12.7",
+    "endDate": "1 day",
+    "address": "CXZc-UcbVTILqvfyqfCj4csPcJeQDLhyREXqdbGtF17J3321",
+    "options": ["Donald Tramp", "Vivek Ramaswamy", "Dean Phillips", "Robert Kennedy Jr", "Joseph Biden"],
+    "totalTickets": 1875,
+    "ticketOption": [794, 546, 321, 210, 2],
+    "price" : 10
+  }
+]
