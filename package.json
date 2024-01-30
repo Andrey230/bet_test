@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@orbs-network/ton-access": "^2.3.3",
     "@tonconnect/ui-react": "^2.0.0",
     "@twa-dev/sdk": "^7.0.0",
     "@twa-dev/types": "^7.0.0",
     "@vitejs/plugin-basic-ssl": "^1.0.2",
+    "axios": "^1.6.7",
     "buffer": "^6.0.3",
+    "date-fns": "^3.3.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
@@ -24,7 +27,8 @@
     "sort-by": "^1.2.0",
     "ton": "^13.9.0",
     "ton-core": "^0.53.0",
-    "ton-crypto": "^3.2.0"
+    "ton-crypto": "^3.2.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

@@ -1,11 +1,10 @@
 import {TonConnectButton, useTonConnectUI} from "@tonconnect/ui-react"
 import { NavLink } from "react-router-dom"
 import {useTonConnect} from "../hooks/useTonConnect"
-import {disconnectWallet} from "../handlers/handlers";
 
 export default function Header() {
 
-    const {connected} = useTonConnect()
+    const {connected, wallet} = useTonConnect();
     const [tonConnectUI] = useTonConnectUI();
 
     const disconnectWallet = async () => {
@@ -37,9 +36,8 @@ export default function Header() {
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                                     <li>
-                                        <a className="justify-between">
+                                        <a className="justify-between" href={`/app/profile/${wallet?.toString()}`}>
                                             Profile
-                                            <span className="badge">New</span>
                                         </a>
                                     </li>
                                     <li><a>Settings</a></li>

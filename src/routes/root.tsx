@@ -6,7 +6,11 @@ export default function Root() {
         <>
             <Header />
             <div className="bg-base-300 pt-6 pb-8">
-                <Outlet />
+                <div className="flex justify-center">
+                    <div className="w-4/5">
+                        <Outlet />
+                    </div>
+                </div>
             </div>
         </>
     )

@@ -9,9 +9,11 @@ import {
 } from "react-router-dom"
 import {TonConnectUIProvider} from "@tonconnect/ui-react";
 import Root from "./routes/root"
-import Home from "./routes/home"
+import Home, {loader as homeLoader} from "./routes/home"
 import EventView, {loader as eventLoader} from "./routes/event/view";
+import ProfileView, {loader as profileLoader} from "./routes/profile/view";
 import EventCreate from "./routes/event/create";
+import ProfileWaiting from "./routes/profile/waiting";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +27,7 @@ const router = createBrowserRouter([
             {
                 path: "/app",
                 element: <Home />,
+                loader: homeLoader,
             },
             {
                 path: "/app/event/:eventId",
@@ -34,6 +37,15 @@ const router = createBrowserRouter([
             {
                 path: "/app/event/create",
                 element: <EventCreate />
+            },
+            {
+                path: "/app/profile/waiting",
+                element: <ProfileWaiting />,
+            },
+            {
+                path: "/app/profile/:address",
+                element: <ProfileView />,
+                loader: profileLoader,
             },
         ],
     },

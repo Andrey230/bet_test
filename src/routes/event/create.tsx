@@ -1,19 +1,29 @@
 import {useState, forwardRef} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {useEventCreatorContract} from "../../hooks/useEventCreatorContract";
+import {beginCell, toNano} from "ton-core";
+import {uploadPinataFile, uploadPinataJson} from "../../api/endpoints";
 
 export default function EventCreate(){
+    const maxTags = 5;
+
+    const {createEvent} = useEventCreatorContract();
     //OPTIONS
     const defaultOptions = ["Option 1", "Option 2"];
     const [options, setOptions] = useState(defaultOptions);
     const [optionsError, setOptionsError] = useState("");
+
+    //TAGS
+    const [tags, setTags] = useState([]);
+    const [tag, setTag] = useState("");
 
     //TITLE
     const [title, setTitle] = useState("");
     const [titleError, setTitleError] = useState("");
 
     //IMAGE
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState(null);
     const [imageUrl, setImageUrl] = useState("");
     const [imageError, setImageError] = useState("");
     const maxImageSize = 5000000;
@@ -75,9 +85,8 @@ export default function EventCreate(){
     };
 
     const addOptionHandler = () => {
-        const optionLength = options.length;
         const newOptions = [...options, ""]
-        setOptions(newOptions)
+        setOptions(newOptions);
     }
 
     const removeOptionHandler = (optionIndex) => {
@@ -87,16 +96,6 @@ export default function EventCreate(){
 
         setOptions(newOptions)
     }
-
-    const submitCreateEventForm = (event) => {
-        event.preventDefault();
-
-        console.log(title);
-        console.log(desc);
-        console.log(options);
-        console.log(endEventDate);
-        console.log(stopSellTicketDate);
-    };
 
     const textInputHandler = (event, setValue, setError) => {
         const value = event.target.value;
@@ -111,8 +110,6 @@ export default function EventCreate(){
     }
 
     const stopSellTicketHandler = (date) => {
-        console.log(date.valueOf());
-
         if(date.valueOf() < Date.now()){
             setStopSellTicketDateError("Date must be greater that now");
         }else{
@@ -146,21 +143,20 @@ export default function EventCreate(){
         </button>
     ));
 
-    const onChangeImage = (e) => {
-        console.log(e.target.files[0].size);
-
+    const onChangeImage = async (e) => {
         if(e.target.files[0].size > maxImageSize){
             setImageError("Max size 5MB");
         }else{
+            setImage(e.target.files[0]);
             setImageUrl(URL.createObjectURL(e.target.files[0]));
         }
     }
 
-    const ticketPriceHandler = (event) => {
+    const ticketPriceHandler = async (event) => {
         setPrice(event.target.value);
     }
 
-    const createEventHandler = () => {
+    const createEventHandler = async () => {
         let hasErrors = false;
         if(title === ""){
             hasErrors = true;
@@ -178,18 +174,80 @@ export default function EventCreate(){
             }
         });
 
+        if(!image){
+            hasErrors =true;
+            setImageError("Pick image");
+        }
+
         if(optionsError){
             hasErrors = true;
             setOptionsError("Invalid options");
         }
 
+        if(hasErrors){
+            return;
+        }
 
+        const pinataImage = await uploadPinataFile(image);
+        const pinataImageUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${pinataImage}`;
+        const eventData = {
+            name: title,
+            description: desc,
+            image: pinataImageUrl,
+            options: options,
+            tags: tags
+        };
+
+        const pinataJson = await uploadPinataJson(eventData);
+
+        const pinataJsonUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${pinataJson}`;
+
+
+        const OFFCHAIN_CONTENT_PREFIX = 0x01;
+
+
+        let eventContent = beginCell().storeInt(OFFCHAIN_CONTENT_PREFIX, 8).storeStringRefTail(pinataJsonUrl).endCell();
+        //
+        await createEvent({
+            $$type: "EventCreate",
+            query_id: 0n,
+            content: eventContent,
+            ticket_price: toNano(`${price}`),
+            stop_sell_ticket_datetime: BigInt(getTimestamp(stopSellTicketDate)),
+            event_start_datetime: BigInt(getTimestamp(endEventDate)),
+            total_options: BigInt(options.length)
+        });
+    }
+
+    function getTimestamp(date: Date): number
+    {
+        return Math.floor(date.getTime() / 1000);
+    }
+
+    const addTagsButton = () => {
+        if(tag !== "" && tags.length < maxTags){
+            const newTags = [...tags, tag];
+            setTags(newTags);
+            setTag("");
+        }
+    };
+
+    const handleTagsInput = (element) => {
+        setTag(element.target.value);
+    }
+
+    const removeTag = (tagIndex) => {
+        const newTags = tags.filter(function(item, index) {
+            return tagIndex !== index;
+        });
+
+        setTags(newTags);
     }
 
     return (
         <>
             <div className="flex justify-center">
-                <div className="w-4/5 bg-base-100 rounded-lg p-5 shadow-xl">
+                <div className="bg-base-100 rounded-lg p-5 shadow-xl">
                     <h3 className="text-2xl font-semibold">Create event</h3>
 
                     <label className="form-control w-full max-w-xs mt-3">
@@ -197,18 +255,12 @@ export default function EventCreate(){
                         {imageUrl ?
                             <div className="bg-cover bg-center h-44 rounded-lg" style={{backgroundImage: `url(${imageUrl})`}} ></div>
                             :
-                            <div className="bg-cover bg-center h-44 rounded-lg bg-base-200 flex justify-center items-center">
+                            <div className={`bg-cover bg-center h-44 rounded-lg bg-base-200 flex justify-center items-center ${imageError ? 'border-error border' : ''}`}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 fill-base-100" viewBox="0 0 512 512"><path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>
                             </div>
                         }
 
                         <input type="file" className="hidden" accept="image/*" onChange={onChangeImage}/>
-                        {imageError ?
-                            <div className="label">
-                                <span className="label-text-alt"></span>
-                                <span className="label-text-alt text-error">{imageError}</span>
-                            </div>
-                            : null}
                     </label>
 
                     <label className="form-control w-full max-w-xs">
@@ -231,6 +283,29 @@ export default function EventCreate(){
                         </div>
 
                         <input type="range" min={1} max={100} value={price} className="range range-primary range-md" onChange={ticketPriceHandler}/>
+                    </label>
+
+                    <label className="form-control">
+                        <div className="label">
+                            <span className="label-text font-semibold">Tags</span>
+                        </div>
+
+                        <div className="flex justify-between gap-3">
+                            <input type="text" placeholder="Tags" className={`bg-base-200 input w-full max-w-xs`} name="tags" value={tag} onChange={handleTagsInput}/>
+                            <button className="btn btn-primary text-xl" onClick={addTagsButton}>
+                                +
+                            </button>
+                        </div>
+
+                        <div className="flex gap-2 flex-wrap mt-3">
+                            {tags.map((element, index) => {
+                                return <div className="badge badge-primary badge-lg gap-1" key={index} onClick={() => removeTag(index)}>
+                                    {element}
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-4 h-4 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </div>;
+                            })}
+                        </div>
+
                     </label>
 
                     <label className="form-control w-full max-w-xs">
