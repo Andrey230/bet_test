@@ -14,6 +14,7 @@ import EventView, {loader as eventLoader} from "./routes/event/view";
 import ProfileView, {loader as profileLoader} from "./routes/profile/view";
 import EventCreate from "./routes/event/create";
 import ProfileWaiting from "./routes/profile/waiting";
+import TicketsView from "./routes/tickets/view";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
                 path: "/app",
                 element: <Home />,
                 loader: homeLoader,
+            },
+            {
+                path: "/app/tickets",
+                element: <TicketsView />,
             },
             {
                 path: "/app/event/:eventId",

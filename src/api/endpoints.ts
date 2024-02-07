@@ -1,7 +1,7 @@
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://bet-api-c64c.onrender.com";
 const PINATA_JWT = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI5M2MwMTk5NC0yYmFmLTQwMDktYjc1OC04NWU0M2QzOTk2MWEiLCJlbWFpbCI6ImFuZHJleWJlbG91czIzMEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiMGE2MjEwMTlhYTRmNWYwMTRmOTgiLCJzY29wZWRLZXlTZWNyZXQiOiIyN2ZlZWRkNWE3YjQ5M2Y5NDU5MDUxMGQxMmE0ZmE0ZmEyZDg1Y2U1MTZhOWYzODVlNDgyY2NjYTQ2NDU3MTkzIiwiaWF0IjoxNzA2Mjc3ODI0fQ.98KA_65Bl8lxBlgBMwd_uzSAupQWdUJVRtbAdu77gxc`;
 
 export function sendTransaction(params: {}){
@@ -34,8 +34,35 @@ export function getEvents(params = {}){
     });
 }
 
+
+export function getEvent(address: string){
+    let url = baseUrl + `/events/${address}`;
+
+    console.log(url);
+
+    return fetch(url, {
+        method: "GET"
+    });
+}
+
+export function getTickets(address: string){
+    let url = baseUrl + `/tickets/${address}`;
+
+    return fetch(url, {
+        method: "GET"
+    });
+}
+
 export function getWaitingEvents(address: string){
     let url = baseUrl + `/events/waiting/${address}`;
+
+    return fetch(url, {
+        method: "GET"
+    });
+}
+
+export function getProfileEvents(address: string){
+    let url = baseUrl + `/events/profile/${address}`;
 
     return fetch(url, {
         method: "GET"

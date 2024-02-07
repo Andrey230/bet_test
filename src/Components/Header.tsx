@@ -1,6 +1,7 @@
 import {TonConnectButton, useTonConnectUI} from "@tonconnect/ui-react"
 import { NavLink } from "react-router-dom"
 import {useTonConnect} from "../hooks/useTonConnect"
+import {Address} from "ton-core";
 
 export default function Header() {
 
@@ -11,11 +12,17 @@ export default function Header() {
         await tonConnectUI.disconnect()
     }
 
+    const handleClick = () => {
+        const elem = document.activeElement;
+        if(elem){
+            elem?.blur();
+        }
+    };
     return (
         <>
             <div className="navbar bg-base-100 relative z-20">
                 <div className="flex-1">
-                    <NavLink to="/" className="btn btn-ghost text-xl">moc1000</NavLink>
+                    <NavLink to="/app" className="btn btn-ghost text-xl">moc1000</NavLink>
                 </div>
 
                 <div className="flex-none">
@@ -28,6 +35,9 @@ export default function Header() {
                                     </div>
                                 </div>
                             </NavLink>
+
+
+
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
@@ -36,11 +46,15 @@ export default function Header() {
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                                     <li>
-                                        <a className="justify-between" href={`/app/profile/${wallet?.toString()}`}>
-                                            Profile
-                                        </a>
+                                        <NavLink to={`/app/profile/${Address.parse(wallet?.toString())}`} className="justify-between" onClick={handleClick}>
+                                            Events
+                                        </NavLink>
                                     </li>
-                                    <li><a>Settings</a></li>
+                                    <li>
+                                        <NavLink to="/app/tickets" className="justify-between" onClick={handleClick}>
+                                            Tickets
+                                        </NavLink>
+                                    </li>
                                     <li><a onClick={disconnectWallet}>Logout</a></li>
                                 </ul>
                             </div>

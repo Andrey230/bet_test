@@ -1742,6 +1742,7 @@ export type TicketData = {
     event_address: Address;
     ticket_amount: bigint;
     ticket_option: bigint;
+    returned: boolean;
 }
 
 export function storeTicketData(src: TicketData) {
@@ -1752,6 +1753,7 @@ export function storeTicketData(src: TicketData) {
         b_0.storeInt(src.ticket_amount, 257);
         let b_1 = new Builder();
         b_1.storeInt(src.ticket_option, 257);
+        b_1.storeBit(src.returned);
         b_0.storeRef(b_1.endCell());
     };
 }
@@ -1763,7 +1765,8 @@ export function loadTicketData(slice: Slice) {
     let _ticket_amount = sc_0.loadIntBig(257);
     let sc_1 = sc_0.loadRef().beginParse();
     let _ticket_option = sc_1.loadIntBig(257);
-    return { $$type: 'TicketData' as const, owner_address: _owner_address, event_address: _event_address, ticket_amount: _ticket_amount, ticket_option: _ticket_option };
+    let _returned = sc_1.loadBit();
+    return { $$type: 'TicketData' as const, owner_address: _owner_address, event_address: _event_address, ticket_amount: _ticket_amount, ticket_option: _ticket_option, returned: _returned };
 }
 
 function loadTupleTicketData(source: TupleReader) {
@@ -1771,7 +1774,8 @@ function loadTupleTicketData(source: TupleReader) {
     let _event_address = source.readAddress();
     let _ticket_amount = source.readBigNumber();
     let _ticket_option = source.readBigNumber();
-    return { $$type: 'TicketData' as const, owner_address: _owner_address, event_address: _event_address, ticket_amount: _ticket_amount, ticket_option: _ticket_option };
+    let _returned = source.readBoolean();
+    return { $$type: 'TicketData' as const, owner_address: _owner_address, event_address: _event_address, ticket_amount: _ticket_amount, ticket_option: _ticket_option, returned: _returned };
 }
 
 function storeTupleTicketData(source: TicketData) {
@@ -1780,6 +1784,7 @@ function storeTupleTicketData(source: TicketData) {
     builder.writeAddress(source.event_address);
     builder.writeNumber(source.ticket_amount);
     builder.writeNumber(source.ticket_option);
+    builder.writeBoolean(source.returned);
     return builder.build();
 }
 
@@ -1819,8 +1824,8 @@ function initTicket_init_args(src: Ticket_init_args) {
 }
 
 async function Ticket_init(event_address: Address, owner_address: Address, index: bigint, ticket_amount: bigint, option: bigint, content: Cell) {
-    const __code = Cell.fromBase64('te6ccgECGQEABSoAART/APSkE/S88sgLAQIBYgIDA3rQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxVFts88uCCFQQFAgFYDxAE9AGSMH/gcCHXScIflTAg1wsf3iCCEHiuO7S6j0sw0x8BghB4rju0uvLggdM/+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiBJsEjH4QW8kE18DggnJw4Chcn+IFEMwbW3bPH/gIIIQETvkMrrjAiCCEIgpp3q6Bg0HCAC8yPhDAcx/AcoAVWBQdiDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlAEINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WEss/yx/MyFADzxbJWMzLB8ntVAAkAAAAAFRpY2tldCBjcmVhdGVkAdAw0x8BghARO+QyuvLggdM/ATGBVnj4QlKAxwXy9HCAQHBUM4dTtshVQIIQ2gM9ClAGyx8Uyz8Syz/LHwEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxbLB8kqUEQUQzBtbds8fw0EhI8uMNMfAYIQiCmnerry4IHTPwExMIEV0PhCUoDHBfL0cIBAcIgpVTAUQzBtbds8f+AgghBOfDuPuuMCghCUapi2ugkNCgsANgAAAABUaWNrZXQgc3VjY2VzcyByZXR1cm5lZAHQMNMfAYIQTnw7j7ry4IHTPwExgVZ4+EJSgMcF8vRwgEBwVDOHU7bIVUCCEDvC5PdQBssfFMs/Ess/yx8BINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WywfJKlBEFEMwbW3bPH8NAViOp9MfAYIQlGqYtrry4IHTPwExyAGCEK/5D1dYyx/LP8n4QgFwbds8f+AwcAwBOm1tIm6zmVsgbvLQgG8iAZEy4hAkcAMEgEJQI9s8DQHKyHEBygFQBwHKAHABygJQBSDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlAD+gJwAcpoI26zkX+TJG6z4pczMwFwAcoA4w0hbrOcfwHKAAEgbvLQgAHMlTFwAcoA4skB+wAOAJh/AcoAyHABygBwAcoAJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4iRus51/AcoABCBu8tCAUATMljQDcAHKAOJwAcoAAn8BygACyVjMALm7vRgnBc7D1dLK57HoTsOdZKhRtmgnCd1jUtK2R8syLTry398WI5gnAgVcAbgGdjlM5YOq5HJbLDgnAb1J3vlUWW8cdT094FWcMmgnCdl05as07LczoOlm2UZuikgCASAREgIBIBMUAhG1DBtnm2eNjpAVFgARsK+7UTQ0gABgAHWybuNDVpcGZzOi8vUW1OYm9ZUjdDYWNhTk1lRlBhaHNTQnFFWUdYQXF2cW9ZN2dVTEZOWlhqeXlBV4IALe7UTQ1AH4Y9IAAY5P+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAH6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAdM/0x/U1AHQAdMHVWBsF+D4KNcLCoMJuvLgids8BtFVBNs8FxgACFR1YyMAtPpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAGBAQHXANQB0IEBAdcAgQEB1wDUMBA2EDUQNAAQyHABygfJ0Fg=');
-    const __system = Cell.fromBase64('te6cckECGwEABTQAAQHAAQEFoUmbAgEU/wD0pBP0vPLICwMCAWIMBAIBWAsFAgEgCAYCEbUMG2ebZ42OkBgHAAhUdWMjAgEgCgkAdbJu40NWlwZnM6Ly9RbU5ib1lSN0NhY2FOTWVGUGFoc1NCcUVZR1hBcXZxb1k3Z1VMRk5aWGp5eUFXggABGwr7tRNDSAAGAAubu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcBvUne+VRZbxx1PT3gVZwyaCcJ2XTlqzTstzOg6WbZRm6KSAN60AHQ0wMBcbCjAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IhUUFMDbwT4YQL4Yts8VRbbPPLgghgODQC8yPhDAcx/AcoAVWBQdiDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlAEINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WEss/yx/MyFADzxbJWMzLB8ntVAT0AZIwf+BwIddJwh+VMCDXCx/eIIIQeK47tLqPSzDTHwGCEHiuO7S68uCB0z/6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIEmwSMfhBbyQTXwOCCcnDgKFyf4gUQzBtbds8f+AgghARO+QyuuMCIIIQiCmneroXFRQPBISPLjDTHwGCEIgpp3q68uCB0z8BMTCBFdD4QlKAxwXy9HCAQHCIKVUwFEMwbW3bPH/gIIIQTnw7j7rjAoIQlGqYtroTFRIQAViOp9MfAYIQlGqYtrry4IHTPwExyAGCEK/5D1dYyx/LP8n4QgFwbds8f+AwcBEBOm1tIm6zmVsgbvLQgG8iAZEy4hAkcAMEgEJQI9s8FQHQMNMfAYIQTnw7j7ry4IHTPwExgVZ4+EJSgMcF8vRwgEBwVDOHU7bIVUCCEDvC5PdQBssfFMs/Ess/yx8BINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WywfJKlBEFEMwbW3bPH8VADYAAAAAVGlja2V0IHN1Y2Nlc3MgcmV0dXJuZWQB0DDTHwGCEBE75DK68uCB0z8BMYFWePhCUoDHBfL0cIBAcFQzh1O2yFVAghDaAz0KUAbLHxTLPxLLP8sfASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFssHySpQRBRDMG1t2zx/FQHKyHEBygFQBwHKAHABygJQBSDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlAD+gJwAcpoI26zkX+TJG6z4pczMwFwAcoA4w0hbrOcfwHKAAEgbvLQgAHMlTFwAcoA4skB+wAWAJh/AcoAyHABygBwAcoAJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4iRus51/AcoABCBu8tCAUATMljQDcAHKAOJwAcoAAn8BygACyVjMACQAAAAAVGlja2V0IGNyZWF0ZWQC3u1E0NQB+GPSAAGOT/pAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAHTP9Mf1NQB0AHTB1VgbBfg+CjXCwqDCbry4InbPAbRVQTbPBoZABDIcAHKB8nQWAC0+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAH6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAYEBAdcA1AHQgQEB1wCBAQHXANQwEDYQNRA022iWzQ==');
+    const __code = Cell.fromBase64('te6ccgECGAEABPAAART/APSkE/S88sgLAQIBYgIDA3rQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxVF9s88uCCFAQFAgFYDg8E9AGSMH/gcCHXScIflTAg1wsf3iCCEHiuO7S6j0sw0x8BghB4rju0uvLggdM/+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiBJsEjH4QW8kE18DggnJw4Chcn+IFEMwbW3bPH/gIIIQETvkMrrjAiCCEE58O4+6BgwHCADAyPhDAcx/AcoAVXBQhyDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlAFINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WE8s/yx/MyFjPFskBzBLLB8oAye1UACQAAAAAVGlja2V0IGNyZWF0ZWQB6DDTHwGCEBE75DK68uCB0z8BMYFWePhCUpDHBfL0ggCHEQLAABLy9H9wgEBwVDSYU8fIVUCCENoDPQpQBssfFMs/Ess/yx8BINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WywfJKwRQVRRDMG1t2zx/DAP+jvMw0x8BghBOfDuPuvLggdM/ATGBVnj4QlKQxwXy9IF0AQLAABLy9H9wgEBwVDSYU8fIVUCCEDvC5PdQBssfFMs/Ess/yx8BINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WywfJKwRQVRRDMG1t2zx/4IIQlGqYtrrjAgwJCgFO0x8BghCUapi2uvLggdM/ATHIAYIQr/kPV1jLH8s/yfhCAXBt2zx/CwAEMHABOm1tIm6zmVsgbvLQgG8iAZEy4hAkcAMEgEJQI9s8DAHKyHEBygFQBwHKAHABygJQBSDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlAD+gJwAcpoI26zkX+TJG6z4pczMwFwAcoA4w0hbrOcfwHKAAEgbvLQgAHMlTFwAcoA4skB+wANAJh/AcoAyHABygBwAcoAJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4iRus51/AcoABCBu8tCAUATMljQDcAHKAOJwAcoAAn8BygACyVjMALm7vRgnBc7D1dLK57HoTsOdZKhRtmgnCd1jUtK2R8syLTry398WI5gnAgVcAbgGdjlM5YOq5HJbLDgnAb1J3vlUWW8cdT094FWcMmgnCdl05as07LczoOlm2UZuikgCASAQEQIBIBITAhG1DBtnm2eNkLAUFQARsK+7UTQ0gABgAHWybuNDVpcGZzOi8vUW1Oa2FRUWJrOTJoR2RWUFVNWWVmNVVKNmROV0dSaFJTVm9tTVBxOXJyZjJFRoIALi7UTQ1AH4Y9IAAY5R+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAH6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAdM/0x/U1AHQAdMH0gBVcGwY4Pgo1wsKgwm68uCJ2zwG0VUE2zwWFwAKVHZ0U0MAtPpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiAGBAQHXANQB0IEBAdcAgQEB1wDUMBA2EDUQNAAUcMhwAcoHydBAMw==');
+    const __system = Cell.fromBase64('te6cckECGgEABPoAAQHAAQEFoUmbAgEU/wD0pBP0vPLICwMCAWIMBAIBWAsFAgEgCAYCEbUMG2ebZ42QsBcHAApUdnRTQwIBIAoJAHWybuNDVpcGZzOi8vUW1Oa2FRUWJrOTJoR2RWUFVNWWVmNVVKNmROV0dSaFJTVm9tTVBxOXJyZjJFRoIAARsK+7UTQ0gABgALm7vRgnBc7D1dLK57HoTsOdZKhRtmgnCd1jUtK2R8syLTry398WI5gnAgVcAbgGdjlM5YOq5HJbLDgnAb1J3vlUWW8cdT094FWcMmgnCdl05as07LczoOlm2UZuikgDetAB0NMDAXGwowH6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIVFBTA28E+GEC+GLbPFUX2zzy4IIXDg0AwMj4QwHMfwHKAFVwUIcg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxZQBSDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFhPLP8sfzMhYzxbJAcwSywfKAMntVAT0AZIwf+BwIddJwh+VMCDXCx/eIIIQeK47tLqPSzDTHwGCEHiuO7S68uCB0z/6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIEmwSMfhBbyQTXwOCCcnDgKFyf4gUQzBtbds8f+AgghARO+QyuuMCIIIQTnw7j7oWFBMPA/6O8zDTHwGCEE58O4+68uCB0z8BMYFWePhCUpDHBfL0gXQBAsAAEvL0f3CAQHBUNJhTx8hVQIIQO8Lk91AGyx8Uyz8Syz/LHwEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxbLB8krBFBVFEMwbW3bPH/gghCUapi2uuMCFBEQAAQwcAFO0x8BghCUapi2uvLggdM/ATHIAYIQr/kPV1jLH8s/yfhCAXBt2zx/EgE6bW0ibrOZWyBu8tCAbyIBkTLiECRwAwSAQlAj2zwUAegw0x8BghARO+QyuvLggdM/ATGBVnj4QlKQxwXy9IIAhxECwAAS8vR/cIBAcFQ0mFPHyFVAghDaAz0KUAbLHxTLPxLLP8sfASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFssHySsEUFUUQzBtbds8fxQByshxAcoBUAcBygBwAcoCUAUg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxZQA/oCcAHKaCNus5F/kyRus+KXMzMBcAHKAOMNIW6znH8BygABIG7y0IABzJUxcAHKAOLJAfsAFQCYfwHKAMhwAcoAcAHKACRus51/AcoABCBu8tCAUATMljQDcAHKAOIkbrOdfwHKAAQgbvLQgFAEzJY0A3ABygDicAHKAAJ/AcoAAslYzAAkAAAAAFRpY2tldCBjcmVhdGVkAuLtRNDUAfhj0gABjlH6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB0z/TH9TUAdAB0wfSAFVwbBjg+CjXCwqDCbry4InbPAbRVQTbPBkYABRwyHABygfJ0EAzALT6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgBgQEB1wDUAdCBAQHXAIEBAdcA1DAQNhA1EDSdqyw9');
     let builder = beginCell();
     builder.storeRef(__system);
     builder.storeUint(0, 1);
@@ -1854,8 +1859,9 @@ const Ticket_errors: { [key: number]: { message: string } } = {
     135: { message: `Code of a contract was not found` },
     136: { message: `Invalid address` },
     137: { message: `Masterchain support is not enabled for this contract` },
-    5584: { message: `Event required` },
     22136: { message: `Owner required` },
+    29697: { message: `Ticket already canceled` },
+    34577: { message: `Ticket already returned` },
 }
 
 const Ticket_types: ABIType[] = [
@@ -1891,7 +1897,7 @@ const Ticket_types: ABIType[] = [
     {"name":"ClearEvent","header":3007469561,"fields":[{"name":"query_id","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"event_address","type":{"kind":"simple","type":"address","optional":false}}]},
     {"name":"EventData","header":null,"fields":[{"name":"ticket_price","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"balance","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"owner_address","type":{"kind":"simple","type":"address","optional":false}},{"name":"event_creator_address","type":{"kind":"simple","type":"address","optional":false}},{"name":"index","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"content","type":{"kind":"simple","type":"cell","optional":false}},{"name":"total_tickets","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"total_options","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"is_completed","type":{"kind":"simple","type":"bool","optional":false}},{"name":"winner_option","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"share_per_ticket","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"options","type":{"kind":"dict","key":"int","value":"int"}},{"name":"event_start_datetime","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"stop_sell_ticket_datetime","type":{"kind":"simple","type":"int","optional":false,"format":257}}]},
     {"name":"EventCreatorData","header":null,"fields":[{"name":"balance","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"event_index","type":{"kind":"simple","type":"int","optional":false,"format":257}}]},
-    {"name":"TicketData","header":null,"fields":[{"name":"owner_address","type":{"kind":"simple","type":"address","optional":false}},{"name":"event_address","type":{"kind":"simple","type":"address","optional":false}},{"name":"ticket_amount","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"ticket_option","type":{"kind":"simple","type":"int","optional":false,"format":257}}]},
+    {"name":"TicketData","header":null,"fields":[{"name":"owner_address","type":{"kind":"simple","type":"address","optional":false}},{"name":"event_address","type":{"kind":"simple","type":"address","optional":false}},{"name":"ticket_amount","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"ticket_option","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"returned","type":{"kind":"simple","type":"bool","optional":false}}]},
 ]
 
 const Ticket_getters: ABIGetter[] = [
@@ -1901,7 +1907,6 @@ const Ticket_getters: ABIGetter[] = [
 const Ticket_receivers: ABIReceiver[] = [
     {"receiver":"internal","message":{"kind":"typed","type":"DeployTicket"}},
     {"receiver":"internal","message":{"kind":"typed","type":"ReturnTicket"}},
-    {"receiver":"internal","message":{"kind":"typed","type":"ReturnTicketSuccess"}},
     {"receiver":"internal","message":{"kind":"typed","type":"CancelTicket"}},
     {"receiver":"internal","message":{"kind":"typed","type":"Deploy"}},
 ]
@@ -1936,7 +1941,7 @@ export class Ticket implements Contract {
         this.init = init;
     }
 
-    async send(provider: ContractProvider, via: Sender, args: { value: bigint, bounce?: boolean| null | undefined }, message: DeployTicket | ReturnTicket | ReturnTicketSuccess | CancelTicket | Deploy) {
+    async send(provider: ContractProvider, via: Sender, args: { value: bigint, bounce?: boolean| null | undefined }, message: DeployTicket | ReturnTicket | CancelTicket | Deploy) {
 
         let body: Cell | null = null;
         if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'DeployTicket') {
@@ -1944,9 +1949,6 @@ export class Ticket implements Contract {
         }
         if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'ReturnTicket') {
             body = beginCell().store(storeReturnTicket(message)).endCell();
-        }
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'ReturnTicketSuccess') {
-            body = beginCell().store(storeReturnTicketSuccess(message)).endCell();
         }
         if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'CancelTicket') {
             body = beginCell().store(storeCancelTicket(message)).endCell();

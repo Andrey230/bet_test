@@ -1,7 +1,7 @@
 import {useTonConnect} from "../../hooks/useTonConnect";
 import {useEffect, useState} from "react";
 import {getWaitingEvents} from "../../api/endpoints";
-import EventsContainer from "../../Components/EventsContainer";
+import EventGrid from "../../Components/EventGrid";
 
 export default function ProfileWaiting(){
     const [waitingEvents, setWaitingEvents] = useState([]);
@@ -11,6 +11,7 @@ export default function ProfileWaiting(){
         if(connected){
             getWaitingEvents(wallet?.toString()).then((response) => response.json())
                 .then((data) => {
+                    console.log(data.events);
                     setWaitingEvents(data.events ?? []);
                 })
                 .catch((error) => console.log(error));
@@ -20,7 +21,8 @@ export default function ProfileWaiting(){
 
     return (
         <>
-            <EventsContainer events={waitingEvents} title="Waiting events" search={false} categories={false} waiting={true} more={false}/>
+            <h1 className="text-3xl font-semibold mb-5">Waiting events</h1>
+            <EventGrid events={waitingEvents} waiting={true}/>
         </>
     );
 }

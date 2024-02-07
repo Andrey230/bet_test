@@ -11,7 +11,7 @@ export function useEventCreatorContract() {
     const eventCreatorContract = useAsyncInitialize(async () => {
         if(!client) return;
 
-        const contract = EventCreator.fromAddress(Address.parse("EQB9gncraLfnYpyIR6jDJ4PIpc-i7DCBFrrjch-iRNPfUPuU"));
+        const contract = EventCreator.fromAddress(Address.parse("EQAV3AsFgdt5hU6SAvNzagMVGMwf0hBDV0EU0zWzVSLfbN7r"));
 
         return client.open(contract) as OpenedContract<EventCreator>;
     }, [client]);

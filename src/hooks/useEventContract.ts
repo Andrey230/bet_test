@@ -18,7 +18,7 @@ export function useEventContract(address){
 
     return {
         setWinnerOption: async (message: SetWinnerOption, additionalParams = {}) => {
-            const {sender} = getSender("updateEvent", additionalParams);
+            const {sender} = getSender("setWinnerOption", additionalParams);
 
             await eventContract?.send(sender, {
                 value: toNano("0.15"),
@@ -26,7 +26,7 @@ export function useEventContract(address){
         },
         buyTicket: async (value: number, message: CreateTicket, additionalParams = {}) => {
             const {sender} = getSender("createTicket", additionalParams);
-            const additionalValue = 0.15;
+            const additionalValue = 0.08;
 
 
 

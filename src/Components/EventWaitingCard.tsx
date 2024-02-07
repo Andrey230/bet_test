@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useEventContract} from "../hooks/useEventContract";
+import BrandHelper from "../helper/brandHelper";
 
 export default function EventWaitingCard({event}){
     const [winnerOption, setWinnerOptionInput] = useState(1);
@@ -25,14 +26,14 @@ export default function EventWaitingCard({event}){
             <div className="bg-cover bg-center h-44 rounded-t-xl" style={{backgroundImage: `url(${event.image})`}} ></div>
             <div className="card-body pt-4">
                 <p className="font-semibold text-slate-400">
-                    Left 5 hours to set winner option
+                    Left {BrandHelper.getDistance(BrandHelper.getDate(event.event_start_datetime + 86400), new Date())} to set winner option
                 </p>
                 <h2 className="font-bold text-xl">{event.name}</h2>
 
                 <p>Set winner option</p>
 
                 <div>
-                    <select className="select w-full max-w-xs shadow" value={winnerOption} onChange={changeWinnerOption}>
+                    <select className="select w-full max-w-xs bg-base-200" value={winnerOption} onChange={changeWinnerOption}>
                         {event.options.map((value, index) => (
                             <option key={index} value={value.option}>{value.name}</option>
                         ))}

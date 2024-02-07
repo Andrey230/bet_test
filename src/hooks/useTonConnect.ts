@@ -3,6 +3,7 @@ import {Cell, SenderArguments} from "ton-core";
 import {SendTransactionResponse, useTonConnectUI, useTonWallet} from "@tonconnect/ui-react";
 import {Buffer} from "buffer";
 import {sendTransaction} from "../api/endpoints";
+import {useNotification} from "../routes/root";
 
 export function useTonConnect(): {
     //sender: Sender;
@@ -13,6 +14,7 @@ export function useTonConnect(): {
 } {
     const [tonConnectUI] = useTonConnectUI();
     const wallet = useTonWallet();
+    const {notifications, addNotification} = useNotification();
 
     return {
         getSender: (action: string = 'none', additionalParams = {}) => {
@@ -47,9 +49,16 @@ export function useTonConnect(): {
                                 };
 
                                 sendTransaction({...requiredParams, ...additionalParams});
+                                addNotification({
+                                    success: true,
+                                    message: "The transaction was sent successfully. Changes will take effect in 20-30 seconds"
+                                });
                             }
                         }catch (error){
-
+                            addNotification({
+                                success: false,
+                                message: "Ups, something went wrong..."
+                            });
                         }
                     }
                 }

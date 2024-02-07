@@ -1,36 +1,64 @@
-import EventsContainer from "../Components/EventsContainer";
 import {getEvents, getWaitingEvents} from "../api/endpoints";
 import { useLoaderData } from "react-router-dom";
 import {useTonConnect} from "../hooks/useTonConnect";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
+import EventGrid from "../Components/EventGrid";
 
 export async function loader({ params }) {
-    let events = [];
+    let defaultEvents = [];
 
     await getEvents().then((response) => response.json())
         .then((data) => {
-            events = data.events ?? [];
+            defaultEvents = data.events ?? [];
         })
         .catch((error) => console.log(error));
 
-    return { events };
+    return { defaultEvents };
 }
 
 export default function Home(){
-    const { events } = useLoaderData();
+    const { defaultEvents } = useLoaderData();
     const [waitingEventsCount, setWaitingEventsCount] = useState(0);
     const {wallet, connected} = useTonConnect();
+    const [searchValue, setSearchValue] = useState('');
+    const [events, setEvents] = useState(defaultEvents);
 
     useEffect(() => {
         if(connected){
             getWaitingEvents(wallet?.toString()).then((response) => response.json())
                 .then((data) => {
-                    console.log(data.totalEvents);
                     setWaitingEventsCount(data.totalEvents ?? 0);
                 })
                 .catch((error) => console.log(error));
         }
     }, [connected]);
+
+    const debounce = (func, delay) => {
+        let timerId;
+        return function (...args) {
+            clearTimeout(timerId);
+            timerId = setTimeout(() => func.apply(this, args), delay);
+        };
+    };
+
+    const delayedSearch = useCallback(
+        debounce(async (value) => {
+            await getEvents({
+                term: value
+            }).then((response) => response.json())
+                .then((data) => {
+                    setEvents(data.events ?? []);
+                })
+                .catch((error) => console.log(error));
+        }, 1000),
+        []
+    );
+
+    const searchInputHandler = (element) => {
+        const value = element.target.value;
+        setSearchValue(value);
+        delayedSearch(value);
+    }
 
     return (
         <>
@@ -41,7 +69,20 @@ export default function Home(){
                     </div>
                 </a>
                 : ""}
-            <EventsContainer events={events} title="Top events"/>
+            <input type="text" id="find-event-input" placeholder="Find event" className="drop-shadow-lg input w-full max-w-xs mb-5" value={searchValue} onChange={searchInputHandler}/>
+            <div className="flex justify-between items-center mb-4">
+                <h1 className="text-3xl font-semibold">Top events</h1>
+                <div className="dropdown dropdown-bottom dropdown-end">
+                    <div tabIndex={0} role="button" className="btn bg-base-100">Categories</div>
+                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 mt-3 rounded-box w-52">
+                        <li><a>Top events</a></li>
+                        <li><a>Sport</a></li>
+                        <li><a>Crypto</a></li>
+                        <li><a>Other</a></li>
+                    </ul>
+                </div>
+            </div>
+            <EventGrid events={events}/>
         </>
     )
 }

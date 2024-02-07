@@ -1,7 +1,6 @@
 import './App.css'
 import { TonConnectUIProvider } from '@tonconnect/ui-react'
 import Header from "./Components/Header"
-import EventsContainer from "./Components/EventsContainer"
 
 
 function App() {
