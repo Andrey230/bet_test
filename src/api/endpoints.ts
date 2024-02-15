@@ -1,8 +1,8 @@
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 
-const baseUrl = "https://bet-api-c64c.onrender.com";
-const PINATA_JWT = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI5M2MwMTk5NC0yYmFmLTQwMDktYjc1OC04NWU0M2QzOTk2MWEiLCJlbWFpbCI6ImFuZHJleWJlbG91czIzMEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiMGE2MjEwMTlhYTRmNWYwMTRmOTgiLCJzY29wZWRLZXlTZWNyZXQiOiIyN2ZlZWRkNWE3YjQ5M2Y5NDU5MDUxMGQxMmE0ZmE0ZmEyZDg1Y2U1MTZhOWYzODVlNDgyY2NjYTQ2NDU3MTkzIiwiaWF0IjoxNzA2Mjc3ODI0fQ.98KA_65Bl8lxBlgBMwd_uzSAupQWdUJVRtbAdu77gxc`;
+const baseUrl = import.meta.env.VITE_BACKEND_ENDPOINT;
+const PINATA_JWT = import.meta.env.VITE_PINATA_JWT;
 
 export function sendTransaction(params: {}){
     fetch(baseUrl + `/transactions/update`, {
