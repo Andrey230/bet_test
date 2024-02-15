@@ -60,7 +60,7 @@ WebApp.ready()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-      <TonConnectUIProvider manifestUrl="https://bafkreif7vyi7y6kevlgjq6g6khpvs3xbkvjhz2vpajeide2a64gdg2uadq.ipfs.nftstorage.link/">
+      <TonConnectUIProvider manifestUrl="https://bafkreig5ot5zrnghimvmkdolg7s4lxivcq6gkrdi7lxwtzg3egixy7jxrq.ipfs.nftstorage.link/">
           <RouterProvider router={router} />
       </TonConnectUIProvider>
   </React.StrictMode>,
