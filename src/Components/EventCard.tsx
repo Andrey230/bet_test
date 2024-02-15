@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import {fromNano, toNano} from "ton-core";
+import {fromNano} from "ton-core";
 import BrandHelper from "../helper/brandHelper";
 
 export default function EventCard({event}) {

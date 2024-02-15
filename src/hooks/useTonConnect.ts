@@ -1,4 +1,3 @@
-import { CHAIN } from "@tonconnect/protocol";
 import {Cell, SenderArguments} from "ton-core";
 import {SendTransactionResponse, useTonConnectUI, useTonWallet} from "@tonconnect/ui-react";
 import {Buffer} from "buffer";

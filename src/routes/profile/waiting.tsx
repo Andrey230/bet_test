@@ -1,6 +1,6 @@
 import {useTonConnect} from "../../hooks/useTonConnect";
 import {useEffect, useState} from "react";
-import {getEvents, getWaitingEvents} from "../../api/endpoints";
+import {getWaitingEvents} from "../../api/endpoints";
 import EventGrid from "../../Components/EventGrid";
 import {useLoader} from "../root";
 
