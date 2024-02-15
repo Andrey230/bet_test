@@ -1,23 +1,24 @@
 import {useTonConnect} from "../../hooks/useTonConnect";
 import {useEffect, useState} from "react";
-import {getWaitingEvents} from "../../api/endpoints";
+import {getEvents, getWaitingEvents} from "../../api/endpoints";
 import EventGrid from "../../Components/EventGrid";
+import {useLoader} from "../root";
 
 export default function ProfileWaiting(){
     const [waitingEvents, setWaitingEvents] = useState([]);
     const {wallet, connected} = useTonConnect();
+    const {setLoading} = useLoader();
 
     useEffect(() => {
         if(connected){
             getWaitingEvents(wallet?.toString()).then((response) => response.json())
                 .then((data) => {
-                    console.log(data.events);
                     setWaitingEvents(data.events ?? []);
+                    setLoading(false);
                 })
                 .catch((error) => console.log(error));
         }
     }, [connected]);
-
 
     return (
         <>

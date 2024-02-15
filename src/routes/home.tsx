@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import {useTonConnect} from "../hooks/useTonConnect";
 import {useCallback, useEffect, useState} from "react";
 import EventGrid from "../Components/EventGrid";
+import {useLoader} from "./root";
 
 export async function loader({ params }) {
     let defaultEvents = [];
@@ -18,6 +19,8 @@ export async function loader({ params }) {
 
 export default function Home(){
     const { defaultEvents } = useLoaderData();
+    const {setLoading} = useLoader();
+    setLoading(false);
     const [waitingEventsCount, setWaitingEventsCount] = useState(0);
     const {wallet, connected} = useTonConnect();
     const [searchValue, setSearchValue] = useState('');

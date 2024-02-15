@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
-
 import {getProfileEvents} from "../../api/endpoints";
 import EventGrid from "../../Components/EventGrid";
+import {useLoader} from "../root";
 
 export async function loader({ params }) {
     const address = params.address;
@@ -21,17 +21,21 @@ export async function loader({ params }) {
 
 export default function ProfileView(){
     const { address, events, eventCount } = useLoaderData();
+    const {setLoading} = useLoader();
+    setLoading(false);
 
     return (
         <>
             <h1 className="text-3xl font-semibold mb-5">Your events</h1>
-            <div className="stats shadow mb-5">
+            <div className="stats mb-5 shadow-xl w-full">
                 <div className="stat">
-                    <div className="stat-title">Total events</div>
-                    <div className="stat-value">{eventCount}</div>
-                    <div className="stat-desc">21% more than last month</div>
+                    <div className="stat-title">Events</div>
+                    <div className="stat-value text-primary">{eventCount}</div>
                 </div>
-
+                <div className="stat">
+                    <div className="stat-title">Likes</div>
+                    <div className="stat-value text-secondary">{Math.floor(Math.random() * 1000)}</div>
+                </div>
             </div>
             <EventGrid events={events} />
         </>

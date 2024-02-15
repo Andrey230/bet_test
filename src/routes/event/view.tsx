@@ -7,6 +7,7 @@ import {useEventContract} from "../../hooks/useEventContract";
 import BrandHelper from "../../helper/brandHelper";
 import EventDoughnut from "../../Components/EventDoughnut";
 import {getEvent} from "../../api/endpoints";
+import {useLoader} from "../root";
 
 export async function loader({ params }) {
     const eventId = params.eventId;
@@ -29,6 +30,9 @@ export async function loader({ params }) {
 }
 
 export default function EventView(){
+    const {setLoading} = useLoader();
+    setLoading(false);
+
     const { event } = useLoaderData();
     const {connected} = useTonConnect();
     const {buyTicket} = useEventContract(event.address);

@@ -36,7 +36,7 @@ export default function EventTickets({event}){
             case "completed":
                 return "Event completed";
             case "active":
-                return `Left ${BrandHelper.getDistance(event.stop_sell_ticket_datetime, new Date())} to buy a ticket/s`;
+                return `Left ${BrandHelper.getDistance(BrandHelper.getDate(event.stop_sell_ticket_datetime), new Date())} to buy a ticket/s`;
             case "ticket_closed":
                 return "The opportunity to buy tickets is closed";
             case "canceled":
@@ -57,9 +57,17 @@ export default function EventTickets({event}){
                 </p>
                 <Link to={"/app/event/" + event.address}><h2 className="font-bold text-xl text-primary">{event.name}</h2></Link>
 
-                {tickets.map((ticket, index) => (
-                    <Ticket ticket={ticket} key={index} options={event.options}/>
-                ))}
+                <div className="collapse bg-base-200 collapse-arrow">
+                    <input type="checkbox" />
+                    <div className="collapse-title text-xl font-medium">
+                        Tickets
+                    </div>
+                    <div className="collapse-content">
+                        {tickets.map((ticket, index) => (
+                            <Ticket ticket={ticket} key={index} options={event.options}/>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );

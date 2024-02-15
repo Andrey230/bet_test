@@ -4,17 +4,22 @@ import {beginCell, toNano} from "ton-core";
 import {uploadPinataFile, uploadPinataJson} from "../../api/endpoints";
 import DatePicker from "react-datepicker";
 import '/src/datepicker/datepicker.css';
-import dayjs from 'dayjs';
 import BrandHelper from "../../helper/brandHelper";
+import {useLoader} from "../root";
 
 export default function EventCreate(){
     const maxTags = 5;
+
+    const {setLoading} = useLoader();
+    setLoading(false);
 
     const {createEvent} = useEventCreatorContract();
     //OPTIONS
     const defaultOptions = ["Option 1", "Option 2"];
     const [options, setOptions] = useState(defaultOptions);
     const [optionsError, setOptionsError] = useState("");
+
+    const [loading, setLoadingEvent] = useState(false);
 
     //TAGS
     const [tags, setTags] = useState([]);
@@ -126,6 +131,10 @@ export default function EventCreate(){
     }
 
     const createEventHandler = async () => {
+        if(loading){
+            return;
+        }
+
         let hasErrors = false;
         if(title === ""){
             hasErrors = true;
@@ -157,6 +166,8 @@ export default function EventCreate(){
             return;
         }
 
+        setLoadingEvent(true);
+
         const pinataImage = await uploadPinataFile(image);
         const pinataImageUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${pinataImage}`;
         const eventData = {
@@ -186,6 +197,8 @@ export default function EventCreate(){
             event_start_datetime: BigInt(BrandHelper.getTimeStamp(endEventDate)),
             total_options: BigInt(options.length)
         });
+
+        setLoadingEvent(false);
     }
 
     const addTagsButton = () => {
@@ -337,7 +350,11 @@ export default function EventCreate(){
                         <div className="mt-5">
                             <div className="flex justify-left gap-2 mt-5">
                                 <div className="btn btn-active" onClick={addOptionHandler}>Add option</div>
-                                <button className="btn btn-primary" onClick={createEventHandler}>Create</button>
+                                <button className="btn btn-primary" onClick={createEventHandler} disabled={loading}>
+                                    {loading ? <span className="loading loading-spinner loading-md"></span> :
+                                        "Create"
+                                    }
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -2,11 +2,14 @@ import Header from "../Components/Header";
 import { Outlet } from "react-router-dom";
 import {createContext, useContext, useState} from 'react';
 import Notifications from "../Components/Notifications";
+import LoadingScreen from "../Components/LoadingScreen";
 
-const Context = createContext({});
+const NotificationContext = createContext({});
+const LoaderContext = createContext({});
 
 export default function Root() {
     const [notifications, setNotifications] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const addNotification = (message) => {
         setNotifications([message]);
@@ -26,27 +29,43 @@ export default function Root() {
         clearNotification
     };
 
+    const contextLoaderValues = {
+        loading,
+        setLoading
+    };
+
     return (
         <>
-            <Context.Provider value={contextValues}>
-                <Notifications />
-                <Header />
-                <div className="bg-base-300 pt-6 pb-8">
-                    <div className="flex justify-center">
-                        <div className="w-4/5">
-                            <Outlet />
+            <LoaderContext.Provider value={contextLoaderValues}>
+                <NotificationContext.Provider value={contextValues}>
+                    <Notifications />
+                    <LoadingScreen />
+                    <Header />
+                    <div className="bg-base-300 pt-6 pb-8 min-h-screen">
+                        <div className="flex justify-center">
+                            <div className="w-4/5">
+                                <Outlet />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Context.Provider>
+                </NotificationContext.Provider>
+            </LoaderContext.Provider>
         </>
     )
 }
 
 export const useNotification = () => {
-    const context = useContext(Context);
+    const context = useContext(NotificationContext);
     if (!context) {
         throw new Error('useNotification must be used within a NotificationProvider');
+    }
+    return context;
+};
+
+export const useLoader = () => {
+    const context = useContext(LoaderContext);
+    if (!context) {
+        throw new Error('useNotification must be used within a LoaderContext');
     }
     return context;
 };
