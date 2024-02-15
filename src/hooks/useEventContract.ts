@@ -26,7 +26,7 @@ export function useEventContract(address){
         },
         buyTicket: async (value: number, message: CreateTicket, additionalParams = {}) => {
             const {sender} = getSender("createTicket", additionalParams);
-            const additionalValue = 0.08;
+            const additionalValue = 0.1;
 
 
 
