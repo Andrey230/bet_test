@@ -4,6 +4,7 @@ import {useTonConnect} from "../hooks/useTonConnect";
 import {useCallback, useEffect, useState} from "react";
 import EventGrid from "../Components/EventGrid";
 import {useLoader} from "./root";
+import { NavLink } from "react-router-dom"
 
 export async function loader({ params }) {
     let defaultEvents = [];
@@ -66,11 +67,11 @@ export default function Home(){
     return (
         <>
             {waitingEventsCount > 0 ?
-                <a href="/app/profile/waiting">
+                <NavLink to="/app/profile/waiting">
                     <div role="alert" className="alert alert-warning drop-shadow-lg mb-3 rounded-lg">
                         <div className="text-xs">{waitingEventsCount} event(s) is waiting for your decision. You have only 24 hours to set winner option. Tap to see</div>
                     </div>
-                </a>
+                </NavLink>
                 : ""}
             <input type="text" id="find-event-input" placeholder="Find event" className="drop-shadow-lg input w-full max-w-xs mb-5" value={searchValue} onChange={searchInputHandler}/>
             <div className="flex justify-between items-center mb-4">
