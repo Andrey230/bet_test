@@ -1,7 +1,7 @@
 import {useTonClient} from "./useTonClient";
 import {useTonConnect} from "./useTonConnect";
 import {useAsyncInitialize} from "./useAsyncInitialize";
-import {CreateTicket, Event, SetWinnerOption} from 'src/contracts/event';
+import {CreateTicket, Event, SetWinnerOption} from '../contracts/event';
 import {Address, OpenedContract, toNano} from "ton-core";
 
 export function useEventContract(address){
