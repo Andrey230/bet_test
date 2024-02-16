@@ -114,7 +114,9 @@ export default function EventCreate(){
             setError("");
         }
 
-        setValue(event.target.value);
+        const cleanedText = value.replace(/\s+/g, ' ');
+
+        setValue(cleanedText);
     }
 
     const onChangeImage = async (e) => {
@@ -282,7 +284,7 @@ export default function EventCreate(){
 
                         <div className="mt-5">
                             <p className="font-semibold mb-2">Description</p>
-                            <textarea className={`w-full textarea bg-base-200 h-24 ${descError ? "input-error" : ""}`} placeholder="Event description" name="description" value={desc} onChange={(event) => {textInputHandler(event, setDesc, setDescError)}}></textarea>
+                            <textarea className={`w-full textarea bg-base-200 h-24 ${descError ? "input-error" : ""}`} style={{height: "160px"}} maxLength={380} placeholder="Event description" name="description" value={desc} onChange={(event) => {textInputHandler(event, setDesc, setDescError)}}></textarea>
                         </div>
 
                         <div className="mt-5">
