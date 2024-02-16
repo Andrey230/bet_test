@@ -99,28 +99,32 @@ export default function EventView(){
             <div className="">
                 <div className="bg-base-100 rounded-xl p-5 shadow-xl">
                     <h3 className="text-2xl font-semibold">{event.name}</h3>
-                    <div className="bg-cover bg-center h-44 rounded-lg mt-3" style={{backgroundImage: `url(${event.image})`}} ></div>
+                    <div className="bg-cover bg-center h-44 rounded-lg mt-3 relative" style={{backgroundImage: `url(${event.image})`}} >
+                        <div className="bg-base-content/80 rounded-xl flex justify-start gap-2 items-center absolute bottom-0 right-0 pr-2 pl-2 mr-1 mb-1">
+                            <span className="font-bold text-2xl text-base-100">{event.total_tickets}</span>
+                            <svg className="inline-block w-7 h-7 stroke-current fill-base-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M64 64C28.7 64 0 92.7 0 128v64c0 8.8 7.4 15.7 15.7 18.6C34.5 217.1 48 235 48 256s-13.5 38.9-32.3 45.4C7.4 304.3 0 311.2 0 320v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V320c0-8.8-7.4-15.7-15.7-18.6C541.5 294.9 528 277 528 256s13.5-38.9 32.3-45.4c8.3-2.9 15.7-9.8 15.7-18.6V128c0-35.3-28.7-64-64-64H64zm64 112l0 160c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16V176c0-8.8-7.2-16-16-16H144c-8.8 0-16 7.2-16 16zM96 160c0-17.7 14.3-32 32-32H448c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V160z"/></svg>
+                        </div>
+                    </div>
                     <p className="font-normal mt-2">{event.description}</p>
                     <div className="stats stats-vertical lg:stats-horizontal w-full">
-
-                        <div className="stat pl-0">
-                            <div className="stat-title">Ticket price</div>
-                            <div className="stat-value text-lg text-primary">{fromNano(event.ticket_price)} TON</div>
-                        </div>
-
-                        <div className="stat pl-0">
-                            <div className="stat-title">Total tickets</div>
-                            <div className="stat-value text-lg text-secondary text-success">{event.total_tickets}</div>
-                        </div>
-
                         <div className="stat pl-0">
                             <div className="stat-title">Stop sell tickets</div>
-                            <div className="stat-value text-lg text-base-content">{format(stopSellTicket, "MMMM d, yyyy - HH:mm")}</div>
+                            <div className="stat-value text-lg text-base-content">
+                                <div className="flex justify-start gap-2 items-center">
+                                    {format(stopSellTicket, "d.MM.yyyy - HH:mm")}
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="inline-block w-5 h-5 stroke-current"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="stat pl-0">
                             <div className="stat-title">Event end date</div>
-                            <div className="stat-value text-lg text-base-content">{format(eventStart, "MMMM d, yyyy - HH:mm")}</div>
+                            <div className="stat-value text-lg text-base-content">
+                                <div className="flex justify-start gap-2 items-center">
+                                    {format(eventStart, "d.MM.yyyy - HH:mm")}
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="inline-block w-5 h-5 stroke-current"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
