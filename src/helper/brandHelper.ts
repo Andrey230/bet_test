@@ -44,26 +44,31 @@ export default class BrandHelper{
             case "active":
                 return {
                     color : "success",
+                    badge: "badge-success",
                     text : "active"
                 };
             case "completed":
                 return {
                     color : "ghost",
+                    badge: "badge-ghost",
                     text : "completed"
                 };
             case "ticket_closed":
                 return {
                     color : "warning",
+                    badge: "badge-warning",
                     text : "gate closed"
                 };
             case "canceled":
                 return {
                     color : "error",
+                    badge: "badge-error",
                     text : "canceled"
                 };
             case "waiting_winner":
                 return {
                     color : "warning",
+                    badge: "badge-warning",
                     text : "waiting winner"
                 };
         }

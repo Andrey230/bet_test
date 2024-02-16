@@ -20,7 +20,7 @@ export default function Header() {
     };
     return (
         <>
-            <div className="navbar bg-base-100 relative z-20">
+            <div className="navbar bg-base-100 relative z-20 shadow">
                 <div className="flex-1">
                     <NavLink to="/app" className="btn btn-ghost text-xl">moc1000</NavLink>
                 </div>

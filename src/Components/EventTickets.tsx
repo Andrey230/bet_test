@@ -37,12 +37,12 @@ export default function EventTickets({event}){
     return (
         <div className="card bg-base-100 shadow-xl w-full">
             <div className="bg-cover bg-center h-44 rounded-t-xl relative" style={{backgroundImage: `url(${event.image})`}} >
-                <div className={`absolute top-0 left-0 mt-2 ml-2 badge badge-md badge-${label.color}`}>{label.text}</div>
+                <div className={`absolute top-0 left-0 mt-2 ml-2 badge badge-md ${label.badge}`}>{label.text}</div>
             </div>
-            <div className="card-body pt-4">
+            <div className="card-body  p-4">
                 <Link to={"/app/event/" + event.address}><h2 className="font-bold text-xl text-primary">{event.name}</h2></Link>
 
-                <div className="collapse bg-base-200 collapse-arrow">
+                <div className="collapse bg-base-200 collapse-arrow mt-2">
                     <input type="checkbox" />
                     <div className="collapse-title text-xl font-medium">
                         Tickets

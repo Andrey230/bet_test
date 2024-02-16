@@ -93,7 +93,7 @@ export default function EventView(){
             <div className="">
                 <div className="bg-base-100 rounded-xl shadow-xl">
                     <div className="bg-cover bg-center h-44 rounded-t-xl mt-3 relative" style={{backgroundImage: `url(${event.image})`}} >
-                        <div className={`absolute top-0 left-0 mt-2 ml-2 badge-md badge badge-${label.color}`}>{label.text}</div>
+                        <div className={`absolute top-0 left-0 mt-2 ml-2 badge-md badge ${label.badge}`}>{label.text}</div>
 
                         <div className="bg-base-content/80 rounded-xl flex justify-start gap-2 items-center absolute bottom-0 right-0 pr-2 pl-2 mr-2 mb-2">
                             <span className="font-bold text-2xl text-base-100">{event.total_tickets}</span>
@@ -109,7 +109,7 @@ export default function EventView(){
                                 <div className="stat-title">Stop sell tickets</div>
                                 <div className="stat-value text-lg text-base-content">
                                     <div className="flex justify-start gap-2 items-center">
-                                        {format(stopSellTicket, "d.MM.yyyy - HH:mm")}
+                                        {format(stopSellTicket, "dd.MM.yyyy - HH:mm")}
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="inline-block w-5 h-5 stroke-current"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@ export default function EventView(){
                                 <div className="stat-title">Event end date</div>
                                 <div className="stat-value text-lg text-base-content">
                                     <div className="flex justify-start gap-2 items-center">
-                                        {format(eventStart, "d.MM.yyyy - HH:mm")}
+                                        {format(eventStart, "dd.MM.yyyy - HH:mm")}
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="inline-block w-5 h-5 stroke-current"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg>
                                     </div>
                                 </div>

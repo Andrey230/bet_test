@@ -24,7 +24,7 @@ export default function TicketsView(){
     return (
         <>
             <h1 className="text-3xl font-semibold">Your tickets</h1>
-            <div className="flex flex-col gap-3 mt-5">
+            <div className="flex flex-col gap-5 mt-5">
                 {events.map((event, index) => {
                     return <EventTickets event={event} key={index}/>;
                 })}

@@ -53,7 +53,7 @@ export default function EventWaitingCard({event}){
     return (
         <div className="card bg-base-100 shadow-xl w-full">
             <div className="bg-cover bg-center h-44 rounded-t-xl relative" style={{backgroundImage: `url(${event.image})`}} >
-                <div className={`absolute top-0 left-0 mt-2 ml-2 badge badge-md badge-${label.color}`}>{label.text}</div>
+                <div className={`absolute top-0 left-0 mt-2 ml-2 badge badge-md ${label.badge}`}>{label.text}</div>
 
                 <div className="bg-base-content/80 rounded-xl flex justify-start gap-2 items-center absolute bottom-0 right-0 pr-2 pl-2 mr-2 mb-2">
                     <span className="font-bold text-2xl text-base-100">{event.total_tickets}</span>
