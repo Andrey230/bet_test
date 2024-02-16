@@ -37,4 +37,35 @@ export default class BrandHelper{
             }
         }
     }
+
+    static getEventStateLabel(state)
+    {
+        switch (state){
+            case "active":
+                return {
+                    color : "success",
+                    text : "active"
+                };
+            case "completed":
+                return {
+                    color : "ghost",
+                    text : "completed"
+                };
+            case "ticket_closed":
+                return {
+                    color : "warning",
+                    text : "gate closed"
+                };
+            case "canceled":
+                return {
+                    color : "error",
+                    text : "canceled"
+                };
+            case "waiting_winner":
+                return {
+                    color : "warning",
+                    text : "waiting winner"
+                };
+        }
+    }
 }

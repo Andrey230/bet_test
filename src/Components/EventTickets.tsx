@@ -31,30 +31,15 @@ export default function EventTickets({event}){
         });
     }
 
-    const renderStatus = () => {
-        switch (BrandHelper.getEventState(event)){
-            case "completed":
-                return "Event completed";
-            case "active":
-                return `Left ${BrandHelper.getDistance(BrandHelper.getDate(event.stop_sell_ticket_datetime), new Date())} to buy a ticket/s`;
-            case "ticket_closed":
-                return "The opportunity to buy tickets is closed";
-            case "canceled":
-                return "Event is canceled";
-            case "waiting_winner":
-                return "Event is waiting for winner option";
-        }
-    }
-
     const tickets = filterTickets(event.tickets ?? []);
+    const label = BrandHelper.getEventStateLabel(BrandHelper.getEventState(event));
 
     return (
         <div className="card bg-base-100 shadow-xl w-full">
-            <div className="bg-cover bg-center h-44 rounded-t-xl" style={{backgroundImage: `url(${event.image})`}} ></div>
+            <div className="bg-cover bg-center h-44 rounded-t-xl relative" style={{backgroundImage: `url(${event.image})`}} >
+                <div className={`absolute top-0 left-0 mt-2 ml-2 badge badge-md badge-${label.color}`}>{label.text}</div>
+            </div>
             <div className="card-body pt-4">
-                <p className="font-bold text-base-content/30">
-                    {renderStatus()}
-                </p>
                 <Link to={"/app/event/" + event.address}><h2 className="font-bold text-xl text-primary">{event.name}</h2></Link>
 
                 <div className="collapse bg-base-200 collapse-arrow">
