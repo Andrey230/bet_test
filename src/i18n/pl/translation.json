@@ -56,5 +56,30 @@
     "total_likes": "Polubienia",
     "tickets": "Bilety",
     "waiting_events": "Oczekujące wydarzenia"
+  },
+  "create": {
+    "main_title": "Stwórz wydarzenie",
+    "title": {
+      "label": "Tytuł",
+      "placeholder": "Real Madryt kontra Barcelona..."
+    },
+    "description": {
+      "label": "Opis",
+      "placeholder": "Opisz kiedy, gdzie i o której godzinie odbędzie się wydarzenie..."
+    },
+    "stop_sell_ticket": {
+      "label": "Data zakończenia sprzedaży biletów",
+      "error": "Data zakończenia sprzedaży biletów musi być wcześniejsza niż data zakończenia wydarzenia"
+    },
+    "end_event": {
+      "label": "Data zakończenia wydarzenia",
+      "error": "Data zakończenia wydarzenia nie może być wcześniejsza niż data zakończenia sprzedaży biletów"
+    },
+    "tags": "Tagi",
+    "options": {
+      "label": "Opcje",
+      "add": "Dodaj opcję"
+    },
+    "button": "Utwórz"
   }
 }

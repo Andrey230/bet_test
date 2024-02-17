@@ -50,8 +50,8 @@ export default function Header() {
                     <div className="flex items-center">
                         <NavLink to="/app" className="btn btn-ghost text-xl">moc1000</NavLink>
                         <div className="dropdown dropdown-bottom">
-                            <div tabIndex={0} role="button" className="w-12 h-12 flex justify-center items-center">
-                                <span className="font-bold">{i18n.language}</span>
+                            <div tabIndex={0} role="button" className="w-10 h-12 flex justify-center items-center">
+                                <span className="font-bold text-primary">{i18n.language}</span>
                             </div>
                             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
                                 <li><a onClick={() => changeLanguage("en")}>en</a></li>

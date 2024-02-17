@@ -6,12 +6,15 @@ import DatePicker from "react-datepicker";
 import '/src/datepicker/datepicker.css';
 import BrandHelper from "../../helper/brandHelper";
 import {useLoader} from "../root";
+import {useTranslation} from "react-i18next";
 
 export default function EventCreate(){
     const maxTags = 5;
 
     const {setLoading} = useLoader();
     setLoading(false);
+
+    const [t] = useTranslation("global");
 
     const {createEvent} = useEventCreatorContract();
     //OPTIONS
@@ -50,7 +53,7 @@ export default function EventCreate(){
 
     const [endEventDate, setEndDateEvent] = useState(defaultEndEventDate);
     const [endEventDateError, setEndDateEventError] = useState(false);
-    const [price, setPrice] = useState(5);
+    const [price, setPrice] = useState(1);
 
     const optionHandler = (option) => {
         const optionIndex = option.target.dataset.optionIndex
@@ -261,7 +264,7 @@ export default function EventCreate(){
         <>
             <div className="flex justify-center">
                 <div className="bg-base-100 rounded-lg p-5 shadow-xl">
-                    <h3 className="text-2xl font-semibold border-base-300">Create event</h3>
+                    <h3 className="text-2xl font-semibold border-base-300">{t("create.main_title")}</h3>
 
                     <div className="flex flex-col mt-5">
                         <label>
@@ -278,17 +281,17 @@ export default function EventCreate(){
                         </label>
 
                         <div className="mt-5">
-                            <p className="font-semibold mb-2">Title</p>
-                            <input type="text" placeholder="Event title" className={`bg-base-200 input w-full max-w-xs ${titleError ? "input-error" : ""}`} name="title" value={title} onChange={(event) => {textInputHandler(event, setTitle, setTitleError)}}/>
+                            <p className="font-semibold mb-2">{t("create.title.label")}</p>
+                            <input type="text" placeholder={t("create.title.placeholder")} className={`bg-base-200 input w-full max-w-xs ${titleError ? "input-error" : ""}`} name="title" value={title} onChange={(event) => {textInputHandler(event, setTitle, setTitleError)}}/>
                         </div>
 
                         <div className="mt-5">
-                            <p className="font-semibold mb-2">Description</p>
-                            <textarea className={`w-full textarea bg-base-200 h-24 ${descError ? "input-error" : ""}`} style={{height: "160px"}} maxLength={380} placeholder="Event description" name="description" value={desc} onChange={(event) => {textInputHandler(event, setDesc, setDescError)}}></textarea>
+                            <p className="font-semibold mb-2">{t("create.description.label")}</p>
+                            <textarea className={`w-full textarea bg-base-200 h-24 ${descError ? "input-error" : ""}`} style={{height: "160px"}} maxLength={380} placeholder={t("create.description.placeholder")} name="description" value={desc} onChange={(event) => {textInputHandler(event, setDesc, setDescError)}}></textarea>
                         </div>
 
                         <div className="mt-5">
-                            <p className="font-semibold mb-3">Stop sell tickets date</p>
+                            <p className="font-semibold mb-3">{t("create.stop_sell_ticket.label")}</p>
                             <DatePicker
                                 className="w-full"
                                 selected={stopSellTicketDate}
@@ -301,11 +304,11 @@ export default function EventCreate(){
                                 title={"awdawd"}
                             />
 
-                            {stopSellTicketDateError ? <p className="text-error text-xs mt-2">Stop sell ticket date must be earlier than the end date of the event</p> : ""}
+                            {stopSellTicketDateError ? <p className="text-error text-xs mt-2">{t("create.stop_sell_ticket.error")}</p> : ""}
                         </div>
 
                         <div className="mt-5">
-                            <p className="font-semibold mb-3">Event end date</p>
+                            <p className="font-semibold mb-3">{t("create.end_event.label")}</p>
                             <DatePicker
                                 selected={endEventDate}
                                 onChange={endEventDateHandler}
@@ -316,16 +319,16 @@ export default function EventCreate(){
                                 minDate={new Date()}
                             />
 
-                            {endEventDateError ? <p className="text-error text-xs mt-2">The end date of the event cannot be earlier than the stop ticket sale date</p> : ""}
+                            {endEventDateError ? <p className="text-error text-xs mt-2">{t("create.end_event.error")}</p> : ""}
                         </div>
 
-                        <div className="mt-5">
-                            <p className="font-semibold mb-3">Ticket price: {price} TON</p>
-                            <input type="range" min={1} max={100} value={price} className="range range-primary range-lg" onChange={ticketPriceHandler}/>
-                        </div>
+                        {/*<div className="mt-5">*/}
+                        {/*    <p className="font-semibold mb-3">Ticket price: {price} TON</p>*/}
+                        {/*    <input type="range" min={1} max={100} value={price} className="range range-primary range-lg" onChange={ticketPriceHandler}/>*/}
+                        {/*</div>*/}
 
                         <div className="mt-5">
-                            <p className="font-semibold mb-3">Tags</p>
+                            <p className="font-semibold mb-3">{t("create.tags")}</p>
                             <div className="flex justify-between gap-3">
                                 <input type="text" placeholder="Tags" className={`bg-base-200 input w-full max-w-xs`} name="tags" value={tag} onChange={handleTagsInput}/>
                                 <button className="btn btn-primary text-xl" onClick={addTagsButton}>
@@ -343,7 +346,7 @@ export default function EventCreate(){
                         </div>
 
                         <div className="mt-5">
-                            <p className="text-sm mb-2 font-semibold">Options</p>
+                            <p className="text-sm mb-2 font-semibold">{t("create.options.label")}</p>
                             <div className="flex flex-col gap-3">
                                 {renderOptions()}
                             </div>
@@ -351,10 +354,10 @@ export default function EventCreate(){
 
                         <div className="mt-5">
                             <div className="flex justify-left gap-2 mt-5">
-                                <div className="btn btn-active" onClick={addOptionHandler}>Add option</div>
+                                <div className="btn btn-active" onClick={addOptionHandler}>{t("create.options.add")}</div>
                                 <button className="btn btn-primary" onClick={createEventHandler} disabled={loading}>
                                     {loading ? <span className="loading loading-spinner loading-md"></span> :
-                                        "Create"
+                                        t("create.button")
                                     }
                                 </button>
                             </div>

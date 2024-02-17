@@ -57,5 +57,30 @@
     "total_likes": "Likes",
     "tickets": "Tickets",
     "waiting_events": "Waiting events"
+  },
+  "create": {
+    "main_title": "Create event",
+    "title": {
+      "label": "Title",
+      "placeholder": "Real Madrid vs Barcelona... "
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "Describe when where at what time the event will take place..."
+    },
+    "stop_sell_ticket": {
+      "label": "Ticket sale closing date",
+      "error": "Stop sell ticket date must be earlier than the end date of the event"
+    },
+    "end_event": {
+      "label": "End event date",
+      "error": "The end date of the event cannot be earlier than the stop ticket sale date"
+    },
+    "tags": "Tags",
+    "options": {
+      "label": "Options",
+      "add": "Add option"
+    },
+    "button": "Create"
   }
 }
