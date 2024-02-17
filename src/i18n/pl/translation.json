@@ -75,7 +75,10 @@
       "label": "Data zakończenia wydarzenia",
       "error": "Data zakończenia wydarzenia nie może być wcześniejsza niż data zakończenia sprzedaży biletów"
     },
-    "tags": "Tagi",
+    "tags": {
+      "label": "Tagi",
+      "placeholder": "piłka nożna, kryptowaluty, e-sport..."
+    },
     "options": {
       "label": "Opcje",
       "add": "Dodaj opcję"

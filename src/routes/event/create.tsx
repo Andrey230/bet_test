@@ -328,9 +328,9 @@ export default function EventCreate(){
                         {/*</div>*/}
 
                         <div className="mt-5">
-                            <p className="font-semibold mb-3">{t("create.tags")}</p>
+                            <p className="font-semibold mb-3">{t("create.tags.label")}</p>
                             <div className="flex justify-between gap-3">
-                                <input type="text" placeholder="Tags" className={`bg-base-200 input w-full max-w-xs`} name="tags" value={tag} onChange={handleTagsInput}/>
+                                <input type="text" placeholder={t("create.tags.placeholder")} className={`bg-base-200 input w-full max-w-xs`} name="tags" value={tag} onChange={handleTagsInput}/>
                                 <button className="btn btn-primary text-xl" onClick={addTagsButton}>
                                     +
                                 </button>

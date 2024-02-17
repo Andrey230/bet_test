@@ -76,7 +76,10 @@
       "label": "End event date",
       "error": "The end date of the event cannot be earlier than the stop ticket sale date"
     },
-    "tags": "Tags",
+    "tags": {
+      "label": "Tags",
+      "placeholder": "football, crypto, e-sport..."
+    },
     "options": {
       "label": "Options",
       "add": "Add option"
