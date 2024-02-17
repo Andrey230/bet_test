@@ -4,6 +4,7 @@
       "tickets": "Twoje bilety",
       "events": "Twoje wydarzenia",
       "home": "Strona główna",
+      "history" : "Historia",
       "logout": "Wyloguj się"
     }
   },
@@ -55,7 +56,8 @@
     "total_events": "Wydarzenia",
     "total_likes": "Polubienia",
     "tickets": "Bilety",
-    "waiting_events": "Oczekujące wydarzenia"
+    "waiting_events": "Oczekujące wydarzenia",
+    "history" : "Historia"
   },
   "create": {
     "main_title": "Stwórz wydarzenie",

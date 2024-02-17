@@ -1,10 +1,15 @@
 import {useTicketContract} from "../hooks/useTicketContract";
 
-export default function Ticket({ticket, options}){
+export default function Ticket({ticket, options, history}){
 
     const {returnWinnerTicket, cancelTicket} = useTicketContract(ticket.address);
 
     const renderTicketAction = () => {
+
+        if(history){
+            return "";
+        }
+
         switch (ticket.state){
             case "cancel":
                 const cancelTicketHandler = async () => {

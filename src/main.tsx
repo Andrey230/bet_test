@@ -14,6 +14,7 @@ import EventView, {loader as eventLoader} from "./routes/event/view";
 import ProfileView, {loader as profileLoader} from "./routes/profile/view";
 import EventCreate from "./routes/event/create";
 import ProfileWaiting from "./routes/profile/waiting";
+import ProfileHistory from "./routes/profile/history";
 import TicketsView from "./routes/tickets/view";
 import i18next from "i18next";
 import translation_en from './i18n/en/translation.json';
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
             {
                 path: "/app/profile/waiting",
                 element: <ProfileWaiting />,
+            },
+            {
+                path: "/app/profile/history",
+                element: <ProfileHistory />,
             },
             {
                 path: "/app/profile/:address",

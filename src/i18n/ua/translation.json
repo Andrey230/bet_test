@@ -4,6 +4,7 @@
       "tickets": "Ваші квитки",
       "events": "Ваші події",
       "home": "Головна",
+      "history" : "Історія",
       "logout": "Вийти"
     }
   },
@@ -55,7 +56,8 @@
     "total_events": "Подій",
     "total_likes": "Лайків",
     "tickets": "Квитки",
-    "waiting_events": "Очікуючі події"
+    "waiting_events": "Очікуючі події",
+    "history" : "Історія"
   },
   "create": {
     "main_title": "Створити подію",

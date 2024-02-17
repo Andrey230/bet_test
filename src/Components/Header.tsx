@@ -83,13 +83,18 @@ export default function Header() {
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                                     <li>
-                                        <NavLink to={`/app/profile/${Address.parse(wallet?.toString())}`} className="justify-between" onClick={handleClick}>
+                                        <NavLink to={`app/profile/${Address.parse(wallet?.toString())}`} className="justify-between" onClick={handleClick}>
                                             {t("header.menu.events")}
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to="/app/tickets" className="justify-between" onClick={handleClick}>
+                                        <NavLink to="app/tickets" className="justify-between" onClick={handleClick}>
                                             {t("header.menu.tickets")}
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="app/profile/history" className="justify-between" onClick={handleClick}>
+                                            {t("header.menu.history")}
                                         </NavLink>
                                     </li>
                                     <li><a onClick={disconnectWallet}>{t("header.menu.logout")}</a></li>

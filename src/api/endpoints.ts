@@ -45,8 +45,13 @@ export function getEvent(address: string){
     });
 }
 
-export function getTickets(address: string){
+export function getTickets(address: string, params = {}){
     let url = baseUrl + `/tickets/${address}`;
+    const paramsString = buildQueryString(params);
+
+    if(paramsString !== ''){
+        url = url + `?${paramsString}`;
+    }
 
     return fetch(url, {
         method: "GET"
