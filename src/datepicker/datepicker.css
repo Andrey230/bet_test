@@ -527,7 +527,7 @@
 .react-datepicker__year-text--selected:hover,
 .react-datepicker__year-text--in-selecting-range:hover,
 .react-datepicker__year-text--in-range:hover {
-    background-color: #1d5d90;
+    background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
 }
 .react-datepicker__day--keyboard-selected,
 .react-datepicker__month-text--keyboard-selected,
