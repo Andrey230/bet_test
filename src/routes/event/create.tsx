@@ -301,7 +301,7 @@ export default function EventCreate(){
                                 timeInputLabel="Time:"
                                 dateFormat="MMMM d, yyyy - HH:mm"
                                 minDate={new Date()}
-                                title={"awdawd"}
+                                shouldCloseOnSelect={false}
                             />
 
                             {stopSellTicketDateError ? <p className="text-error text-xs mt-2">{t("create.stop_sell_ticket.error")}</p> : ""}
@@ -317,6 +317,7 @@ export default function EventCreate(){
                                 timeInputLabel="Time:"
                                 dateFormat="MMMM d, yyyy - HH:mm"
                                 minDate={new Date()}
+                                shouldCloseOnSelect={false}
                             />
 
                             {endEventDateError ? <p className="text-error text-xs mt-2">{t("create.end_event.error")}</p> : ""}
