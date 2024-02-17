@@ -8,6 +8,7 @@ import BrandHelper from "../../helper/brandHelper";
 import EventDoughnut from "../../Components/EventDoughnut";
 import {getEvent} from "../../api/endpoints";
 import {useLoader} from "../root";
+import {useTranslation} from "react-i18next";
 
 export async function loader({ params }) {
     const eventId = params.eventId;
@@ -32,6 +33,8 @@ export async function loader({ params }) {
 export default function EventView(){
     const {setLoading} = useLoader();
     setLoading(false);
+
+    const [t] = useTranslation("global");
 
     const { event } = useLoaderData();
     const {connected} = useTonConnect();
@@ -71,17 +74,17 @@ export default function EventView(){
         switch (event.state){
             case "active":
                 return (<>
-                    <p className="text-xl font-semibold mb-3">Take part in the event</p>
+                    <p className="text-xl font-semibold mb-3">{t("event.take_part.label")}</p>
                     <select className="select w-full max-w-xs bg-base-200" value={ticketOption} onChange={ticketOptionHandler}>
-                        <option disabled selected>Pick your option</option>
+                        <option disabled selected>{t("event.pick_option")}</option>
                         {event.options.map((value, index) => (
                             <option key={index} value={value.option}>{value.name}</option>
                         ))}
                     </select>
 
-                    <p className="mt-3 mb-2">Tickets: {ticketAmount}</p>
+                    <p className="mt-3 mb-2">{t("event.ticket_to_buy", {count: ticketAmount})}</p>
                     <input type="range" min="1" max="100" value={ticketAmount} className="range range-primary range-lg" onChange={ticketAmountHandler} disabled={moreTickets}/>
-                    <button className="btn btn-primary mt-4" onClick={buyTicketHandler}>Take a part</button>
+                    <button className="btn btn-primary mt-4" onClick={buyTicketHandler}>{t("event.take_part.button")}</button>
                 </>);
         }
     }
@@ -93,7 +96,7 @@ export default function EventView(){
             <div className="">
                 <div className="bg-base-100 rounded-xl shadow-xl">
                     <div className="bg-cover bg-center h-44 rounded-t-xl mt-3 relative" style={{backgroundImage: `url(${event.image})`}} >
-                        <div className={`absolute top-0 left-0 mt-2 ml-2 badge-md badge ${label.badge}`}>{label.text}</div>
+                        <div className={`absolute top-0 left-0 mt-2 ml-2 badge-md badge ${label.badge}`}>{t(`event.state.${event.state}`)}</div>
 
                         <div className="bg-base-content/80 rounded-xl flex justify-start gap-2 items-center absolute bottom-0 right-0 pr-2 pl-2 mr-2 mb-2">
                             <span className="font-bold text-2xl text-base-100">{event.total_tickets}</span>
@@ -115,7 +118,7 @@ export default function EventView(){
 
                         <div className="stats stats-vertical lg:stats-horizontal w-full">
                             <div className="stat pl-0">
-                                <div className="stat-title">Stop sell tickets</div>
+                                <div className="stat-title">{t("event.stop_sell_ticket.label")}</div>
                                 <div className="stat-value text-lg text-base-content">
                                     <div className="flex justify-start gap-2 items-center">
                                         {format(stopSellTicket, "dd.MM.yyyy - HH:mm")}
@@ -125,7 +128,7 @@ export default function EventView(){
                             </div>
 
                             <div className="stat pl-0">
-                                <div className="stat-title">Event end date</div>
+                                <div className="stat-title">{t("event.end_event.label")}</div>
                                 <div className="stat-value text-lg text-base-content">
                                     <div className="flex justify-start gap-2 items-center">
                                         {format(eventStart, "dd.MM.yyyy - HH:mm")}

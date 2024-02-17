@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useEventContract} from "../hooks/useEventContract";
 import BrandHelper from "../helper/brandHelper";
-import { differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
+import {useTranslation} from "react-i18next";
 
 export default function EventWaitingCard({event}){
     const [winnerOption, setWinnerOptionInput] = useState(1);
@@ -9,6 +9,7 @@ export default function EventWaitingCard({event}){
     const [leftMinutes, setLeftMinutes] = useState(0);
     const [leftSeconds, setLeftSeconds] = useState(0);
     const {setWinnerOption} = useEventContract(event.address);
+    const [t] = useTranslation("global");
 
     const changeWinnerOption = (element) => {
         setWinnerOptionInput(Number(element.target.value));
@@ -53,7 +54,7 @@ export default function EventWaitingCard({event}){
     return (
         <div className="card bg-base-100 shadow-xl w-full">
             <div className="bg-cover bg-center h-44 rounded-t-xl relative" style={{backgroundImage: `url(${event.image})`}} >
-                <div className={`absolute top-0 left-0 mt-2 ml-2 badge badge-md ${label.badge}`}>{label.text}</div>
+                <div className={`absolute top-0 left-0 mt-2 ml-2 badge badge-md ${label.badge}`}>{t("event.state.waiting_winner")}</div>
 
                 <div className="bg-base-content/80 rounded-xl flex justify-start gap-2 items-center absolute bottom-0 right-0 pr-2 pl-2 mr-2 mb-2">
                     <span className="font-bold text-2xl text-base-100">{event.total_tickets}</span>
@@ -62,7 +63,7 @@ export default function EventWaitingCard({event}){
             </div>
             <div className="card-body pt-4">
                 <div className="mb-2">
-                    <p className="text-neutral/80">Event is canceled after:</p>
+                    <p className="text-neutral/80">{t("event.cancel_after")}</p>
                     <span className="countdown font-mono text-xl">
                   <span style={{"--value":leftHours}}></span>:
                   <span style={{"--value":leftMinutes}}></span>:
@@ -71,7 +72,6 @@ export default function EventWaitingCard({event}){
                 </div>
 
                 <h2 className="font-bold text-xl">{event.name}</h2>
-                <p>Set winner option</p>
 
                 <div>
                     <select className="select w-full max-w-xs bg-base-200" value={winnerOption} onChange={changeWinnerOption}>
@@ -80,7 +80,7 @@ export default function EventWaitingCard({event}){
                         ))}
                     </select>
 
-                    <button className="btn btn-primary mt-3" onClick={submitWinnerOption}>Set</button>
+                    <button className="btn btn-primary mt-3" onClick={submitWinnerOption}>{t("event.set_winner.button")}</button>
                 </div>
             </div>
         </div>

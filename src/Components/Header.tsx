@@ -2,11 +2,17 @@ import {TonConnectButton, useTonConnectUI} from "@tonconnect/ui-react"
 import { NavLink } from "react-router-dom"
 import {useTonConnect} from "../hooks/useTonConnect"
 import {Address} from "ton-core";
+import { useTranslation } from 'react-i18next';
 
 export default function Header() {
 
     const {connected, wallet} = useTonConnect();
-    const [tonConnectUI] = useTonConnectUI();
+    const [tonConnectUI, setOptions] = useTonConnectUI();
+    const [t, i18n] = useTranslation("global");
+
+    setOptions({
+        language: i18n.language
+    });
 
     const disconnectWallet = async () => {
         await tonConnectUI.disconnect()
@@ -18,11 +24,34 @@ export default function Header() {
             elem?.blur();
         }
     };
+
+    const changeLanguage = (lang => {
+        i18n.changeLanguage(lang);
+
+        const elem = document.activeElement;
+        if(elem){
+            elem?.blur();
+        }
+    });
+
     return (
         <>
             <div className="navbar bg-base-100 relative z-20 shadow">
                 <div className="flex-1">
-                    <NavLink to="/app" className="btn btn-ghost text-xl">moc1000</NavLink>
+                    <div className="flex items-center">
+                        <NavLink to="/app" className="btn btn-ghost text-xl">moc1000</NavLink>
+                        <div className="dropdown dropdown-bottom">
+                            <div tabIndex={0} role="button" className="w-12 h-12 flex justify-center items-center">
+                                <span className="font-bold">{i18n.language}</span>
+                            </div>
+                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
+                                <li><a onClick={() => changeLanguage("en")}>en</a></li>
+                                <li><a onClick={() => changeLanguage("ua")}>ua</a></li>
+                                <li><a onClick={() => changeLanguage("pl")}>pl</a></li>
+                                <li><a onClick={() => changeLanguage("ru")}>ru</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="flex-none">
@@ -37,7 +66,6 @@ export default function Header() {
                             </NavLink>
 
 
-
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
@@ -47,15 +75,15 @@ export default function Header() {
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                                     <li>
                                         <NavLink to={`/app/profile/${Address.parse(wallet?.toString())}`} className="justify-between" onClick={handleClick}>
-                                            Events
+                                            {t("header.menu.events")}
                                         </NavLink>
                                     </li>
                                     <li>
                                         <NavLink to="/app/tickets" className="justify-between" onClick={handleClick}>
-                                            Tickets
+                                            {t("header.menu.tickets")}
                                         </NavLink>
                                     </li>
-                                    <li><a onClick={disconnectWallet}>Logout</a></li>
+                                    <li><a onClick={disconnectWallet}>{t("header.menu.logout")}</a></li>
                                 </ul>
                             </div>
                         </>

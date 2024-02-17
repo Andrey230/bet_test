@@ -3,11 +3,13 @@ import {useEffect, useState} from "react";
 import {getWaitingEvents} from "../../api/endpoints";
 import EventGrid from "../../Components/EventGrid";
 import {useLoader} from "../root";
+import {useTranslation} from "react-i18next";
 
 export default function ProfileWaiting(){
     const [waitingEvents, setWaitingEvents] = useState([]);
     const {wallet, connected} = useTonConnect();
     const {setLoading} = useLoader();
+    const [t] = useTranslation("global");
 
     useEffect(() => {
         if(connected){
@@ -22,7 +24,7 @@ export default function ProfileWaiting(){
 
     return (
         <>
-            <h1 className="text-3xl font-semibold mb-5">Waiting events</h1>
+            <h1 className="text-3xl font-semibold mb-5">{t("profile.waiting_events")}</h1>
             <EventGrid events={waitingEvents} waiting={true}/>
         </>
     );

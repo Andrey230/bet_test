@@ -1,9 +1,12 @@
 import { Chart as ChartJS, ArcElement } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import {useTranslation} from "react-i18next";
 
 ChartJS.register(ArcElement);
 
 export default function EventDoughnut({options}){
+
+    const [t] = useTranslation("global");
 
     const colors = [
         'rgb(56 189 248)',
@@ -50,7 +53,7 @@ export default function EventDoughnut({options}){
 
     return (
         <>
-            <h3 className="text-xl font-bold">Top options</h3>
+            <h3 className="text-xl font-bold">{t("event.top_options")}</h3>
             <div className="p-5">
                 <Doughnut
                     data={dataChart}

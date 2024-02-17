@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import {fromNano} from "ton-core";
 import BrandHelper from "../helper/brandHelper";
+import {useTranslation} from "react-i18next";
 
 export default function EventCard({event}) {
     const stopSellDate = BrandHelper.getDate(event.stop_sell_ticket_datetime);
-    const volume = fromNano(event.ticket_price * event.total_tickets);
+    const [t] = useTranslation("global");
 
     const renderStatus = () => {
         switch (event.state){
@@ -23,7 +23,7 @@ export default function EventCard({event}) {
             <div className="card bg-base-100 shadow-xl w-full">
                 <div className="bg-cover bg-center h-44 rounded-t-xl" style={{backgroundImage: `url(${event.image})`}} >
                     <div className="bg-cover bg-center h-44 rounded-lg relative" style={{backgroundImage: `url(${event.image})`}} >
-                        <div className={`absolute top-0 left-0 mt-2 ml-2 badge badge-md ${label.badge}`}>{label.text}</div>
+                        <div className={`absolute top-0 left-0 mt-2 ml-2 badge badge-md ${label.badge}`}>{t(`event.state.${event.state}`)}</div>
 
                         <div className="bg-base-content/80 rounded-xl flex justify-start gap-2 items-center absolute bottom-0 right-0 pr-2 pl-2 mr-2 mb-2">
                             <span className="font-bold text-2xl text-base-100">{event.total_tickets}</span>

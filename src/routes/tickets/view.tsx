@@ -4,11 +4,13 @@ import {useTonConnect} from "../../hooks/useTonConnect";
 import {Address} from "ton-core";
 import EventTickets from "../../Components/EventTickets";
 import {useLoader} from "../root";
+import {useTranslation} from "react-i18next";
 
 export default function TicketsView(){
     const {wallet, connected} = useTonConnect();
     const [events, setEvents] = useState([]);
     const {setLoading} = useLoader();
+    const [t] = useTranslation("global");
 
     useEffect(() => {
         if(connected){
@@ -23,7 +25,7 @@ export default function TicketsView(){
 
     return (
         <>
-            <h1 className="text-3xl font-semibold">Your tickets</h1>
+            <h1 className="text-3xl font-semibold">{t("profile.your_tickets")}</h1>
             <div className="flex flex-col gap-5 mt-5">
                 {events.map((event, index) => {
                     return <EventTickets event={event} key={index}/>;

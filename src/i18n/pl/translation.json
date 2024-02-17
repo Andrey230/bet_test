@@ -1,0 +1,60 @@
+{
+  "header": {
+    "menu": {
+      "tickets": "Twoje bilety",
+      "events": "Twoje wydarzenia",
+      "home": "Strona główna",
+      "logout": "Wyloguj się"
+    }
+  },
+  "main": {
+    "search": {
+      "placeholder": "Znajdź wydarzenie po tytule, opisie, tagach..."
+    },
+    "categories": {
+      "label": "Kategorie",
+      "top": "Najlepsze wydarzenia",
+      "new": "Nowe wydarzenia"
+    }
+  },
+  "notification": {
+    "waiting": "{{count}} wydarzeń czeka na Twoją decyzję. Masz tylko 24 godziny, aby wybrać zwycięzcę. Kliknij, aby zobaczyć",
+    "error": "Ups, coś poszło nie tak...",
+    "success": "Transakcja została pomyślnie wysłana. Zmiany zostaną wprowadzone w ciągu 20-30 sekund"
+  },
+  "event": {
+    "state": {
+      "active": "aktywne",
+      "completed": "zakończone",
+      "ticket_closed": "zamknięcie sprzedaży biletów",
+      "canceled": "anulowane",
+      "waiting_winner": "oczekiwanie na zwycięzcę"
+    },
+    "stop_sell_ticket": {
+      "label": "Zakończenie sprzedaży biletów"
+    },
+    "end_event": {
+      "label": "Data zakończenia wydarzenia"
+    },
+    "top_options": "Najlepsze opcje",
+    "take_part": {
+      "label": "Weź udział w wydarzeniu",
+      "button": "Kup"
+    },
+    "pick_option": "Wybierz swoją opcję",
+    "ticket_to_buy": "Bilety: {{count}}",
+    "cancel_after": "Wydarzenie zostanie anulowane po:",
+    "set_winner": {
+      "button": "Wybierz zwycięzcę"
+    },
+    "more_events": "Więcej wydarzeń"
+  },
+  "profile": {
+    "your_events": "Twoje wydarzenia",
+    "your_tickets": "Twoje bilety",
+    "total_events": "Wydarzenia",
+    "total_likes": "Polubienia",
+    "tickets": "Bilety",
+    "waiting_events": "Oczekujące wydarzenia"
+  }
+}

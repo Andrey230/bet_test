@@ -5,6 +5,7 @@ import {useCallback, useEffect, useState} from "react";
 import EventGrid from "../Components/EventGrid";
 import {useLoader} from "./root";
 import { NavLink } from "react-router-dom"
+import {useTranslation} from "react-i18next";
 
 export async function loader({ params }) {
     let defaultEvents = [];
@@ -26,6 +27,7 @@ export default function Home(){
     const {wallet, connected} = useTonConnect();
     const [searchValue, setSearchValue] = useState('');
     const [events, setEvents] = useState(defaultEvents);
+    const [t] = useTranslation("global");
 
     useEffect(() => {
         if(connected){
@@ -69,20 +71,18 @@ export default function Home(){
             {waitingEventsCount > 0 ?
                 <NavLink to="/app/profile/waiting">
                     <div role="alert" className="alert alert-warning drop-shadow-lg mb-3 rounded-lg">
-                        <div className="text-xs">{waitingEventsCount} event(s) is waiting for your decision. You have only 24 hours to set winner option. Tap to see</div>
+                        <div className="text-xs">{t("notification.waiting", {count: waitingEventsCount})}</div>
                     </div>
                 </NavLink>
                 : ""}
-            <input type="text" id="find-event-input" placeholder="Find event" className="drop-shadow-lg input w-full max-w-xs mb-5" value={searchValue} onChange={searchInputHandler}/>
+            <input type="text" id="find-event-input" placeholder={t("main.search.placeholder")} className="drop-shadow-lg input w-full max-w-xs mb-5" value={searchValue} onChange={searchInputHandler}/>
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-3xl font-semibold">Top events</h1>
+                <h1 className="text-2xl font-semibold">{t("main.categories.top")}</h1>
                 <div className="dropdown dropdown-bottom dropdown-end">
-                    <div tabIndex={0} role="button" className="btn bg-base-100">Categories</div>
+                    <div tabIndex={0} role="button" className="btn bg-base-100">{t("main.categories.label")}</div>
                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 mt-3 rounded-box w-52">
-                        <li><a>Top events</a></li>
-                        <li><a>Sport</a></li>
-                        <li><a>Crypto</a></li>
-                        <li><a>Other</a></li>
+                        <li><a>{t("main.categories.top")}</a></li>
+                        <li><a>{t("main.categories.new")}</a></li>
                     </ul>
                 </div>
             </div>

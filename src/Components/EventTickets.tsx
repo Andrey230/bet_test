@@ -1,8 +1,11 @@
 import Ticket from "./Ticket";
 import BrandHelper from "../helper/brandHelper";
 import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 export default function EventTickets({event}){
+    const [t] = useTranslation("global");
+
     const filterTickets = (tickets) => {
         return tickets.map((ticket) => {
             if(event.is_completed){
@@ -37,7 +40,7 @@ export default function EventTickets({event}){
     return (
         <div className="card bg-base-100 shadow-xl w-full">
             <div className="bg-cover bg-center h-44 rounded-t-xl relative" style={{backgroundImage: `url(${event.image})`}} >
-                <div className={`absolute top-0 left-0 mt-2 ml-2 badge badge-md ${label.badge}`}>{label.text}</div>
+                <div className={`absolute top-0 left-0 mt-2 ml-2 badge badge-md ${label.badge}`}>{t(`event.state.${BrandHelper.getEventState(event)}`)}</div>
             </div>
             <div className="card-body  p-4">
                 <Link to={"/app/event/" + event.address}><h2 className="font-bold text-xl text-primary">{event.name}</h2></Link>
@@ -45,7 +48,7 @@ export default function EventTickets({event}){
                 <div className="collapse bg-base-200 collapse-arrow mt-2">
                     <input type="checkbox" />
                     <div className="collapse-title text-xl font-medium">
-                        Tickets
+                        {t("profile.tickets")}
                     </div>
                     <div className="collapse-content">
                         {tickets.map((ticket, index) => (

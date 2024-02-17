@@ -15,6 +15,31 @@ import ProfileView, {loader as profileLoader} from "./routes/profile/view";
 import EventCreate from "./routes/event/create";
 import ProfileWaiting from "./routes/profile/waiting";
 import TicketsView from "./routes/tickets/view";
+import i18next from "i18next";
+import translation_en from './i18n/en/translation.json';
+import translation_ru from './i18n/ru/translation.json';
+import translation_pl from './i18n/pl/translation.json';
+import translation_ua from './i18n/ua/translation.json';
+import {I18nextProvider} from "react-i18next";
+
+i18next.init({
+    interpolation: {escapeValue: false},
+    lng: "en",
+    resources: {
+        en: {
+            global: translation_en
+        },
+        ru: {
+            global: translation_ru
+        },
+        pl: {
+            global: translation_pl
+        },
+        ua: {
+            global: translation_ua
+        }
+    }
+});
 
 const router = createBrowserRouter([
     {
@@ -60,8 +85,10 @@ WebApp.ready()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-      <TonConnectUIProvider manifestUrl="https://bafkreig5ot5zrnghimvmkdolg7s4lxivcq6gkrdi7lxwtzg3egixy7jxrq.ipfs.nftstorage.link/">
-          <RouterProvider router={router} />
-      </TonConnectUIProvider>
+      <I18nextProvider i18n={i18next} >
+          <TonConnectUIProvider manifestUrl="https://bafkreig5ot5zrnghimvmkdolg7s4lxivcq6gkrdi7lxwtzg3egixy7jxrq.ipfs.nftstorage.link/">
+              <RouterProvider router={router} />
+          </TonConnectUIProvider>
+      </I18nextProvider>
   </React.StrictMode>,
 )

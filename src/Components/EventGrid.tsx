@@ -1,7 +1,10 @@
 import EventWaitingCard from "./EventWaitingCard";
 import EventCard from "./EventCard";
+import {useTranslation} from "react-i18next";
 
 export default function EventGrid({events, waiting, more}){
+    const [t] = useTranslation("global");
+
     const renderEvents = () => {
         if(events.length > 0){
             return events.map((event, index) => {
@@ -17,7 +20,7 @@ export default function EventGrid({events, waiting, more}){
                     <>
                         {renderEvents()}
                         {more ? <div className="flex justify-center mt-6">
-                            <button className="btn btn-primary">More events</button>
+                            <button className="btn btn-primary">{t("event.more_events")}</button>
                         </div> : ""}
                     </>
                     :

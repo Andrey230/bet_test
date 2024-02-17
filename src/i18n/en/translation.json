@@ -1,0 +1,61 @@
+{
+
+  "header" : {
+    "menu": {
+      "tickets": "Your tickets",
+      "events": "Your events",
+      "home" : "Home",
+      "logout": "Logout"
+    }
+  },
+  "main": {
+    "search": {
+      "placeholder": "Find event by title, description, tags..."
+    },
+    "categories": {
+      "label": "Categories",
+      "top": "Top events",
+      "new": "New events"
+    }
+  },
+  "notification": {
+    "waiting": "{{count}} event(s) is waiting for your decision. You have only 24 hours to set winner option. Tap to see",
+    "error": "Ups, something went wrong...",
+    "success": "The transaction was sent successfully. Changes will take effect in 20-30 seconds"
+  },
+  "event": {
+    "state": {
+      "active": "active",
+      "completed": "completed",
+      "ticket_closed": "gate closed",
+      "canceled": "canceled",
+      "waiting_winner": "waiting winner"
+    },
+    "stop_sell_ticket": {
+      "label": "Stop sell tickets"
+    },
+    "end_event": {
+      "label": "Event end date"
+    },
+    "top_options": "Top options",
+    "take_part": {
+      "label": "Take part in the event",
+      "button": "Buy"
+    },
+    "pick_option": "Pick your option",
+    "ticket_to_buy": "Tickets: {{count}}",
+    "cancel_after": "Event is canceled after:",
+    "set_winner": {
+      "button": "Set winner"
+    },
+    "more_events": "More events"
+  },
+  "profile": {
+    "your_events": "Your events",
+    "your_tickets": "Your tickets",
+    "total_events": "Events",
+    "total_likes": "Likes",
+    "tickets": "Tickets",
+    "waiting_events": "Waiting events"
+  }
+}
