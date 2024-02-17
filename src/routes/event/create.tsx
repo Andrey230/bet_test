@@ -262,7 +262,7 @@ export default function EventCreate(){
 
     return (
         <>
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-20">
                 <div className="bg-base-100 rounded-lg p-5 shadow-xl">
                     <h3 className="text-2xl font-semibold border-base-300">{t("create.main_title")}</h3>
 
