@@ -3,9 +3,12 @@ import { NavLink } from "react-router-dom"
 import {useTonConnect} from "../hooks/useTonConnect"
 import {Address} from "ton-core";
 import { useTranslation } from 'react-i18next';
+import {useCookies} from "react-cookie";
+import BrandHelper from "../helper/brandHelper";
 
 export default function Header() {
 
+    const [cookies, setCookie, removeCookie] = useCookies();
     const {connected, wallet} = useTonConnect();
     const [tonConnectUI, setOptions] = useTonConnectUI();
     const [t, i18n] = useTranslation("global");
@@ -27,6 +30,12 @@ export default function Header() {
 
     const changeLanguage = (lang => {
         i18n.changeLanguage(lang);
+        const currentDate = new Date();
+        currentDate.setMonth(currentDate.getMonth() + 2);
+
+        setCookie("language",lang, {
+            expires: currentDate
+        });
 
         const elem = document.activeElement;
         if(elem){
