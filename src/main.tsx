@@ -57,28 +57,28 @@ const router = createBrowserRouter([
                 loader: homeLoader,
             },
             {
-                path: "/tickets",
+                path: "tickets",
                 element: <TicketsView />,
             },
             {
-                path: "/event/:eventId",
+                path: "event/:eventId",
                 element: <EventView />,
                 loader: eventLoader,
             },
             {
-                path: "/event/create",
+                path: "event/create",
                 element: <EventCreate />
             },
             {
-                path: "/profile/waiting",
+                path: "profile/waiting",
                 element: <ProfileWaiting />,
             },
             {
-                path: "/profile/history",
+                path: "profile/history",
                 element: <ProfileHistory />,
             },
             {
-                path: "/profile/:address",
+                path: "profile/:address",
                 element: <ProfileView />,
                 loader: profileLoader,
             },
