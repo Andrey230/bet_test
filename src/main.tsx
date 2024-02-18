@@ -87,7 +87,8 @@ const router = createBrowserRouter([
 ]);
 
 WebApp.ready()
-WebApp.close();
+WebApp.expand();
+WebApp.enableClosingConfirmation();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
