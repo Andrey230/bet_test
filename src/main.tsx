@@ -87,6 +87,7 @@ const router = createBrowserRouter([
 ]);
 
 WebApp.ready()
+WebApp.close();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
