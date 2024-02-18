@@ -86,7 +86,6 @@ const router = createBrowserRouter([
     },
 ]);
 
-console.log(WebApp.initData);
 WebApp.ready();
 WebApp.expand();
 WebApp.enableClosingConfirmation();

@@ -4,7 +4,7 @@ import {useTonConnect} from "../hooks/useTonConnect"
 import {Address} from "ton-core";
 import { useTranslation } from 'react-i18next';
 import {useCookies} from "react-cookie";
-import BrandHelper from "../helper/brandHelper";
+import WebApp from "@twa-dev/sdk";
 
 export default function Header() {
 
@@ -46,6 +46,7 @@ export default function Header() {
     return (
         <>
             <div className="navbar bg-base-100 relative z-20 shadow">
+                {JSON.stringify(WebApp.initData ?? {})}
                 <div className="flex-1">
                     <div className="flex items-center">
                         <NavLink to="/" className="btn btn-ghost text-xl">moc1000</NavLink>
