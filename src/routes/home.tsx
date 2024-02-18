@@ -69,7 +69,7 @@ export default function Home(){
     return (
         <>
             {waitingEventsCount > 0 ?
-                <NavLink to="/app/profile/waiting">
+                <NavLink to="profile/waiting">
                     <div role="alert" className="alert alert-warning drop-shadow-lg mb-3 rounded-lg">
                         <div className="text-xs">{t("notification.waiting", {count: waitingEventsCount})}</div>
                     </div>

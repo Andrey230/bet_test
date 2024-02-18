@@ -48,7 +48,7 @@ export default function Header() {
             <div className="navbar bg-base-100 relative z-20 shadow">
                 <div className="flex-1">
                     <div className="flex items-center">
-                        <NavLink to="/app" className="btn btn-ghost text-xl">moc1000</NavLink>
+                        <NavLink to="/" className="btn btn-ghost text-xl">moc1000</NavLink>
                         <div className="dropdown dropdown-bottom">
                             <div tabIndex={0} role="button" className="w-10 h-12 flex justify-center items-center">
                                 <span className="font-bold text-primary">{i18n.language}</span>
@@ -66,7 +66,7 @@ export default function Header() {
                 <div className="flex-none">
                     {connected ? (
                         <>
-                            <NavLink to="/app/event/create">
+                            <NavLink to="event/create">
                                 <div className="btn btn-ghost btn-circle">
                                     <div className="indicator">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" stroke="currentColor" viewBox="0 0 448 512"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
@@ -83,17 +83,17 @@ export default function Header() {
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                                     <li>
-                                        <NavLink to={`app/profile/${Address.parse(wallet?.toString())}`} className="justify-between" onClick={handleClick}>
+                                        <NavLink to={`profile/${Address.parse(wallet?.toString())}`} className="justify-between" onClick={handleClick}>
                                             {t("header.menu.events")}
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to="app/tickets" className="justify-between" onClick={handleClick}>
+                                        <NavLink to="tickets" className="justify-between" onClick={handleClick}>
                                             {t("header.menu.tickets")}
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to="app/profile/history" className="justify-between" onClick={handleClick}>
+                                        <NavLink to="profile/history" className="justify-between" onClick={handleClick}>
                                             {t("header.menu.history")}
                                         </NavLink>
                                     </li>

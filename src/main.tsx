@@ -47,38 +47,38 @@ const router = createBrowserRouter([
         path: "/",
         element: <Root />,
         children: [
+            // {
+            //     path: "/",
+            //     element: <Navigate to={"/app"} replace={true} />
+            // },
             {
                 path: "/",
-                element: <Navigate to={"/app"} replace={true} />
-            },
-            {
-                path: "/app",
                 element: <Home />,
                 loader: homeLoader,
             },
             {
-                path: "/app/tickets",
+                path: "/tickets",
                 element: <TicketsView />,
             },
             {
-                path: "/app/event/:eventId",
+                path: "/event/:eventId",
                 element: <EventView />,
                 loader: eventLoader,
             },
             {
-                path: "/app/event/create",
+                path: "/event/create",
                 element: <EventCreate />
             },
             {
-                path: "/app/profile/waiting",
+                path: "/profile/waiting",
                 element: <ProfileWaiting />,
             },
             {
-                path: "/app/profile/history",
+                path: "/profile/history",
                 element: <ProfileHistory />,
             },
             {
-                path: "/app/profile/:address",
+                path: "/profile/:address",
                 element: <ProfileView />,
                 loader: profileLoader,
             },
@@ -89,7 +89,6 @@ const router = createBrowserRouter([
 WebApp.ready()
 WebApp.expand();
 WebApp.enableClosingConfirmation();
-WebApp.BackButton.show();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
