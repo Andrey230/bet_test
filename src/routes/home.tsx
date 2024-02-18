@@ -33,7 +33,7 @@ export default function Home(){
 
         if(!startRedirect && eventId){
             setStartRedirect(true);
-            return navigate('/event' + eventId);
+            return navigate('/event/' + eventId);
         }
     }, []);
 
