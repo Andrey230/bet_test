@@ -53,7 +53,7 @@ export default function EventTickets({event, history}){
                     : ""}
             </div>
             <div className="card-body  p-4">
-                <Link to={"event/" + event._id}><h2 className="font-bold text-xl text-primary">{event.name}</h2></Link>
+                <Link to={"/event/" + event._id}><h2 className="font-bold text-xl text-primary">{event.name}</h2></Link>
 
                 <div className="collapse bg-base-200 collapse-arrow mt-2">
                     <input type="checkbox" />
