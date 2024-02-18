@@ -4,7 +4,6 @@ import {useTonConnect} from "../hooks/useTonConnect"
 import {Address} from "ton-core";
 import { useTranslation } from 'react-i18next';
 import {useCookies} from "react-cookie";
-import WebApp from "@twa-dev/sdk";
 
 export default function Header() {
 
@@ -12,17 +11,6 @@ export default function Header() {
     const {connected, wallet} = useTonConnect();
     const [tonConnectUI, setOptions] = useTonConnectUI();
     const [t, i18n] = useTranslation("global");
-
-    let parts = WebApp.initData.split('&');
-
-    let startParamValue = null;
-    parts.forEach(part => {
-        let [key, value] = part.split('=');
-
-        if (key === "start_param") {
-            startParamValue = decodeURIComponent(value);
-        }
-    });
 
     setOptions({
         language: i18n.language
@@ -57,7 +45,6 @@ export default function Header() {
     return (
         <>
             <div className="navbar bg-base-100 relative z-20 shadow">
-                {startParamValue}
                 <div className="flex-1">
                     <div className="flex items-center">
                         <NavLink to="/" className="btn btn-ghost text-xl">moc1000</NavLink>

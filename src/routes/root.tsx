@@ -5,11 +5,29 @@ import Notifications from "../Components/Notifications";
 import LoadingScreen from "../Components/LoadingScreen";
 import {useCookies} from "react-cookie";
 import {useTranslation} from "react-i18next";
+import WebApp from "@twa-dev/sdk";
 
 const NotificationContext = createContext({});
 const LoaderContext = createContext({});
 
 export default function Root() {
+
+    let parts = WebApp.initData.split('&');
+
+    let eventId = null;
+    parts.forEach(part => {
+        let [key, value] = part.split('=');
+
+        if (key === "start_param") {
+            eventId = decodeURIComponent(value);
+        }
+    });
+
+    if(eventId){
+        return <Redirect to={"event/" + eventId} />;
+    }
+
+
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(true);
     const [t, i18n] = useTranslation();

@@ -19,7 +19,7 @@ export default function EventCard({event}) {
     const label = BrandHelper.getEventStateLabel(event.state);
 
     return (
-        <Link to={"event/" + event.address}>
+        <Link to={"event/" + event._id}>
             <div className="card bg-base-100 shadow-xl w-full">
                 <div className="bg-cover bg-center h-44 rounded-t-xl" style={{backgroundImage: `url(${event.image})`}} >
                     <div className="bg-cover bg-center h-44 rounded-lg relative" style={{backgroundImage: `url(${event.image})`}} >
