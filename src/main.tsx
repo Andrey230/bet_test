@@ -86,7 +86,8 @@ const router = createBrowserRouter([
     },
 ]);
 
-WebApp.ready()
+console.log(WebApp.initData);
+WebApp.ready();
 WebApp.expand();
 WebApp.enableClosingConfirmation();
 WebApp.setHeaderColor('#FFFFFF');
