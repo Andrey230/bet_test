@@ -3,9 +3,11 @@ import { useLoaderData } from "react-router-dom";
 import {useTonConnect} from "../hooks/useTonConnect";
 import {useCallback, useEffect, useState} from "react";
 import EventGrid from "../Components/EventGrid";
-import {useLoader} from "./root";
+import {useLoader, useStartRedirect} from "./root";
 import { NavLink } from "react-router-dom"
 import {useTranslation} from "react-i18next";
+import WebApp from "@twa-dev/sdk";
+import { useNavigate } from "react-router-dom";
 
 export async function loader({ params }) {
     let defaultEvents = [];
@@ -21,8 +23,20 @@ export async function loader({ params }) {
 
 export default function Home(){
     const { defaultEvents } = useLoaderData();
+    const {startRedirect, setStartRedirect} = useStartRedirect();
     const {setLoading} = useLoader();
+    let navigate = useNavigate();
     setLoading(false);
+
+    useEffect(() => {
+        const eventId = findStartParam();
+
+        if(!startRedirect && eventId){
+            setStartRedirect(true);
+            return navigate('/event' + eventId);
+        }
+    }, []);
+
     const [waitingEventsCount, setWaitingEventsCount] = useState(0);
     const {wallet, connected} = useTonConnect();
     const [searchValue, setSearchValue] = useState('');
@@ -89,4 +103,19 @@ export default function Home(){
             <EventGrid events={events}/>
         </>
     )
+}
+
+function findStartParam(){
+    let parts = WebApp.initData.split('&');
+
+    let eventId = null;
+    parts.forEach(part => {
+        let [key, value] = part.split('=');
+
+        if (key === "start_param") {
+            eventId = decodeURIComponent(value);
+        }
+    });
+
+    return eventId;
 }
