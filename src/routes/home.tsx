@@ -26,7 +26,6 @@ export default function Home(){
     const {startRedirect, setStartRedirect} = useStartRedirect();
     const {setLoading} = useLoader();
     let navigate = useNavigate();
-    setLoading(false);
 
     useEffect(() => {
         const eventId = findStartParam();
@@ -35,6 +34,8 @@ export default function Home(){
             setStartRedirect(true);
             return navigate('/event/' + eventId);
         }
+
+        setLoading(false);
     }, []);
 
     const [waitingEventsCount, setWaitingEventsCount] = useState(0);
