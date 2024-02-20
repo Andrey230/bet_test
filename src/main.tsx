@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import WebApp from '@twa-dev/sdk'
 import {
     createBrowserRouter,
     RouterProvider,
@@ -85,11 +84,6 @@ const router = createBrowserRouter([
         ],
     },
 ]);
-
-WebApp.ready();
-WebApp.expand();
-WebApp.enableClosingConfirmation();
-WebApp.setHeaderColor('#FFFFFF');
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
