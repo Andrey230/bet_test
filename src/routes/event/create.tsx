@@ -297,35 +297,33 @@ export default function EventCreate(){
                         <div className="mt-5">
                             <p className="font-semibold mb-3">{t("create.stop_sell_ticket.label")}</p>
 
-                            <input type="time" className="input w-full max-w-xs" onChange={handleTimeChange}/>
-
-                            {/*<DatePicker*/}
-                            {/*    className="w-full"*/}
-                            {/*    selected={stopSellTicketDate}*/}
-                            {/*    onChange={stopSellTicketDateHandler}*/}
-                            {/*    customInput={<StopSellTicketInput />}*/}
-                            {/*    showTimeInput*/}
-                            {/*    timeInputLabel="Time:"*/}
-                            {/*    dateFormat="MMMM d, yyyy - HH:mm"*/}
-                            {/*    minDate={new Date()}*/}
-                            {/*    shouldCloseOnSelect={false}*/}
-                            {/*/>*/}
+                            <DatePicker
+                                className="w-full"
+                                selected={stopSellTicketDate}
+                                onChange={stopSellTicketDateHandler}
+                                customInput={<StopSellTicketInput />}
+                                showTimeInput
+                                timeInputLabel="Time:"
+                                dateFormat="MMMM d, yyyy - HH:mm"
+                                minDate={new Date()}
+                                shouldCloseOnSelect={false}
+                            />
 
                             {stopSellTicketDateError ? <p className="text-error text-xs mt-2">{t("create.stop_sell_ticket.error")}</p> : ""}
                         </div>
 
                         <div className="mt-5">
                             <p className="font-semibold mb-3">{t("create.end_event.label")}</p>
-                            {/*<DatePicker*/}
-                            {/*    selected={endEventDate}*/}
-                            {/*    onChange={endEventDateHandler}*/}
-                            {/*    customInput={<StopSellTicketInput />}*/}
-                            {/*    showTimeInput*/}
-                            {/*    timeInputLabel="Time:"*/}
-                            {/*    dateFormat="MMMM d, yyyy - HH:mm"*/}
-                            {/*    minDate={new Date()}*/}
-                            {/*    shouldCloseOnSelect={false}*/}
-                            {/*/>*/}
+                            <DatePicker
+                                selected={endEventDate}
+                                onChange={endEventDateHandler}
+                                customInput={<StopSellTicketInput />}
+                                showTimeInput
+                                timeInputLabel="Time:"
+                                dateFormat="MMMM d, yyyy - HH:mm"
+                                minDate={new Date()}
+                                shouldCloseOnSelect={false}
+                            />
 
                             {endEventDateError ? <p className="text-error text-xs mt-2">{t("create.end_event.error")}</p> : ""}
                         </div>
