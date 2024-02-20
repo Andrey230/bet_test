@@ -333,7 +333,7 @@ export default function EventCreate(){
                                     />
                                 </div>
                                 <div className="w-1/2">
-                                    <input type="time" placeholder="00:00" className="btn w-full max-w-xs" onChange={stopSellTimeHandler} value={stopSellTicketTime}/>
+                                    <input type="time" placeholder="00:00" className="btn w-full" onChange={stopSellTimeHandler} value={stopSellTicketTime}/>
                                 </div>
                             </div>
 
@@ -356,7 +356,7 @@ export default function EventCreate(){
                                     />
                                 </div>
                                 <div className="w-1/2">
-                                    <input type="time" placeholder="00:00" className="btn w-full max-w-xs" onChange={endEventTimeHandler} value={endEventTime}/>
+                                    <input type="time" placeholder="00:00" className="btn w-full" onChange={endEventTimeHandler} value={endEventTime}/>
                                 </div>
                             </div>
 
