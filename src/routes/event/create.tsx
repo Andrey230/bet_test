@@ -211,7 +211,7 @@ export default function EventCreate(){
 
     const addTagsButton = () => {
         if(tag !== "" && tags.length < maxTags){
-            const newTags = [...tags, tag];
+            const newTags = [...tags, tag.toLowerCase()];
             setTags(newTags);
             setTag("");
         }
