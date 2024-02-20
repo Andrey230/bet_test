@@ -292,6 +292,9 @@ export default function EventCreate(){
 
                         <div className="mt-5">
                             <p className="font-semibold mb-3">{t("create.stop_sell_ticket.label")}</p>
+
+                            <input type="time" className="input w-full max-w-xs"/>
+
                             <DatePicker
                                 className="w-full"
                                 selected={stopSellTicketDate}
@@ -306,13 +309,6 @@ export default function EventCreate(){
 
                             {stopSellTicketDateError ? <p className="text-error text-xs mt-2">{t("create.stop_sell_ticket.error")}</p> : ""}
                         </div>
-
-                        <DatePicker
-                            selected={new Date()}
-                            timeInputLabel="Time:"
-                            dateFormat="MM/dd/yyyy h:mm aa"
-                            showTimeInput
-                        />
 
                         <div className="mt-5">
                             <p className="font-semibold mb-3">{t("create.end_event.label")}</p>
