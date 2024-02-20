@@ -340,7 +340,6 @@ export default function EventCreate(){
 
                         <div className="mt-5">
                             <p className="font-semibold mb-3">{t("create.end_event.label")}</p>
-
                             <div className="flex gap-2 justify-between">
                                 <div className="w-2/3">
                                     <DatePicker
