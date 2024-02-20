@@ -327,7 +327,7 @@ export default function EventCreate(){
                                         customInput={<StopSellTicketInput />}
                                         showTimeInput
                                         timeInputLabel="Time:"
-                                        dateFormat="MM.dd.yyyy"
+                                        dateFormat="dd.MM.yyyy"
                                         minDate={new Date()}
                                         shouldCloseOnSelect={false}
                                     />
@@ -347,7 +347,7 @@ export default function EventCreate(){
                                         onChange={endEventDateHandler}
                                         customInput={<StopSellTicketInput />}
                                         timeInputLabel="Time:"
-                                        dateFormat="MM.dd.yyyy"
+                                        dateFormat="dd.MM.yyyy"
                                         minDate={new Date()}
                                         shouldCloseOnSelect={false}
                                     />
