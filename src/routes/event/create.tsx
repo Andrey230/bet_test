@@ -344,20 +344,17 @@ export default function EventCreate(){
                             <p className="font-semibold mb-3">{t("create.end_event.label")}</p>
 
                             <div className="flex gap-2">
-                                <div className="w-1/2">
-                                    <DatePicker
-                                        selected={endEventDate}
-                                        onChange={endEventDateHandler}
-                                        customInput={<StopSellTicketInput />}
-                                        timeInputLabel="Time:"
-                                        dateFormat="MM.dd.yyyy"
-                                        minDate={new Date()}
-                                        shouldCloseOnSelect={false}
-                                    />
-                                </div>
-                                <div className="w-1/2">
-                                    <input type="time" placeholder="00:00" className="btn w-full" onChange={endEventTimeHandler} value={endEventTime}/>
-                                </div>
+                                <DatePicker
+                                    selected={endEventDate}
+                                    onChange={endEventDateHandler}
+                                    customInput={<StopSellTicketInput />}
+                                    timeInputLabel="Time:"
+                                    dateFormat="MM.dd.yyyy"
+                                    minDate={new Date()}
+                                    shouldCloseOnSelect={false}
+                                />
+
+                                <input type="time" placeholder="00:00" className="btn w-full" onChange={endEventTimeHandler} value={endEventTime}/>
                             </div>
 
                             {endEventDateError ? <p className="text-error text-xs mt-2">{t("create.end_event.error")}</p> : ""}
