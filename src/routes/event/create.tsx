@@ -318,8 +318,8 @@ export default function EventCreate(){
                         <div className="mt-5">
                             <p className="font-semibold mb-3">{t("create.stop_sell_ticket.label")}</p>
 
-                            <div className="flex gap-2">
-                                <div className="w-1/2">
+                            <div className="flex justify-between gap-2">
+                                <div className="w-2/3">
                                     <DatePicker
                                         className="w-full"
                                         selected={stopSellTicketDate}
@@ -332,9 +332,7 @@ export default function EventCreate(){
                                         shouldCloseOnSelect={false}
                                     />
                                 </div>
-                                <div className="w-1/2">
-                                    <input type="time" placeholder="00:00" className="btn w-full" onChange={stopSellTimeHandler} value={stopSellTicketTime}/>
-                                </div>
+                                <input type="time" placeholder="00:00" className="btn flex-grow" onChange={stopSellTimeHandler} value={stopSellTicketTime}/>
                             </div>
 
                             {stopSellTicketDateError ? <p className="text-error text-xs mt-2">{t("create.stop_sell_ticket.error")}</p> : ""}
@@ -343,18 +341,20 @@ export default function EventCreate(){
                         <div className="mt-5">
                             <p className="font-semibold mb-3">{t("create.end_event.label")}</p>
 
-                            <div className="flex gap-2">
-                                <DatePicker
-                                    selected={endEventDate}
-                                    onChange={endEventDateHandler}
-                                    customInput={<StopSellTicketInput />}
-                                    timeInputLabel="Time:"
-                                    dateFormat="MM.dd.yyyy"
-                                    minDate={new Date()}
-                                    shouldCloseOnSelect={false}
-                                />
+                            <div className="flex gap-2 justify-between">
+                                <div className="w-2/3">
+                                    <DatePicker
+                                        selected={endEventDate}
+                                        onChange={endEventDateHandler}
+                                        customInput={<StopSellTicketInput />}
+                                        timeInputLabel="Time:"
+                                        dateFormat="MM.dd.yyyy"
+                                        minDate={new Date()}
+                                        shouldCloseOnSelect={false}
+                                    />
+                                </div>
 
-                                <input type="time" placeholder="00:00" className="btn w-full" onChange={endEventTimeHandler} value={endEventTime}/>
+                                <input type="time" placeholder="00:00" className="btn flex-grow" onChange={endEventTimeHandler} value={endEventTime}/>
                             </div>
 
                             {endEventDateError ? <p className="text-error text-xs mt-2">{t("create.end_event.error")}</p> : ""}
