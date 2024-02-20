@@ -260,6 +260,10 @@ export default function EventCreate(){
         }
     }
 
+    const handleTimeChange = (event) => {
+        event.preventDefault(); // Отмена действия по умолчанию (отправка формы)
+    };
+
     return (
         <>
             <div className="flex justify-center mb-20">
@@ -293,7 +297,7 @@ export default function EventCreate(){
                         <div className="mt-5">
                             <p className="font-semibold mb-3">{t("create.stop_sell_ticket.label")}</p>
 
-                            <input type="time" className="input w-full max-w-xs"/>
+                            <input type="time" className="input w-full max-w-xs" onChange={handleTimeChange}/>
 
                             {/*<DatePicker*/}
                             {/*    className="w-full"*/}
