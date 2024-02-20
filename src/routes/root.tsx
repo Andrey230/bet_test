@@ -30,8 +30,6 @@ export default function Root() {
         WebApp.ready();
     }, []);
 
-    console.log(cookies.language);
-
     const addNotification = (message) => {
         setNotifications([message]);
 

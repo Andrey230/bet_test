@@ -38,8 +38,6 @@ export function getEvents(params = {}){
 export function getEvent(address: string){
     let url = baseUrl + `/events/${address}`;
 
-    console.log(url);
-
     return fetch(url, {
         method: "GET"
     });
