@@ -7,6 +7,7 @@ import '/src/datepicker/datepicker.css';
 import BrandHelper from "../../helper/brandHelper";
 import {useLoader} from "../root";
 import {useTranslation} from "react-i18next";
+import dayjs from 'dayjs';
 
 export default function EventCreate(){
     const maxTags = 5;
@@ -49,9 +50,11 @@ export default function EventCreate(){
     defaultEndEventDate.setMinutes(defaultEndEventDate.getMinutes() + 10);
 
     const [stopSellTicketDate, setStopSellTicketDate] = useState(defaultStopSellTicketDate);
+    const [stopSellTicketTime, setStopSellTicketTime] = useState(`${defaultStopSellTicketDate.getHours()}:${defaultStopSellTicketDate.getMinutes()}`);
     const [stopSellTicketDateError, setStopSellTicketDateError] = useState(false);
 
     const [endEventDate, setEndDateEvent] = useState(defaultEndEventDate);
+    const [endEventTime, setEndTimeEvent] = useState(`${defaultEndEventDate.getHours()}:${defaultEndEventDate.getMinutes()}`);
     const [endEventDateError, setEndDateEventError] = useState(false);
     const [price, setPrice] = useState(1);
 
@@ -260,8 +263,26 @@ export default function EventCreate(){
         }
     }
 
-    const handleTimeChange = (event) => {
-        event.preventDefault(); // Отмена действия по умолчанию (отправка формы)
+    const endEventTimeHandler = (event) => {
+        event.preventDefault();
+        const newEndDate = endEventDate;
+        const [hours, minutes] = event.target.value.split(":");
+        newEndDate.setHours(parseInt(hours));
+        newEndDate.setMinutes(parseInt(minutes));
+        setEndDateEvent(newEndDate);
+        setEndTimeEvent(event.target.value);
+        checkEndEventDate(newEndDate);
+    };
+
+    const stopSellTimeHandler = (event) => {
+        event.preventDefault();
+        const newStopSell = stopSellTicketDate;
+        const [hours, minutes] = event.target.value.split(":");
+        newStopSell.setHours(parseInt(hours));
+        newStopSell.setMinutes(parseInt(minutes));
+        setStopSellTicketDate(newStopSell);
+        setStopSellTicketTime(event.target.value);
+        checkStopSellTicketDate(newStopSell);
     };
 
     return (
@@ -297,33 +318,47 @@ export default function EventCreate(){
                         <div className="mt-5">
                             <p className="font-semibold mb-3">{t("create.stop_sell_ticket.label")}</p>
 
-                            <DatePicker
-                                className="w-full"
-                                selected={stopSellTicketDate}
-                                onChange={stopSellTicketDateHandler}
-                                customInput={<StopSellTicketInput />}
-                                showTimeInput
-                                timeInputLabel="Time:"
-                                dateFormat="MMMM d, yyyy - HH:mm"
-                                minDate={new Date()}
-                                shouldCloseOnSelect={false}
-                            />
+                            <div className="flex gap-2">
+                                <div className="w-1/2">
+                                    <DatePicker
+                                        className="w-full"
+                                        selected={stopSellTicketDate}
+                                        onChange={stopSellTicketDateHandler}
+                                        customInput={<StopSellTicketInput />}
+                                        showTimeInput
+                                        timeInputLabel="Time:"
+                                        dateFormat="MM.dd.yyyy"
+                                        minDate={new Date()}
+                                        shouldCloseOnSelect={false}
+                                    />
+                                </div>
+                                <div className="w-1/2">
+                                    <input type="time" placeholder="00:00" className="btn w-full max-w-xs" onChange={stopSellTimeHandler} value={stopSellTicketTime}/>
+                                </div>
+                            </div>
 
                             {stopSellTicketDateError ? <p className="text-error text-xs mt-2">{t("create.stop_sell_ticket.error")}</p> : ""}
                         </div>
 
                         <div className="mt-5">
                             <p className="font-semibold mb-3">{t("create.end_event.label")}</p>
-                            <DatePicker
-                                selected={endEventDate}
-                                onChange={endEventDateHandler}
-                                customInput={<StopSellTicketInput />}
-                                showTimeInput
-                                timeInputLabel="Time:"
-                                dateFormat="MMMM d, yyyy - HH:mm"
-                                minDate={new Date()}
-                                shouldCloseOnSelect={false}
-                            />
+
+                            <div className="flex gap-2">
+                                <div className="w-1/2">
+                                    <DatePicker
+                                        selected={endEventDate}
+                                        onChange={endEventDateHandler}
+                                        customInput={<StopSellTicketInput />}
+                                        timeInputLabel="Time:"
+                                        dateFormat="MM.dd.yyyy"
+                                        minDate={new Date()}
+                                        shouldCloseOnSelect={false}
+                                    />
+                                </div>
+                                <div className="w-1/2">
+                                    <input type="time" placeholder="00:00" className="btn w-full max-w-xs" onChange={endEventTimeHandler} value={endEventTime}/>
+                                </div>
+                            </div>
 
                             {endEventDateError ? <p className="text-error text-xs mt-2">{t("create.end_event.error")}</p> : ""}
                         </div>
