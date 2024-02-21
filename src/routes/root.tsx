@@ -5,7 +5,6 @@ import Notifications from "../Components/Notifications";
 import LoadingScreen from "../Components/LoadingScreen";
 import {useCookies} from "react-cookie";
 import {useTranslation} from "react-i18next";
-import WebApp from "@twa-dev/sdk";
 
 const NotificationContext = createContext({});
 const LoaderContext = createContext({});
@@ -24,10 +23,6 @@ export default function Root() {
         if(cookies.language){
             i18n.changeLanguage(cookies.language);
         }
-        WebApp.expand();
-        WebApp.enableClosingConfirmation();
-        WebApp.setHeaderColor('#FFFFFF');
-        WebApp.ready();
     }, []);
 
     const addNotification = (message) => {

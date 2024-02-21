@@ -21,6 +21,7 @@ import translation_ru from './i18n/ru/translation.json';
 import translation_pl from './i18n/pl/translation.json';
 import translation_ua from './i18n/ua/translation.json';
 import {I18nextProvider} from "react-i18next";
+import WebApp from "@twa-dev/sdk";
 
 i18next.init({
     interpolation: {escapeValue: false},
@@ -84,6 +85,11 @@ const router = createBrowserRouter([
         ],
     },
 ]);
+
+WebApp.expand();
+WebApp.enableClosingConfirmation();
+WebApp.setHeaderColor('#FFFFFF');
+WebApp.ready();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
