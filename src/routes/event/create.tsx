@@ -50,13 +50,15 @@ export default function EventCreate(){
     defaultEndEventDate.setMinutes(defaultEndEventDate.getMinutes() + 10);
 
     const [stopSellTicketDate, setStopSellTicketDate] = useState(defaultStopSellTicketDate);
-    const [stopSellTicketTime, setStopSellTicketTime] = useState(`${defaultStopSellTicketDate.getHours()}:${defaultStopSellTicketDate.getMinutes()}`);
+    const [stopSellTicketTime, setStopSellTicketTime] = useState(`${dayjs(defaultStopSellTicketDate).format("HH:mm")}`);
     const [stopSellTicketDateError, setStopSellTicketDateError] = useState(false);
 
     const [endEventDate, setEndDateEvent] = useState(defaultEndEventDate);
-    const [endEventTime, setEndTimeEvent] = useState(`${defaultEndEventDate.getHours()}:${defaultEndEventDate.getMinutes()}`);
+    const [endEventTime, setEndTimeEvent] = useState(`${dayjs(defaultEndEventDate).format("HH:mm")}`);
     const [endEventDateError, setEndDateEventError] = useState(false);
     const [price, setPrice] = useState(1);
+
+    console.log(stopSellTicketTime, endEventTime);
 
     const optionHandler = (option) => {
         const optionIndex = option.target.dataset.optionIndex
