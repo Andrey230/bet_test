@@ -9,7 +9,7 @@ import {useTranslation} from "react-i18next";
 import WebApp from "@twa-dev/sdk";
 import { useNavigate } from "react-router-dom";
 
-const limitEvents = 2;
+const limitEvents = 10;
 
 export async function loader({ params }) {
     let defaultEvents = [];
@@ -17,7 +17,6 @@ export async function loader({ params }) {
 
     await getEvents({limit: limitEvents}).then((response) => response.json())
         .then((data) => {
-            console.log(data);
             defaultEvents = data.events ?? [];
             defaultHasNextPage = data.hasNextPage ?? false;
         })
@@ -92,8 +91,8 @@ export default function Home(){
 
     const handleScroll = () => {
         if (
-            window.innerHeight + document.documentElement.scrollTop ===
-            document.documentElement.offsetHeight &&
+            window.innerHeight + document.documentElement.scrollTop >=
+            document.documentElement.offsetHeight - 20 &&
             !loadingEvents && hasNextPage
         ) {
             setLoadingEvents(true);
@@ -102,10 +101,8 @@ export default function Home(){
 
 
     useEffect(() => {
-        // Добавление слушателя события прокрутки
         window.addEventListener('scroll', handleScroll);
         return () => {
-            // Удаление слушателя события при размонтировании компонента
             window.removeEventListener('scroll', handleScroll);
         };
     }, [loadingEvents]);
@@ -122,28 +119,26 @@ export default function Home(){
                 .catch((error) => console.log(error));
         };
 
-        console.log(loadingEvents);
-
         if (loadingEvents && hasNextPage) {
-            console.log('request');
             fetchData();
-            setLoadingEvents(false);
         }
+        setLoadingEvents(false);
     }, [loadingEvents]);
 
-    // Обновление слушателя события прокрутки после обновления списка событий
     useEffect(() => {
-        const handleResize = () => {
-            window.removeEventListener('scroll', handleScroll);
-            window.addEventListener('scroll', handleScroll);
-        };
 
-        handleResize();
+        if(hasNextPage){
+            const handleResize = () => {
+                window.removeEventListener('scroll', handleScroll);
+                window.addEventListener('scroll', handleScroll);
+            };
+            handleResize();
+        }
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [events]); // Вызываем useEffect при изменении списка событий
+    }, [events]);
 
     return (
         <>
@@ -166,6 +161,9 @@ export default function Home(){
                 </div>
             </div>
             <EventGrid events={events}/>
+            <div className="flex justify-center mt-5 mb-5">
+                {loadingEvents ? <span className="loading loading-dots loading-lg"></span> : ""}
+            </div>
         </>
     )
 }
