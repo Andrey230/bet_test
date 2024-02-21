@@ -200,7 +200,7 @@ export default function EventCreate(){
         //
         await createEvent({
             $$type: "EventCreate",
-            query_id: 0n,
+            query_id: 1n,
             content: eventContent,
             ticket_price: toNano(`${price}`),
             stop_sell_ticket_datetime: BigInt(BrandHelper.getTimeStamp(stopSellTicketDate)),
