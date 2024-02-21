@@ -5,7 +5,7 @@ import {uploadPinataFile, uploadPinataJson} from "../../api/endpoints";
 import DatePicker from "react-datepicker";
 import '/src/datepicker/datepicker.css';
 import BrandHelper from "../../helper/brandHelper";
-import {useLoader} from "../root";
+import {useLoader, useNotification} from "../root";
 import {useTranslation} from "react-i18next";
 import dayjs from 'dayjs';
 
@@ -16,6 +16,7 @@ export default function EventCreate(){
     setLoading(false);
 
     const [t] = useTranslation("global");
+    const {notifications, addNotification} = useNotification();
 
     const {createEvent} = useEventCreatorContract();
     //OPTIONS
@@ -178,39 +179,43 @@ export default function EventCreate(){
 
         setLoadingEvent(true);
 
-        // const pinataImage = await uploadPinataFile(image);
-        // const pinataImageUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${pinataImage}`;
+        try {
+            const pinataImage = await uploadPinataFile(image);
+            const pinataImageUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${pinataImage}`;
 
-        const pinataImageUrl = 'awdawdawd';
-        const eventData = {
-            name: title,
-            description: desc,
-            image: pinataImageUrl,
-            options: options,
-            tags: tags
-        };
+            const eventData = {
+                name: title,
+                description: desc,
+                image: pinataImageUrl,
+                options: options,
+                tags: tags
+            };
 
-        // const pinataJson = await uploadPinataJson(eventData);
-        //
-        // const pinataJsonUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${pinataJson}`;
+            const pinataJson = await uploadPinataJson(eventData);
 
-        const pinataJsonUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/awdawd`;
+            const pinataJsonUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${pinataJson}`;
 
 
-        const OFFCHAIN_CONTENT_PREFIX = 0x01;
+            const OFFCHAIN_CONTENT_PREFIX = 0x01;
 
 
-        let eventContent = beginCell().storeInt(OFFCHAIN_CONTENT_PREFIX, 8).storeStringRefTail(pinataJsonUrl).endCell();
-        //
-        await createEvent({
-            $$type: "EventCreate",
-            query_id: 1n,
-            content: eventContent,
-            ticket_price: toNano(`${price}`),
-            stop_sell_ticket_datetime: BigInt(BrandHelper.getTimeStamp(stopSellTicketDate)),
-            event_start_datetime: BigInt(BrandHelper.getTimeStamp(endEventDate)),
-            total_options: BigInt(options.length)
-        });
+            let eventContent = beginCell().storeInt(OFFCHAIN_CONTENT_PREFIX, 8).storeStringRefTail(pinataJsonUrl).endCell();
+            //
+            await createEvent({
+                $$type: "EventCreate",
+                query_id: 1n,
+                content: eventContent,
+                ticket_price: toNano(`${price}`),
+                stop_sell_ticket_datetime: BigInt(BrandHelper.getTimeStamp(stopSellTicketDate)),
+                event_start_datetime: BigInt(BrandHelper.getTimeStamp(endEventDate)),
+                total_options: BigInt(options.length)
+            });
+        }catch (error){
+            addNotification({
+                success: false,
+                message: t("notification.error")
+            });
+        }
 
         setLoadingEvent(false);
     }
