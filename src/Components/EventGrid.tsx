@@ -15,7 +15,7 @@ export default function EventGrid({events, waiting, more}){
 
     return (
         <>
-            <div className="flex gap-5 flex-col">
+            <div className="flex gap-5 flex-col mb-10">
                 {events.length > 0 ?
                     <>
                         {renderEvents()}

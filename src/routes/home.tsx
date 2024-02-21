@@ -9,20 +9,25 @@ import {useTranslation} from "react-i18next";
 import WebApp from "@twa-dev/sdk";
 import { useNavigate } from "react-router-dom";
 
+const limitEvents = 2;
+
 export async function loader({ params }) {
     let defaultEvents = [];
+    let defaultHasNextPage = false;
 
-    await getEvents().then((response) => response.json())
+    await getEvents({limit: limitEvents}).then((response) => response.json())
         .then((data) => {
+            console.log(data);
             defaultEvents = data.events ?? [];
+            defaultHasNextPage = data.hasNextPage ?? false;
         })
         .catch((error) => console.log(error));
 
-    return { defaultEvents };
+    return { defaultEvents, defaultHasNextPage };
 }
 
 export default function Home(){
-    const { defaultEvents } = useLoaderData();
+    const { defaultEvents, defaultHasNextPage } = useLoaderData();
     const {startRedirect, setStartRedirect} = useStartRedirect();
     const {setLoading} = useLoader();
     let navigate = useNavigate();
@@ -42,6 +47,8 @@ export default function Home(){
     const {wallet, connected} = useTonConnect();
     const [searchValue, setSearchValue] = useState('');
     const [events, setEvents] = useState(defaultEvents);
+    const [page, setPage] = useState(1);
+    const [hasNextPage, setHasNextPage] = useState(defaultHasNextPage);
     const [t] = useTranslation("global");
 
     useEffect(() => {
@@ -80,6 +87,63 @@ export default function Home(){
         setSearchValue(value);
         delayedSearch(value);
     }
+
+    const [loadingEvents, setLoadingEvents] = useState(false);
+
+    const handleScroll = () => {
+        if (
+            window.innerHeight + document.documentElement.scrollTop ===
+            document.documentElement.offsetHeight &&
+            !loadingEvents && hasNextPage
+        ) {
+            setLoadingEvents(true);
+        }
+    };
+
+
+    useEffect(() => {
+        // Добавление слушателя события прокрутки
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            // Удаление слушателя события при размонтировании компонента
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [loadingEvents]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoadingEvents(true);
+            await getEvents({page: page + 1, limit: limitEvents}).then((response) => response.json())
+                .then((data) => {
+                    setEvents([...events, ...data.events ?? []]);
+                    setPage(page + 1);
+                    setHasNextPage(data.hasNextPage ?? false);
+                })
+                .catch((error) => console.log(error));
+        };
+
+        console.log(loadingEvents);
+
+        if (loadingEvents && hasNextPage) {
+            console.log('request');
+            fetchData();
+            setLoadingEvents(false);
+        }
+    }, [loadingEvents]);
+
+    // Обновление слушателя события прокрутки после обновления списка событий
+    useEffect(() => {
+        const handleResize = () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.addEventListener('scroll', handleScroll);
+        };
+
+        handleResize();
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [events]); // Вызываем useEffect при изменении списка событий
 
     return (
         <>
