@@ -4,6 +4,7 @@ import {useTonConnect} from "../hooks/useTonConnect"
 import {Address} from "ton-core";
 import { useTranslation } from 'react-i18next';
 import {useCookies} from "react-cookie";
+import {useEffect} from "react";
 
 export default function Header() {
 
@@ -11,6 +12,12 @@ export default function Header() {
     const {connected, wallet} = useTonConnect();
     const [tonConnectUI, setOptions] = useTonConnectUI();
     const [t, i18n] = useTranslation("global");
+
+    useEffect(() => {
+        if(localStorage.getItem('ton-connect-storage_bridge-connection') && !connected){
+            window.location.reload();
+        }
+    }, []);
 
     setOptions({
         language: i18n.language
