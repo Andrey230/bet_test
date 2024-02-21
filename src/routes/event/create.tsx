@@ -178,8 +178,10 @@ export default function EventCreate(){
 
         setLoadingEvent(true);
 
-        const pinataImage = await uploadPinataFile(image);
-        const pinataImageUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${pinataImage}`;
+        // const pinataImage = await uploadPinataFile(image);
+        // const pinataImageUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${pinataImage}`;
+
+        const pinataImageUrl = 'awdawdawd';
         const eventData = {
             name: title,
             description: desc,
@@ -188,9 +190,11 @@ export default function EventCreate(){
             tags: tags
         };
 
-        const pinataJson = await uploadPinataJson(eventData);
+        // const pinataJson = await uploadPinataJson(eventData);
+        //
+        // const pinataJsonUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${pinataJson}`;
 
-        const pinataJsonUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${pinataJson}`;
+        const pinataJsonUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/awdawd`;
 
 
         const OFFCHAIN_CONTENT_PREFIX = 0x01;
