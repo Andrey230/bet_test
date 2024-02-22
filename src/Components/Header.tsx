@@ -14,7 +14,15 @@ export default function Header() {
     const [t, i18n] = useTranslation("global");
 
     useEffect(() => {
+        const repeat = Number(localStorage.getItem('connect-repeat') ?? 0);
+
+        if(repeat > 10){
+            tonConnectUI.disconnect();
+            localStorage.removeItem('connect-repeat');
+        }
+
         if(localStorage.getItem('ton-connect-storage_bridge-connection') && !connected){
+            localStorage.setItem('connect-repeat', String(repeat + 1));
             window.location.reload();
         }
     }, []);
