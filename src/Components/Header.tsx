@@ -13,11 +13,11 @@ export default function Header() {
     const [tonConnectUI, setOptions] = useTonConnectUI();
     const [t, i18n] = useTranslation("global");
 
-    useEffect(() => {
-        if(localStorage.getItem('ton-connect-storage_bridge-connection') && !connected){
-            window.location.reload();
-        }
-    }, []);
+    // useEffect(() => {
+    //     if(localStorage.getItem('ton-connect-storage_bridge-connection') && !connected){
+    //         window.location.reload();
+    //     }
+    // }, []);
 
     setOptions({
         language: i18n.language
