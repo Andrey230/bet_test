@@ -25,6 +25,8 @@ export default function Header() {
             localStorage.setItem('connect-repeat', String(repeat + 1));
             window.location.reload();
         }
+
+        localStorage.setItem('connect-repeat', String(0));
     }, []);
 
     setOptions({
