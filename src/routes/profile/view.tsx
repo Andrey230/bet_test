@@ -85,8 +85,10 @@ export default function ProfileView(){
                 </div>
             </div>
 
-            <h1 className="text-3xl font-semibold mb-5">{t("profile.your_events")}</h1>
-            {events.length > 0 ? <EventGrid events={events} /> : ""}
+            {events.length > 0 ? <>
+                <h1 className="text-3xl font-semibold mb-5">{t("profile.your_events")}</h1>
+                <EventGrid events={events} />
+            </> : ""}
         </>
     );
 }
