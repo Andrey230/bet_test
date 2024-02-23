@@ -62,6 +62,9 @@
     "history" : "Historia",
     "description": {
       "placeholder": "nik do telegramu lub twój kanał..."
+    },
+    "save": {
+      "button" : "Zapisz"
     }
   },
   "create": {

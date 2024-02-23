@@ -62,6 +62,9 @@
     "history" : "Історія",
     "description": {
       "placeholder": "ім'я користувача в Telegram або посилання на вашу групу..."
+    },
+    "save": {
+      "button" : "Зберегти"
     }
   },
   "create": {
