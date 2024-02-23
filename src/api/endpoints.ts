@@ -72,6 +72,18 @@ export function checkUser(address: string){
     });
 }
 
+export function saveUser(address: string, user: {}){
+    let url = baseUrl + `/user/${address}`;
+
+    return fetch(url, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user),
+    });
+}
+
 export function getProfileEvents(address: string){
     let url = baseUrl + `/events/profile/${address}`;
 

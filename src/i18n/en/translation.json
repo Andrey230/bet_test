@@ -23,7 +23,8 @@
   "notification": {
     "waiting": "{{count}} event(s) is waiting for your decision. You have only 24 hours to set winner option. Tap to see",
     "error": "Ups, something went wrong...",
-    "success": "The transaction was sent successfully. Changes will take effect in 20-30 seconds"
+    "success": "The transaction was sent successfully. Changes will take effect in 20-30 seconds",
+    "update_user": "Data updated successfully"
   },
   "event": {
     "state": {
@@ -63,6 +64,11 @@
     "history" : "History",
     "description": {
       "placeholder": "e.q. telegram username or your channel..."
+    },
+    "name": {
+      "placeholder": "Username",
+      "allowed_characters" : "Enter only letters, numbers and _",
+      "existed" : "Username already taken"
     },
     "save": {
       "button" : "Save"
