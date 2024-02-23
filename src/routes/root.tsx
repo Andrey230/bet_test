@@ -6,6 +6,9 @@ import LoadingScreen from "../Components/LoadingScreen";
 import {useCookies} from "react-cookie";
 import {useTranslation} from "react-i18next";
 import WebApp from "@twa-dev/sdk";
+import {getWaitingEvents} from "../api/endpoints";
+import {useTonConnect} from "../hooks/useTonConnect";
+import { NavLink } from "react-router-dom";
 
 const NotificationContext = createContext({});
 const LoaderContext = createContext({});
@@ -16,7 +19,20 @@ export default function Root() {
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(true);
     const [startRedirect, setStartRedirect] = useState(false);
-    const [t, i18n] = useTranslation();
+    const [waitingEventsCount, setWaitingEventsCount] = useState(0);
+    const {wallet, connected} = useTonConnect();
+
+    useEffect(() => {
+        if(connected){
+            getWaitingEvents(wallet?.toString()).then((response) => response.json())
+                .then((data) => {
+                    setWaitingEventsCount(data.totalEvents ?? 0);
+                })
+                .catch((error) => console.log(error));
+        }
+    }, [connected]);
+
+    const [t, i18n] = useTranslation("global");
 
     const [cookies] = useCookies();
 
@@ -69,6 +85,13 @@ export default function Root() {
                         <div className="bg-base-300 pt-6 pb-8 min-h-screen">
                             <div className="flex justify-center">
                                 <div className="w-4/5 max-w-xs">
+                                    {connected && waitingEventsCount > 0 ?
+                                        <NavLink to="profile/waiting">
+                                            <div role="alert" className="alert alert-warning drop-shadow-lg mb-4 rounded-lg">
+                                                <div className="text-xs">{t("notification.waiting", {count: waitingEventsCount})}</div>
+                                            </div>
+                                        </NavLink>
+                                        : ""}
                                     <Outlet />
                                 </div>
                             </div>

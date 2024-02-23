@@ -5,7 +5,8 @@
       "events": "Ваші події",
       "home": "Головна",
       "history" : "Історія",
-      "logout": "Вийти"
+      "logout": "Вийти",
+      "profile": "Профіль"
     }
   },
   "main": {
@@ -51,13 +52,17 @@
     "more_events": "Ще події"
   },
   "profile": {
-    "your_events": "Ваші події",
+    "title": "Профіль",
+    "your_events": "Події",
     "your_tickets": "Ваші квитки",
     "total_events": "Подій",
     "total_likes": "Лайків",
     "tickets": "Квитки",
     "waiting_events": "Очікуючі події",
-    "history" : "Історія"
+    "history" : "Історія",
+    "description": {
+      "placeholder": "ім'я користувача в Telegram або посилання на вашу групу..."
+    }
   },
   "create": {
     "main_title": "Створити подію",

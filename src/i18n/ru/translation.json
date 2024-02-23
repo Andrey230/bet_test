@@ -5,7 +5,8 @@
       "events": "Ваши события",
       "home" : "Главная",
       "history" : "История",
-      "logout": "Выйти"
+      "logout": "Выйти",
+      "profile": "Профиль"
     }
   },
   "main": {
@@ -51,13 +52,17 @@
     "more_events": "Еще события"
   },
   "profile": {
-    "your_events": "Ваши события",
+    "title": "Профиль",
+    "your_events": "События",
     "your_tickets": "Ваши билеты",
     "total_events": "Событий",
     "total_likes": "Лайков",
     "tickets": "Билеты",
     "waiting_events": "Ожидающие события",
-    "history" : "История"
+    "history" : "История",
+    "description": {
+      "placeholder": "никнейм в телеграме или ссылка на твою группу..."
+    }
   },
   "create": {
     "main_title": "Создать событие",

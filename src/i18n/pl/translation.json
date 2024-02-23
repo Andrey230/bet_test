@@ -5,7 +5,8 @@
       "events": "Twoje wydarzenia",
       "home": "Strona główna",
       "history" : "Historia",
-      "logout": "Wyloguj się"
+      "logout": "Wyloguj się",
+      "profile": "Profil"
     }
   },
   "main": {
@@ -51,13 +52,17 @@
     "more_events": "Więcej wydarzeń"
   },
   "profile": {
-    "your_events": "Twoje wydarzenia",
+    "title": "Profil",
+    "your_events": "Wydarzenia",
     "your_tickets": "Twoje bilety",
     "total_events": "Wydarzenia",
     "total_likes": "Polubienia",
     "tickets": "Bilety",
     "waiting_events": "Oczekujące wydarzenia",
-    "history" : "Historia"
+    "history" : "Historia",
+    "description": {
+      "placeholder": "nik do telegramu lub twój kanał..."
+    }
   },
   "create": {
     "main_title": "Stwórz wydarzenie",

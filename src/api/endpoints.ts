@@ -64,6 +64,14 @@ export function getWaitingEvents(address: string){
     });
 }
 
+export function checkUser(address: string){
+    let url = baseUrl + `/user/check/${address}`;
+
+    return fetch(url, {
+        method: "GET"
+    });
+}
+
 export function getProfileEvents(address: string){
     let url = baseUrl + `/events/profile/${address}`;
 

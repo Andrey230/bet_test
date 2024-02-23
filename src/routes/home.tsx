@@ -42,23 +42,11 @@ export default function Home(){
         setLoading(false);
     }, []);
 
-    const [waitingEventsCount, setWaitingEventsCount] = useState(0);
-    const {wallet, connected} = useTonConnect();
     const [searchValue, setSearchValue] = useState('');
     const [events, setEvents] = useState(defaultEvents);
     const [page, setPage] = useState(1);
     const [hasNextPage, setHasNextPage] = useState(defaultHasNextPage);
     const [t] = useTranslation("global");
-
-    useEffect(() => {
-        if(connected){
-            getWaitingEvents(wallet?.toString()).then((response) => response.json())
-                .then((data) => {
-                    setWaitingEventsCount(data.totalEvents ?? 0);
-                })
-                .catch((error) => console.log(error));
-        }
-    }, [connected]);
 
     const debounce = (func, delay) => {
         let timerId;
@@ -142,13 +130,6 @@ export default function Home(){
 
     return (
         <>
-            {waitingEventsCount > 0 ?
-                <NavLink to="profile/waiting">
-                    <div role="alert" className="alert alert-warning drop-shadow-lg mb-3 rounded-lg">
-                        <div className="text-xs">{t("notification.waiting", {count: waitingEventsCount})}</div>
-                    </div>
-                </NavLink>
-                : ""}
             <input type="text" id="find-event-input" placeholder={t("main.search.placeholder")} className="drop-shadow-lg input w-full max-w-xs mb-5" value={searchValue} onChange={searchInputHandler}/>
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-semibold">{t("main.categories.top")}</h1>

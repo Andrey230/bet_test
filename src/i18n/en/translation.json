@@ -6,7 +6,8 @@
       "events": "Your events",
       "home" : "Home",
       "history" : "History",
-      "logout": "Logout"
+      "logout": "Logout",
+      "profile": "Profile"
     }
   },
   "main": {
@@ -52,13 +53,20 @@
     "more_events": "More events"
   },
   "profile": {
-    "your_events": "Your events",
+    "title": "Profile",
+    "your_events": "Events",
     "your_tickets": "Your tickets",
     "total_events": "Events",
     "total_likes": "Likes",
     "tickets": "Tickets",
     "waiting_events": "Waiting events",
-    "history" : "History"
+    "history" : "History",
+    "description": {
+      "placeholder": "e.q. telegram username or your channel..."
+    },
+    "save": {
+      "button" : "Save"
+    }
   },
   "create": {
     "main_title": "Create event",
