@@ -127,7 +127,7 @@ export default function ProfileView(){
         }else{
             setIsOwner(false);
         }
-    }, [connected]);
+    }, [connected, address]);
 
     return (
         <>
