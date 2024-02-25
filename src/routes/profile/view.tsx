@@ -27,7 +27,6 @@ export async function loader({ params }) {
 export default function ProfileView(){
     const { address, events, eventCount } = useLoaderData();
     const {setLoading} = useLoader();
-    setLoading(false);
     const [t] = useTranslation("global");
     const userFriendlyAddress = useTonAddress(false);
     const {connected} = useTonConnect();
@@ -42,6 +41,20 @@ export default function ProfileView(){
         total_likes: 0
 
     });
+
+    useEffect(() => {
+        checkUser(address).then((response) => response.json())
+            .then((data) => {
+                setUser(data);
+                setLoading(false);
+            })
+            .catch((error) => console.log(error));
+        if(connected){
+            setIsOwner(Address.parse(userFriendlyAddress).toString() === address);
+        }else{
+            setIsOwner(false);
+        }
+    }, [connected, address]);
 
     const changeName = (event) => {
         let inputValue = event.target.value.toLowerCase();
@@ -116,19 +129,6 @@ export default function ProfileView(){
         setSaving(true);
     }
 
-    useEffect(() => {
-        checkUser(address).then((response) => response.json())
-            .then((data) => {
-                setUser(data);
-            })
-            .catch((error) => console.log(error));
-        if(connected){
-            setIsOwner(Address.parse(userFriendlyAddress).toString() === address);
-        }else{
-            setIsOwner(false);
-        }
-    }, [connected, address]);
-
     return (
         <>
             <h1 className="text-3xl font-semibold mb-5">{t("profile.title")}</h1>
@@ -171,7 +171,7 @@ export default function ProfileView(){
             {events.length > 0 ? <>
                 <h1 className="text-3xl font-semibold mb-5">{t("profile.your_events")}</h1>
                 <EventGrid events={events} />
-            </> : ""}
+            </> : <p className="text-lg font-medium text-base-content/40">{t("profile.empty_events")}</p>}
         </>
     );
 }

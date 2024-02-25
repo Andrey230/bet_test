@@ -50,7 +50,8 @@
     "set_winner": {
       "button": "Wybierz zwycięzcę"
     },
-    "more_events": "Więcej wydarzeń"
+    "more_events": "Więcej wydarzeń",
+    "empty": "Nie znaleziono wydarzeń."
   },
   "profile": {
     "title": "Profil",
@@ -64,6 +65,8 @@
     "description": {
       "placeholder": "nik do telegramu lub twój kanał..."
     },
+    "empty_tickets" : "Obecnie nie masz żadnych biletów. Czas wziąć udział w wydarzeniach.",
+    "empty_events" : "Lista wydarzeń jest pusta. Zacznij je tworzyć.",
     "name": {
       "placeholder": "Twój username",
       "allowed_characters" : "Wpisz tylko litery, cyfry i _",

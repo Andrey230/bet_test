@@ -51,7 +51,8 @@
     "set_winner": {
       "button": "Set winner"
     },
-    "more_events": "More events"
+    "more_events": "More events",
+    "empty": "No events found."
   },
   "profile": {
     "title": "Profile",
@@ -65,6 +66,8 @@
     "description": {
       "placeholder": "e.q. telegram username or your channel..."
     },
+    "empty_tickets" : "You currently don't have any tickets. Time to participate in events.",
+    "empty_events" : "The list of events is empty. Start creating them.",
     "name": {
       "placeholder": "Username",
       "allowed_characters" : "Enter only letters, numbers and _",

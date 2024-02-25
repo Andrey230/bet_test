@@ -27,9 +27,9 @@ export default function TicketsView(){
         <>
             <h1 className="text-3xl font-semibold">{t("profile.your_tickets")}</h1>
             <div className="flex flex-col gap-5 mt-5">
-                {events.map((event, index) => {
+                {events.length > 0 ? events.map((event, index) => {
                     return <EventTickets event={event} key={index}/>;
-                })}
+                }) : <p className="text-lg font-medium text-base-content/40">{t("profile.empty_tickets")}</p>}
             </div>
         </>
     );
