@@ -11,6 +11,7 @@ import {useLoader} from "../root";
 import {useTranslation} from "react-i18next";
 import Clipboard from 'clipboard';
 import { NavLink } from "react-router-dom";
+const miniapp = import.meta.env.VITE_TELEGRAM_MINIAPP;
 
 export async function loader({ params }) {
     const eventId = params.eventId;
@@ -95,7 +96,7 @@ export default function EventView(){
 
     useEffect(() => {
         new Clipboard(btnRef.current, {
-            text: () => `https://t.me/test_telegram_12312_bot/myapp?startapp=${event._id}`,
+            text: () => `${miniapp}?startapp=${event._id}`,
         })
     }, []);
 
