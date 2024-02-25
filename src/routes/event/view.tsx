@@ -15,7 +15,6 @@ const miniapp = import.meta.env.VITE_TELEGRAM_MINIAPP;
 
 export async function loader({ params }) {
     const eventId = params.eventId;
-
     let event;
 
     await getEvent(eventId).then((response) => response.json())
