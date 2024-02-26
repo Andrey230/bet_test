@@ -3,6 +3,7 @@ import {useAsyncInitialize} from "./useAsyncInitialize";
 import {EventCreate, EventCreator} from "../contracts/eventCreator";
 import {Address, OpenedContract, toNano} from "ton-core";
 import {useTonClient} from "./useTonClient";
+const eventCreator = import.meta.env.VITE_EVENT_CREATOR;
 
 export function useEventCreatorContract() {
     const {client} = useTonClient();
@@ -11,7 +12,7 @@ export function useEventCreatorContract() {
     const eventCreatorContract = useAsyncInitialize(async () => {
         if(!client) return;
 
-        const contract = EventCreator.fromAddress(Address.parse("EQAV3AsFgdt5hU6SAvNzagMVGMwf0hBDV0EU0zWzVSLfbN7r"));
+        const contract = EventCreator.fromAddress(Address.parse(eventCreator));
 
         return client.open(contract) as OpenedContract<EventCreator>;
     }, [client]);
