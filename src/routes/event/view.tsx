@@ -63,7 +63,7 @@ export default function EventView(){
 
     const buyTicketHandler = async () => {
 
-        if(isNaN(ticketAmount)){
+        if(isNaN(ticketAmount) || ticketAmount === 0){
             return;
         }
 
