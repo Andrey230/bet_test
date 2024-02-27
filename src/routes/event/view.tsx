@@ -89,7 +89,7 @@ export default function EventView(){
                     </select>
 
                     <div className="flex justify-between items-center gap-3 mt-8">
-                        <input type="number" className="input w-full max-w-xs bg-base-200" value={ticketAmount} step="1" placeholder={t("event.ticket_amount_placeholder")} onChange={ticketAmountHandler} inputMode="tel"/>
+                        <input type="number" className="input w-full max-w-xs bg-base-200" value={ticketAmount} step="1" placeholder={t("event.ticket_amount_placeholder")} onChange={ticketAmountHandler} inputMode="tel" onKeyDown={ticketAmountHandler}/>
                         {/*<p className="mt-3 mb-2">{t("event.ticket_to_buy", {count: ticketAmount})}</p>*/}
                         {/*<input type="range" min="1" max="100" value={ticketAmount} className="range range-primary range-lg" onChange={ticketAmountHandler} disabled={moreTickets}/>*/}
                         <button className="btn btn-primary" onClick={buyTicketHandler}>{t("event.take_part.button")}</button>
