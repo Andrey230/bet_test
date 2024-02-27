@@ -51,7 +51,7 @@ export default function EventView(){
     const ticketAmountHandler = (event) => {
         const newAmount = event.target.value;
         console.log(newAmount);
-        const isValid = /^\d+$/.test(newAmount);
+        const isValid = /^\d*$/.test(newAmount);
         if (isValid) {
             setTicketAmount(newAmount);
         }
