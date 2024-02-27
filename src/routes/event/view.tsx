@@ -62,6 +62,11 @@ export default function EventView(){
     }
 
     const buyTicketHandler = async () => {
+
+        if(isNaN(ticketAmount)){
+            return;
+        }
+
         await buyTicket(ticketAmount * Number(fromNano(event.ticket_price)),{
             $$type: "CreateTicket",
             query_id: 0n,
