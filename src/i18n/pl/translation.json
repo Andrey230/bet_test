@@ -51,7 +51,8 @@
       "button": "Wybierz zwycięzcę"
     },
     "more_events": "Więcej wydarzeń",
-    "empty": "Nie znaleziono wydarzeń."
+    "empty": "Nie znaleziono wydarzeń.",
+    "ticket_amount_placeholder": "Liczba biletów"
   },
   "profile": {
     "title": "Profil",

@@ -52,7 +52,8 @@
       "button": "Set winner"
     },
     "more_events": "More events",
-    "empty": "No events found."
+    "empty": "No events found.",
+    "ticket_amount_placeholder": "Ticket amount"
   },
   "profile": {
     "title": "Profile",

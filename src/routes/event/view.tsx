@@ -45,16 +45,16 @@ export default function EventView(){
     const stopSellTicket = BrandHelper.getDate(event.stop_sell_ticket_datetime);
     const eventStart = BrandHelper.getDate(event.event_start_datetime);
 
-    const [ticketAmount, setTicketAmount] = useState(1);
-    const [moreTickets, setMoreTickets] = useState(false);
+    const [ticketAmount, setTicketAmount] = useState(5);
     const [ticketOption, setTicketOption] = useState(1);
 
     const ticketAmountHandler = (event) => {
-        setTicketAmount(event.target.value);
-    }
-
-    const ticketMoreHandler = () => {
-        setMoreTickets(!moreTickets);
+        const newAmount = event.target.value;
+        console.log(newAmount);
+        const isValid = /^\d*$/.test(newAmount);
+        if (isValid) {
+            setTicketAmount(newAmount);
+        }
     }
 
     const ticketOptionHandler = (event) => {
@@ -84,9 +84,12 @@ export default function EventView(){
                         ))}
                     </select>
 
-                    <p className="mt-3 mb-2">{t("event.ticket_to_buy", {count: ticketAmount})}</p>
-                    <input type="range" min="1" max="100" value={ticketAmount} className="range range-primary range-lg" onChange={ticketAmountHandler} disabled={moreTickets}/>
-                    <button className="btn btn-primary mt-4" onClick={buyTicketHandler}>{t("event.take_part.button")}</button>
+                    <div className="flex justify-between items-center gap-3 mt-8">
+                        <input type="number" className="input w-full max-w-xs bg-base-200" value={ticketAmount} step="1" placeholder={t("event.ticket_amount_placeholder")} onChange={ticketAmountHandler} />
+                        {/*<p className="mt-3 mb-2">{t("event.ticket_to_buy", {count: ticketAmount})}</p>*/}
+                        {/*<input type="range" min="1" max="100" value={ticketAmount} className="range range-primary range-lg" onChange={ticketAmountHandler} disabled={moreTickets}/>*/}
+                        <button className="btn btn-primary" onClick={buyTicketHandler}>{t("event.take_part.button")}</button>
+                    </div>
                 </>);
         }
     }

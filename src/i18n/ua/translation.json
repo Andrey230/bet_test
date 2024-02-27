@@ -51,7 +51,8 @@
       "button": "Вибрати переможця"
     },
     "more_events": "Ще події",
-    "empty": "Події не знайдено."
+    "empty": "Події не знайдено.",
+    "ticket_amount_placeholder": "Кількість квитків"
   },
   "profile": {
     "title": "Профіль",
