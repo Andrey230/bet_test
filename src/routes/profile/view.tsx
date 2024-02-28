@@ -145,7 +145,7 @@ export default function ProfileView(){
                         : <p className="font-bold text-lg">{user.name}</p>}
                     <div className="avatar">
                         <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                            <img src="https://avatar.amuniversal.com/user_avatars/avatars_gocomicsver3/2885000/2885039/AvatarFinal.png" />
+                            <img src="/images/avatar2_new.png" />
                         </div>
                     </div>
                 </div>
