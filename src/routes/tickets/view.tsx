@@ -16,7 +16,7 @@ export default function TicketsView(){
         if(connected){
             getTickets(Address.parse(wallet?.toString()).toString()).then((response) => response.json())
                 .then((data) => {
-                    setEvents(data ?? []);
+                    //setEvents(data ?? []);
                     setLoading(false);
                 })
                 .catch((error) => console.log(error));
@@ -29,7 +29,7 @@ export default function TicketsView(){
             <div className="flex flex-col gap-5 mt-5">
                 {events.length > 0 ? events.map((event, index) => {
                     return <EventTickets event={event} key={index}/>;
-                }) : <p className="text-lg font-medium text-base-content/40">{t("profile.empty_tickets")}</p>}
+                }) : <p className="text-lg font-semibold italic text-primary">{t("profile.empty_tickets")}</p>}
             </div>
         </>
     );

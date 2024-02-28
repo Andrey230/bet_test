@@ -135,7 +135,7 @@ export default function Home(){
     return (
         <>
             <label className="input flex items-center gap-2 drop-shadow-xl w-full max-w-xs mb-5">
-                <input type="text" id="find-event-input" placeholder={t("main.search.placeholder")} className="grow" value={searchValue} onChange={searchInputHandler}/>
+                <input type="text" id="find-event-input" placeholder={t("main.search.placeholder")} className="grow font-semibold text-neutral" value={searchValue} onChange={searchInputHandler}/>
                 {searchValue !== "" ? <svg xmlns="http://www.w3.org/2000/svg" onClick={async () => {
                     setSearchValue("");
                     await searchEvents("");

@@ -17,7 +17,7 @@ export async function loader({ params }) {
     await getProfileEvents(address).then((response) => response.json())
         .then((data) => {
             eventCount = data.eventCount ?? 0;
-            events = data.events ?? [];
+            //events = data.events ?? [];
         })
         .catch((error) => console.log(error));
 
@@ -105,7 +105,6 @@ export default function ProfileView(){
 
         saveUser(address, user).then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 if(data.status){
                     addNotification({
                         success: true,
@@ -169,9 +168,9 @@ export default function ProfileView(){
             </div>
 
             {events.length > 0 ? <>
-                <h1 className="text-3xl font-semibold mb-5">{t("profile.your_events")}</h1>
+                <h1 className="text-3xl font-semibold mb-5 text-neutral">{t("profile.your_events")}</h1>
                 <EventGrid events={events} />
-            </> : <p className="text-lg font-medium text-base-content/40">{t("profile.empty_events")}</p>}
+            </> : <p className="text-lg text-primary font-semibold">{t("profile.empty_events")}</p>}
         </>
     );
 }

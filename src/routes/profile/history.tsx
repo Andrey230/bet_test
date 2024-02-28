@@ -16,7 +16,7 @@ export default function ProfileHistory(){
         if(connected){
             getTickets(Address.parse(wallet?.toString()).toString(), {all: "true"}).then((response) => response.json())
                 .then((data) => {
-                    setEvents(data ?? []);
+                    //setEvents(data ?? []);
                     setLoading(false);
                 })
                 .catch((error) => console.log(error));
@@ -27,9 +27,9 @@ export default function ProfileHistory(){
         <>
             <h1 className="text-3xl font-semibold">{t("profile.history")}</h1>
             <div className="flex flex-col gap-5 mt-5">
-                {events.map((event, index) => {
+                {events.length > 0 ? events.map((event, index) => {
                     return <EventTickets event={event} key={index} history={true}/>;
-                })}
+                }) : <p className="text-lg font-semibold italic text-primary">{t("profile.empty_tickets")}</p>}
             </div>
         </>
     );

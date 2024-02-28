@@ -24,7 +24,7 @@ export default function EventGrid({events, waiting, more}){
                         </div> : ""}
                     </>
                     :
-                    <h3 className="font-semibold text-lg text-base-content/60">{t("event.empty")}</h3>
+                    <h3 className="font-semibold text-lg text-primary italic">{t("event.empty")}</h3>
                 }
             </div>
         </>
