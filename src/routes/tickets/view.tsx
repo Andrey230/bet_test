@@ -16,7 +16,7 @@ export default function TicketsView(){
         if(connected){
             getTickets(Address.parse(wallet?.toString()).toString()).then((response) => response.json())
                 .then((data) => {
-                    //setEvents(data ?? []);
+                    setEvents(data ?? []);
                     setLoading(false);
                 })
                 .catch((error) => console.log(error));
