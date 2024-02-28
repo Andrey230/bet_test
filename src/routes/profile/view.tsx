@@ -17,7 +17,7 @@ export async function loader({ params }) {
     await getProfileEvents(address).then((response) => response.json())
         .then((data) => {
             eventCount = data.eventCount ?? 0;
-            //events = data.events ?? [];
+            events = data.events ?? [];
         })
         .catch((error) => console.log(error));
 
