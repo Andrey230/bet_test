@@ -55,7 +55,7 @@ export default function Header() {
 
     return (
         <>
-            <div className="navbar bg-base-100 relative z-20 shadow">
+            <div className="navbar bg-base-100 relative z-20 shadow-lg">
                 <div className="flex-1">
                     <div className="flex items-center">
                         <NavLink to="/" className="btn btn-ghost">
