@@ -141,7 +141,7 @@ export default function ProfileView(){
                                    onChange={changeName}
                             />
                         </div>
-                        : <p className="font-bold text-lg">{user.name}</p>}
+                        : <p className="font-bold text-lg text-neutral">{user.name}</p>}
                     <div className="avatar">
                         <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                             <img src="/images/avatar_small.png" />
@@ -151,7 +151,7 @@ export default function ProfileView(){
                 {isOwner ? <p className={`text-xs font-semibold text-info/80 ${usernameExist ? "text-error" : "text-base-content/30"}`}>{usernameExist ? t("profile.name.existed") : t("profile.name.allowed_characters")}</p> : ""}
                 <div className="mt-5">
                     {isOwner ? <textarea className="textarea bg-primary/10 text-neutral font-semibold w-full" placeholder={t("profile.description.placeholder")} value={user.description} onChange={changeDescription}></textarea>
-                        : <p>{user.description}</p>}
+                        : <p className="font-semibold text-neutral">{user.description}</p>}
                 </div>
                 {isOwner ? <button className="btn btn-primary mt-2" onClick={saveUserHandler}>{saving ? <span className="loading loading-spinner loading-md"></span> : t("profile.save.button")}</button> : ""}
             </div>
