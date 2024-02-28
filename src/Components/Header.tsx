@@ -7,7 +7,6 @@ import {useCookies} from "react-cookie";
 import {useEffect} from "react";
 
 export default function Header() {
-
     const [cookies, setCookie, removeCookie] = useCookies();
     const {connected, wallet} = useTonConnect();
     const [tonConnectUI, setOptions] = useTonConnectUI();
