@@ -9,7 +9,19 @@ export default {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light"],
+    themes: [{
+      agora: {
+        "primary": "#2a75a5",
+        "secondary": "#df301b",
+        "accent": "#e19110",
+        //"warning": "#e19110",
+        "neutral": "#16181e",
+        "base-100": "#ffffff",
+        "base-300": "#efe4d0",
+        "secondary-content" : "#f5b027",
+        "info" : "#f5b027"
+      },
+    }],
   },
 }
 

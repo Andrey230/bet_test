@@ -138,7 +138,7 @@ export default function ProfileView(){
                     {isOwner ?
                         <div>
                             <input type="text" placeholder={t("profile.name.placeholder")}
-                                   className={`input bg-base-200 w-full ${user.name === "" || usernameExist ? "input-bordered input-error" : ""}`} value={user.name}
+                                   className={`input bg-primary/10 text-neutral font-semibold w-full ${user.name === "" || usernameExist ? "input-bordered input-error" : ""}`} value={user.name}
                                    onChange={changeName}
                             />
                         </div>
@@ -149,9 +149,9 @@ export default function ProfileView(){
                         </div>
                     </div>
                 </div>
-                {isOwner ? <p className={`text-xs font-semibold ${usernameExist ? "text-error" : "text-base-content/30"}`}>{usernameExist ? t("profile.name.existed") : t("profile.name.allowed_characters")}</p> : ""}
+                {isOwner ? <p className={`text-xs font-semibold text-info/80 ${usernameExist ? "text-error" : "text-base-content/30"}`}>{usernameExist ? t("profile.name.existed") : t("profile.name.allowed_characters")}</p> : ""}
                 <div className="mt-5">
-                    {isOwner ? <textarea className="textarea bg-base-200 w-full" placeholder={t("profile.description.placeholder")} value={user.description} onChange={changeDescription}></textarea>
+                    {isOwner ? <textarea className="textarea bg-primary/10 text-neutral font-semibold w-full" placeholder={t("profile.description.placeholder")} value={user.description} onChange={changeDescription}></textarea>
                         : <p>{user.description}</p>}
                 </div>
                 {isOwner ? <button className="btn btn-primary mt-2" onClick={saveUserHandler}>{saving ? <span className="loading loading-spinner loading-md"></span> : t("profile.save.button")}</button> : ""}

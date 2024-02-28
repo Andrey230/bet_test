@@ -8,7 +8,7 @@ import {useTranslation} from "react-i18next";
 import WebApp from "@twa-dev/sdk";
 import {getWaitingEvents} from "../api/endpoints";
 import {useTonConnect} from "../hooks/useTonConnect";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const NotificationContext = createContext({});
 const LoaderContext = createContext({});
@@ -21,16 +21,22 @@ export default function Root() {
     const [startRedirect, setStartRedirect] = useState(false);
     const [waitingEventsCount, setWaitingEventsCount] = useState(0);
     const {wallet, connected} = useTonConnect();
+    const location = useLocation();
 
     useEffect(() => {
-        if(connected){
-            getWaitingEvents(wallet?.toString()).then((response) => response.json())
+        if (connected) {
+            getWaitingEvents(wallet?.toString())
+                .then((response) => response.json())
                 .then((data) => {
                     setWaitingEventsCount(data.totalEvents ?? 0);
                 })
                 .catch((error) => console.log(error));
         }
-    }, [connected]);
+
+        return () => {
+
+        };
+    }, [connected, location]);
 
     const [t, i18n] = useTranslation("global");
 
@@ -82,7 +88,7 @@ export default function Root() {
                         <Notifications />
                         <LoadingScreen />
                         <Header />
-                        <div className="bg-base-300 pt-6 pb-8 min-h-screen">
+                        <div className="bg-base-300/70 pt-6 pb-8 min-h-screen">
                             <div className="flex justify-center">
                                 <div className="w-4/5 max-w-xs">
                                     {connected && waitingEventsCount > 0 ?

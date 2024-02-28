@@ -142,14 +142,14 @@ export default function Home(){
                 }} className="w-4 h-4 opacity-70" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg> : ""}
             </label>
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-2xl font-semibold">{t("main.categories.top")}</h1>
-                <div className="dropdown dropdown-bottom dropdown-end">
-                    <div tabIndex={0} role="button" className="btn bg-base-100">{t("main.categories.label")}</div>
-                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 mt-3 rounded-box w-52">
-                        <li><a>{t("main.categories.top")}</a></li>
-                        <li><a>{t("main.categories.new")}</a></li>
-                    </ul>
-                </div>
+                <h1 className="text-2xl font-semibold text-neutral">{t("main.categories.top")}</h1>
+                {/*<div className="dropdown dropdown-bottom dropdown-end">*/}
+                {/*    <div tabIndex={0} role="button" className="btn bg-base-100">{t("main.categories.label")}</div>*/}
+                {/*    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 mt-3 rounded-box w-52">*/}
+                {/*        <li><a>{t("main.categories.top")}</a></li>*/}
+                {/*        <li><a>{t("main.categories.new")}</a></li>*/}
+                {/*    </ul>*/}
+                {/*</div>*/}
             </div>
             <EventGrid events={events}/>
             <div className="flex justify-center mt-5 mb-5">

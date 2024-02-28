@@ -24,7 +24,7 @@ export default function ProfileWaiting(){
 
     return (
         <>
-            <h1 className="text-3xl font-semibold mb-5">{t("profile.waiting_events")}</h1>
+            <h1 className="text-3xl font-semibold mb-5 text-neutral">{t("profile.waiting_events")}</h1>
             <EventGrid events={waitingEvents} waiting={true}/>
         </>
     );

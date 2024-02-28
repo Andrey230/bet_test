@@ -79,8 +79,8 @@ export default function EventView(){
         switch (event.state){
             case "active":
                 return (<>
-                    <p className="text-xl font-semibold mb-3">{t("event.take_part.label")}</p>
-                    <select className="select w-full max-w-xs bg-base-200" value={ticketOption} onChange={ticketOptionHandler}>
+                    <p className="text-xl font-semibold mb-3 text-neutral">{t("event.take_part.label")}</p>
+                    <select className="select w-full max-w-xs bg-secondary-content text-neutral font-semibold" value={ticketOption} onChange={ticketOptionHandler}>
                         <option disabled selected>{t("event.pick_option")}</option>
                         {event.options.map((value, index) => (
                             <option key={index} value={value.option}>{value.name}</option>
@@ -88,7 +88,7 @@ export default function EventView(){
                     </select>
 
                     <div className="flex justify-between items-center gap-3 mt-8">
-                        <input type="number" className="input w-full max-w-xs bg-base-200" value={ticketAmount} step="1" placeholder={t("event.ticket_amount_placeholder")} onChange={ticketAmountHandler} inputMode="tel" onKeyDown={ticketAmountHandler}/>
+                        <input type="number" className="input w-full max-w-xs bg-primary/10 text-neutral font-semibold" value={ticketAmount} step="1" placeholder={t("event.ticket_amount_placeholder")} onChange={ticketAmountHandler} inputMode="tel" onKeyDown={ticketAmountHandler}/>
                         {/*<p className="mt-3 mb-2">{t("event.ticket_to_buy", {count: ticketAmount})}</p>*/}
                         {/*<input type="range" min="1" max="100" value={ticketAmount} className="range range-primary range-lg" onChange={ticketAmountHandler} disabled={moreTickets}/>*/}
                         <button className="btn btn-primary" onClick={buyTicketHandler}>{t("event.take_part.button")}</button>
@@ -128,7 +128,7 @@ export default function EventView(){
                         {/*    </div>*/}
                         {/*    : ""}*/}
 
-                        <label className="btn btn-sm btn-circle swap shadow swap-rotate absolute top-0 right-0 mt-2 mr-2" ref={btnRef}>
+                        <label className="btn btn-sm btn-circle swap shadow swap-rotate absolute top-0 right-0 mt-2 mr-2 bg-base-100" ref={btnRef}>
 
                             {/* this hidden checkbox controls the state */}
                             <input type="checkbox" />
@@ -150,7 +150,7 @@ export default function EventView(){
                                 <span className="text-xl font-bold text-warning">{event.options[event.winner_option - 1].name}</span>
                             </div>
                             : ""}
-                        <h3 className="text-2xl font-semibold">{event.name}</h3>
+                        <h3 className="text-2xl font-semibold text-neutral">{event.name}</h3>
                         <p className="font-normal mt-2 text-base-content/70">{event.description}</p>
 
                         <div className="mt-3">
@@ -158,7 +158,7 @@ export default function EventView(){
                                 <div className="flex justify-start items-center gap-3 mt-2">
                                     <div className="avatar">
                                         <div className="w-6 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                            <img src="https://avatar.amuniversal.com/user_avatars/avatars_gocomicsver3/2885000/2885039/AvatarFinal.png" />
+                                            <img src="/images/avatar_small.png" />
                                         </div>
                                     </div>
                                     <p className="text-primary font-bold">{event.creator.name}</p>
@@ -168,20 +168,20 @@ export default function EventView(){
 
                         <div className="mt-3">
                             <div className="stat-title">{t("event.stop_sell_ticket.label")}</div>
-                            <div className="stat-value text-lg text-base-content">
+                            <div className="stat-value text-lg text-neutral">
                                 <div className="flex justify-start gap-2 items-center">
                                     {format(stopSellTicket, "dd.MM.yyyy - HH:mm")}
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="inline-block w-5 h-5 stroke-current"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="inline-block w-5 h-5 fill-neutral"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg>
                                 </div>
                             </div>
                         </div>
 
                         <div className="mt-3">
                             <div className="stat-title">{t("event.end_event.label")}</div>
-                            <div className="stat-value text-lg text-base-content">
+                            <div className="stat-value text-lg text-neutral">
                                 <div className="flex justify-start gap-2 items-center">
                                     {format(eventStart, "dd.MM.yyyy - HH:mm")}
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="inline-block w-5 h-5 stroke-current"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="inline-block w-5 h-5 fill-neutral"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg>
                                 </div>
                             </div>
                         </div>

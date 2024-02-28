@@ -53,7 +53,7 @@ export default function EventDoughnut({options}){
 
     return (
         <>
-            <h3 className="text-xl font-bold">{t("event.top_options")}</h3>
+            <h3 className="text-xl font-bold text">{t("event.top_options")}</h3>
             <div className="p-5">
                 <Doughnut
                     data={dataChart}

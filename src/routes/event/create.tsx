@@ -82,7 +82,7 @@ export default function EventCreate(){
     const renderOptions = () => {
         return options.map((value, index) => (
             <div className="flex justify-between" key={index}>
-                <input type="text" placeholder={`Options ${index + 1}`} className={`bg-base-200 input w-full max-w-xs ${value == "" ? "input-error" : ""}`} name={`option`} onChange={optionHandler} data-option-index={index} value={value}/>
+                <input type="text" placeholder={`Options ${index + 1}`} className={`bg-primary/10 input w-full max-w-xs font-semibold text-neutral ${value == "" ? "input-error" : ""}`} name={`option`} onChange={optionHandler} data-option-index={index} value={value}/>
 
                 {index > 1 ? (
                     <a className="btn btn-ghost btn-circle" onClick={() => removeOptionHandler(index)} data-option-index={index}>
@@ -241,7 +241,7 @@ export default function EventCreate(){
     }
 
     const StopSellTicketInput = forwardRef(({ value, onClick }, ref) => (
-        <button className="btn w-full no-animation" onClick={onClick} ref={ref}>
+        <button className="btn w-full no-animation btn-info" onClick={onClick} ref={ref}>
             {value}
         </button>
     ));
@@ -300,7 +300,7 @@ export default function EventCreate(){
         <>
             <div className="flex justify-center mb-20">
                 <div className="bg-base-100 rounded-lg p-5 shadow-xl">
-                    <h3 className="text-2xl font-semibold border-base-300">{t("create.main_title")}</h3>
+                    <h3 className="text-2xl font-semibold text-neutral">{t("create.main_title")}</h3>
 
                     <div className="flex flex-col mt-5">
                         <label>
@@ -308,7 +308,7 @@ export default function EventCreate(){
                                 {imageUrl ?
                                     <div className="bg-cover bg-center h-44 rounded-lg" style={{backgroundImage: `url(${imageUrl})`}} ></div>
                                     :
-                                    <div className={`bg-cover bg-center h-44 rounded-lg bg-base-200 flex justify-center items-center ${imageError ? 'border-error border' : ''}`}>
+                                    <div className={`bg-cover bg-primary/10 bg-center h-44 rounded-lg flex justify-center items-center ${imageError ? 'border-error border' : ''}`}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 fill-base-100" viewBox="0 0 512 512"><path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>
                                     </div>
                                 }
@@ -317,17 +317,17 @@ export default function EventCreate(){
                         </label>
 
                         <div className="mt-5">
-                            <p className="font-semibold mb-2">{t("create.title.label")}</p>
-                            <input type="text" placeholder={t("create.title.placeholder")} className={`bg-base-200 input w-full max-w-xs ${titleError ? "input-error" : ""}`} name="title" value={title} onChange={(event) => {textInputHandler(event, setTitle, setTitleError)}}/>
+                            <p className="font-semibold text-neutral mb-2">{t("create.title.label")}</p>
+                            <input type="text" placeholder={t("create.title.placeholder")} className={`bg-primary/10 placeholder-neutral/20 font-semibold text-neutral input w-full max-w-xs ${titleError ? "input-error" : ""}`} name="title" value={title} onChange={(event) => {textInputHandler(event, setTitle, setTitleError)}}/>
                         </div>
 
                         <div className="mt-5">
-                            <p className="font-semibold mb-2">{t("create.description.label")}</p>
-                            <textarea className={`w-full textarea bg-base-200 h-24 ${descError ? "input-error" : ""}`} style={{height: "160px"}} maxLength={380} placeholder={t("create.description.placeholder")} name="description" value={desc} onChange={(event) => {textInputHandler(event, setDesc, setDescError)}}></textarea>
+                            <p className="font-semibold text-neutral mb-2">{t("create.description.label")}</p>
+                            <textarea className={`w-full textarea bg-primary/10 placeholder-neutral/20 font-semibold text-neutral h-24 ${descError ? "input-error" : ""}`} style={{height: "160px"}} maxLength={380} placeholder={t("create.description.placeholder")} name="description" value={desc} onChange={(event) => {textInputHandler(event, setDesc, setDescError)}}></textarea>
                         </div>
 
                         <div className="mt-5">
-                            <p className="font-semibold mb-3">{t("create.stop_sell_ticket.label")}</p>
+                            <p className="font-semibold text-neutral mb-3">{t("create.stop_sell_ticket.label")}</p>
 
                             <div className="flex justify-between gap-2">
                                 <div className="w-2/3">
@@ -343,14 +343,14 @@ export default function EventCreate(){
                                         shouldCloseOnSelect={false}
                                     />
                                 </div>
-                                <input type="time" placeholder="00:00" className="btn flex-grow" onChange={stopSellTimeHandler} value={stopSellTicketTime}/>
+                                <input type="time" placeholder="00:00" className="btn flex-grow btn-info" onChange={stopSellTimeHandler} value={stopSellTicketTime}/>
                             </div>
 
                             {stopSellTicketDateError ? <p className="text-error text-xs mt-2">{t("create.stop_sell_ticket.error")}</p> : ""}
                         </div>
 
                         <div className="mt-5">
-                            <p className="font-semibold mb-3">{t("create.end_event.label")}</p>
+                            <p className="font-semibold text-neutral mb-3">{t("create.end_event.label")}</p>
                             <div className="flex gap-2 justify-between">
                                 <div className="w-2/3">
                                     <DatePicker
@@ -364,7 +364,7 @@ export default function EventCreate(){
                                     />
                                 </div>
 
-                                <input type="time" placeholder="00:00" className="btn flex-grow" onChange={endEventTimeHandler} value={endEventTime}/>
+                                <input type="time" placeholder="00:00" className="btn flex-grow btn-info" onChange={endEventTimeHandler} value={endEventTime}/>
                             </div>
 
                             {endEventDateError ? <p className="text-error text-xs mt-2">{t("create.end_event.error")}</p> : ""}
@@ -378,7 +378,7 @@ export default function EventCreate(){
                         <div className="mt-5">
                             <p className="font-semibold mb-3">{t("create.tags.label")}</p>
                             <div className="flex justify-between gap-3">
-                                <input type="text" placeholder={t("create.tags.placeholder")} className={`bg-base-200 input w-full max-w-xs`} name="tags" value={tag} onChange={handleTagsInput}/>
+                                <input type="text" placeholder={t("create.tags.placeholder")} className={`bg-primary/10 input w-full max-w-xs text-neutral font-semibold`} name="tags" value={tag} onChange={handleTagsInput}/>
                                 <button className="btn btn-primary text-xl" onClick={addTagsButton}>
                                     +
                                 </button>
@@ -402,7 +402,7 @@ export default function EventCreate(){
 
                         <div className="mt-5">
                             <div className="flex justify-left gap-2 mt-5">
-                                <div className="btn btn-active" onClick={addOptionHandler}>{t("create.options.add")}</div>
+                                <div className="btn btn-info" onClick={addOptionHandler}>{t("create.options.add")}</div>
                                 <button className="btn btn-primary" onClick={createEventHandler} disabled={loading}>
                                     {loading ? <span className="loading loading-spinner loading-md"></span> :
                                         t("create.button")
