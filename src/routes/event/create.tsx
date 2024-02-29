@@ -27,7 +27,6 @@ export default function EventCreate(){
     const defaultOptions = ["Option 1", "Option 2"];
     const [options, setOptions] = useState(defaultOptions);
     const [optionsError, setOptionsError] = useState("");
-
     const [loading, setLoadingEvent] = useState(false);
 
     //TAGS
