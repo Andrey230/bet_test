@@ -6,7 +6,8 @@
       "home": "Strona główna",
       "history" : "Historia",
       "logout": "Wyloguj się",
-      "profile": "Profil"
+      "profile": "Profil",
+      "about-us": "FAQ"
     }
   },
   "main": {
@@ -105,5 +106,13 @@
       "add": "Dodaj opcję"
     },
     "button": "Utwórz"
+  },
+  "about-us": {
+    "title" : "Agora to platforma umożliwiająca uczestnictwo w sporach i wydarzeniach.",
+    "list-creator": "<ul className=\"text-neutral\">\n                <li>1. Przejdź do strony tworzenia wydarzenia (+) i wypełnij niezbędne informacje, w tym termin zakupu biletów i datę zakończenia wydarzenia.</li>\n                <li>2. Po zakończeniu wydarzenia, w ciągu 24 godzin wybierz zwycięską opcję. Jeśli tego nie zrobisz, wydarzenie zostanie anulowane.</li>\n                <li>3. Po wybraniu zwycięzcy otrzymasz 3,5% całkowitej wartości wydarzenia, a platforma Agora otrzyma 1,5%.</li>\n                <li>Pamiętaj, że jesteś odpowiedzialny za uczciwe wyłonienie zwycięzcy i terminowe zakończenie wydarzenia.</li>\n            </ul>",
+    "creator-title": "Jak stworzyć wydarzenie?",
+    "buyer-title": "Jak wziąć udział w wydarzeniach?",
+    "footer": "Powodzenia w udziale i tworzeniu wydarzeń na platformie Agora!",
+    "list-buyer": "<ul className=\"text-base text-neutral\">\n                <li>1. Podłącz swoją portfel.</li>\n                <li>2. Przeglądaj dostępne wydarzenia i wybierz to, w którym chcesz uczestniczyć.</li>\n                <li>3. Kup bilet(y) na interesujące cię wydarzenie, podając liczbę biletów i wybierając odpowiednią opcję. Koszt jednego biletu wynosi 1 TON.</li>\n                <li>4. Poczekaj, aż twórca wydarzenia wyłoni zwycięzcę. Jeśli wybrałeś zwycięską opcję, możesz wymienić ją na część wygranej, zgodnie z liczbą twoich biletów.</li>\n                <li>Jeśli twórca nie wyłoni zwycięzcy w ciągu 24 godzin po zakończeniu wydarzenia, możesz zwrócić swoje bilety i odzyskać swoje środki.</li>\n            </ul>"
   }
 }

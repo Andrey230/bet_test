@@ -1,5 +1,4 @@
 {
-
   "header" : {
     "menu": {
       "tickets": "Your tickets",
@@ -7,7 +6,8 @@
       "home" : "Home",
       "history" : "History",
       "logout": "Logout",
-      "profile": "Profile"
+      "profile": "Profile",
+      "about-us": "FAQ"
     }
   },
   "main": {
@@ -106,5 +106,13 @@
       "add": "Add option"
     },
     "button": "Create"
+  },
+  "about-us": {
+    "title" : "Agora is a platform for participating in disputes and events.",
+    "list-creator": "<ul className=\"text-neutral\">\n                <li>1. Go to the event creation page (+) and fill in the necessary information, including the deadline for ticket purchases and the event end date.</li>\n                <li>2. After the event is over, determine the winning option within 24 hours. If this does not happen, the event will be canceled.</li>\n                <li>3. After determining the winner, you will receive 3.5% of the total event volume, and Agora platform will receive 1.5%.</li>\n                <li>Remember that you are responsible for fairly determining the winner and timely completing the event.</li>\n            </ul>",
+    "creator-title": "How to create an event?",
+    "buyer-title": "How to participate in events?",
+    "footer": "Good luck participating and creating events on the Agora platform!",
+    "list-buyer": "<ul className=\"text-base text-neutral\">\n                <li>1. Connect your wallet.</li>\n                <li>2. Browse available events and choose the one you want to participate in.</li>\n                <li>3. Buy ticket(s) for the event you are interested in, specifying the number of tickets and selecting the appropriate option. The cost of one ticket is equal to 1 TON.</li>\n                <li>4. Wait for the event creator to determine the winner. If you have chosen the winning option, you can exchange it for a share of the winnings according to the number of your tickets.</li>\n                <li>If the creator does not determine the winner within 24 hours after the event ends, you can return your tickets and get your funds back.</li>\n            </ul>"
   }
 }

@@ -120,6 +120,11 @@ export default function Header() {
                                             {t("header.menu.history")}
                                         </NavLink>
                                     </li>
+                                    <li>
+                                        <NavLink to="/about-us" className="justify-between" onClick={handleClick}>
+                                            {t("header.menu.about-us")}
+                                        </NavLink>
+                                    </li>
                                     <li><a onClick={disconnectWallet}>{t("header.menu.logout")}</a></li>
                                 </ul>
                             </div>
