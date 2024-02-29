@@ -1,6 +1,5 @@
-import {getEvents, getWaitingEvents} from "../api/endpoints";
+import {getEvents} from "../api/endpoints";
 import { useLoaderData } from "react-router-dom";
-import {useTonConnect} from "../hooks/useTonConnect";
 import {useCallback, useEffect, useState} from "react";
 import EventGrid from "../Components/EventGrid";
 import {useLoader, useStartRedirect} from "./root";
