@@ -99,7 +99,6 @@ export function saveUserAvatar(address: string, path: string){
 }
 
 export function getProfileEvents(address: string){
-    console.log('wdw');
     let url = baseUrl + `/events/profile/${address}`;
 
     return fetch(url, {
