@@ -8,6 +8,8 @@ import BrandHelper from "../../helper/brandHelper";
 import {useLoader, useNotification} from "../root";
 import {useTranslation} from "react-i18next";
 import dayjs from 'dayjs';
+import {useTonConnect} from "../../hooks/useTonConnect";
+import {useTonConnectModal} from "@tonconnect/ui-react";
 
 export default function EventCreate(){
     const maxTags = 5;
@@ -17,6 +19,8 @@ export default function EventCreate(){
 
     const [t] = useTranslation("global");
     const {notifications, addNotification} = useNotification();
+    const {connected} = useTonConnect();
+    const { open } = useTonConnectModal();
 
     const {createEvent} = useEventCreatorContract();
     //OPTIONS
@@ -140,6 +144,11 @@ export default function EventCreate(){
     }
 
     const createEventHandler = async () => {
+        if(!connected){
+            open();
+            return;
+        }
+
         if(loading){
             return;
         }
