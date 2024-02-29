@@ -22,7 +22,7 @@ export default function AboutUs(){
             {/*    <li>Помните, что вы несете ответственность за честное определение победителя и своевременное завершение события.</li>*/}
             {/*</ul>*/}
 
-            <p className="font-semibold text-lg text-neutral mt-4">{t("about-us.footer")}</p>
+            <p className="font-semibold text-lg text-neutral mt-4 mb-5">{t("about-us.footer")}</p>
         </>
     );
 }
