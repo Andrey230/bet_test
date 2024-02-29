@@ -8,6 +8,7 @@ import {Address} from "ton-core";
 import {useEffect, useState} from "react";
 import {useTonConnect} from "../../hooks/useTonConnect";
 import { put, del } from "@vercel/blob";
+import { NavLink } from "react-router-dom";
 const blobToken = import.meta.env.VITE_BLOB_READ_WRITE_TOKEN;
 
 export async function loader({ params }) {
@@ -208,7 +209,9 @@ export default function ProfileView(){
 
     return (
         <>
-            <h1 className="text-3xl font-semibold mb-5">{t("profile.title")}</h1>
+            <div className="flex justify-between items-center">
+                <h1 className="text-3xl font-semibold mb-5">{t("profile.title")}</h1>
+            </div>
 
             <div className="bg-base-100 rounded-xl p-5 mb-5 shadow-xl">
                 <div className="flex justify-between items-center gap-4">
@@ -253,7 +256,16 @@ export default function ProfileView(){
             </div>
 
             {events.length > 0 ? <>
-                <h1 className="text-3xl font-semibold mb-5 text-neutral">{t("profile.your_events")}</h1>
+                <div className="mb-5 flex justify-between items-center">
+                    <h1 className="text-3xl font-semibold text-neutral">{t("profile.your_events")}</h1>
+                    <NavLink to="/event/create">
+                        <div className="btn btn-ghost btn-circle">
+                            <div className="indicator">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 fill-accent" viewBox="0 0 448 512"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            </div>
+                        </div>
+                    </NavLink>
+                </div>
                 <EventGrid events={events} />
             </> : <p className="text-lg text-primary font-semibold">{t("profile.empty_events")}</p>}
         </>

@@ -143,6 +143,13 @@ export default function Home(){
             </label>
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-semibold text-neutral">{t("main.categories.top")}</h1>
+                <NavLink to="/event/create">
+                    <div className="btn btn-ghost btn-circle">
+                        <div className="indicator">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 fill-accent" viewBox="0 0 448 512"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                        </div>
+                    </div>
+                </NavLink>
                 {/*<div className="dropdown dropdown-bottom dropdown-end">*/}
                 {/*    <div tabIndex={0} role="button" className="btn bg-base-100">{t("main.categories.label")}</div>*/}
                 {/*    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 mt-3 rounded-box w-52">*/}

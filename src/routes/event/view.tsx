@@ -11,6 +11,7 @@ import {useLoader} from "../root";
 import {useTranslation} from "react-i18next";
 import Clipboard from 'clipboard';
 import { NavLink } from "react-router-dom";
+import {useTonConnectModal} from "@tonconnect/ui-react";
 const miniapp = import.meta.env.VITE_TELEGRAM_MINIAPP;
 
 export async function loader({ params }) {
@@ -48,6 +49,8 @@ export default function EventView(){
     const [ticketAmount, setTicketAmount] = useState(5);
     const [ticketOption, setTicketOption] = useState(1);
 
+    const { open } = useTonConnectModal();
+
     const ticketAmountHandler = (event) => {
         const newAmount = event.target.value;
         const isValid = /^\d*$/.test(newAmount);
@@ -65,14 +68,18 @@ export default function EventView(){
             return;
         }
 
-        await buyTicket(ticketAmount * Number(fromNano(event.ticket_price)),{
-            $$type: "CreateTicket",
-            query_id: 0n,
-            ticket_amount: BigInt(ticketAmount),
-            ticket_option: BigInt(ticketOption)
-        }, {
-            event: event.address
-        });
+        if(connected){
+            await buyTicket(ticketAmount * Number(fromNano(event.ticket_price)),{
+                $$type: "CreateTicket",
+                query_id: 0n,
+                ticket_amount: BigInt(ticketAmount),
+                ticket_option: BigInt(ticketOption)
+            }, {
+                event: event.address
+            });
+        }else{
+            open();
+        }
     }
 
     const renderEventAction = () => {
