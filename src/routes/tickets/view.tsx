@@ -9,7 +9,7 @@ import {useTranslation} from "react-i18next";
 export default function TicketsView(){
     const {wallet, connected} = useTonConnect();
     const [events, setEvents] = useState([]);
-    const {loading, setLoading} = useLoader();
+    const {setLoading} = useLoader();
     const [t] = useTranslation("global");
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function TicketsView(){
                 })
                 .catch((error) => console.log(error));
         }
-    }, [connected, loading]);
+    }, [connected]);
 
     return (
         <>

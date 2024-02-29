@@ -23,7 +23,8 @@
     "waiting": "{{count}} wydarzeń czeka na Twoją decyzję. Masz tylko 24 godziny, aby wybrać zwycięzcę. Kliknij, aby zobaczyć",
     "error": "Ups, coś poszło nie tak...",
     "success": "Transakcja została pomyślnie wysłana. Zmiany zostaną wprowadzone w ciągu 20-30 sekund",
-    "update_user": "Dane zostały pomyślnie zaktualizowane"
+    "update_user": "Dane zostały pomyślnie zaktualizowane",
+    "update_user_avatar_error" : "Przesyłaj tylko pliki PNG i JPG. Maksymalny rozmiar to 3,5 MB."
   },
   "event": {
     "state": {

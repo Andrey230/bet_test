@@ -7,22 +7,43 @@ import {useTonAddress} from "@tonconnect/ui-react";
 import {Address} from "ton-core";
 import {useEffect, useState} from "react";
 import {useTonConnect} from "../../hooks/useTonConnect";
-import { put } from "@vercel/blob";
+import { put, del } from "@vercel/blob";
 const blobToken = import.meta.env.VITE_BLOB_READ_WRITE_TOKEN;
 
 export async function loader({ params }) {
     const address = params.address;
+    let events = [];
+    let eventCount = 0;
+    let defaultUser = {
+        name: "",
+        description: "",
+        address: "",
+        total_likes: 0,
+        avatar: "/images/avatar_small.png"
 
-    return { address };
+    };
+
+
+    await getProfileEvents(address).then((response) => response.json())
+        .then((data) => {
+            eventCount = data.eventCount ?? 0;
+            events = data.events ?? [];
+        })
+        .catch((error) => console.log(error));
+
+    await checkUser(address).then((response) => response.json())
+        .then((data) => {
+            defaultUser = data;
+        })
+        .catch((error) => console.log(error));
+
+    return { address, events, eventCount, defaultUser };
 }
 
 export default function ProfileView(){
-    const { address } = useLoaderData();
+    const { address, events, eventCount, defaultUser } = useLoaderData();
 
-    const [eventCount, setEventCount] = useState(0);
-    const [events, setEvents] = useState([]);
-
-    const {loading, setLoading} = useLoader();
+    const {setLoading} = useLoader();
     const [t] = useTranslation("global");
     const userFriendlyAddress = useTonAddress(false);
     const {connected} = useTonConnect();
@@ -31,14 +52,7 @@ export default function ProfileView(){
     const {notifications, addNotification} = useNotification();
     const [usernameExist, setUsernameExist] = useState(false);
     const [avatarUrl, setAvatarUrl] = useState("/images/avatar_small.png");
-    const [user, setUser] = useState({
-        name: "",
-        description: "",
-        address: "",
-        total_likes: 0,
-        avatar: "/images/avatar_small.png"
-
-    });
+    const [user, setUser] = useState(defaultUser);
     const maxImageSize = 4500000;
 
     const changeAvatar = async (e) => {
@@ -80,11 +94,18 @@ export default function ProfileView(){
             });
 
             await saveUserAvatar(address, url).then((response) => response.json())
-                .then((data) => {
+                .then(async (data) => {
+                    if(user.avatar){
+                        del(user.avatar, {
+                            token: blobToken
+                        });
+                    }
+
                     addNotification({
                         success: true,
-                        message: t("notification.update_user_avatar_success")
+                        message: t("notification.update_user")
                     });
+                    setUser(data);
                 })
                 .catch((error) => {
                     addNotification({
@@ -102,26 +123,13 @@ export default function ProfileView(){
     }
 
     useEffect(() => {
-        getProfileEvents(address).then((response) => response.json())
-            .then((data) => {
-                setEventCount(data.eventCount ?? 0);
-                setEvents(data.events);
-            })
-            .catch((error) => console.log(error));
-
-        checkUser(address).then((response) => response.json())
-            .then((data) => {
-                setUser(data);
-                setLoading(false);
-            })
-            .catch((error) => console.log(error));
         if(connected){
             setIsOwner(Address.parse(userFriendlyAddress).toString() === address);
         }else{
             setIsOwner(false);
         }
-
-    }, [loading, connected, address]);
+        setLoading(false);
+    }, [connected, address]);
 
     const changeName = (event) => {
         let inputValue = event.target.value.toLowerCase();
@@ -138,14 +146,16 @@ export default function ProfileView(){
                 name: '',
                 description: user.description,
                 total_likes: user.total_likes,
-                address: user.address
+                address: user.address,
+                avatar: user.avatar,
             });
         } else if (regex.test(inputValue)) {
             setUser({
                 name: inputValue,
                 description: user.description,
                 total_likes: user.total_likes,
-                address: user.address
+                address: user.address,
+                avatar: user.avatar,
             });
         }
     }
@@ -161,7 +171,8 @@ export default function ProfileView(){
             name: user.name,
             description: inputValue,
             total_likes: user.total_likes,
-            address: user.address
+            address: user.address,
+            avatar: user.avatar,
         });
     }
 

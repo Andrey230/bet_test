@@ -24,7 +24,8 @@
     "waiting": "{{count}} event(s) is waiting for your decision. You have only 24 hours to set winner option. Tap to see",
     "error": "Ups, something went wrong...",
     "success": "The transaction was sent successfully. Changes will take effect in 20-30 seconds",
-    "update_user": "Data updated successfully"
+    "update_user": "Data updated successfully",
+    "update_user_avatar_error" : "Upload only PNG and JPG files. Maximum size 3.5MB"
   },
   "event": {
     "state": {

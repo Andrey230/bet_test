@@ -157,8 +157,8 @@ export default function EventView(){
                             <NavLink to={`/profile/${event.owner_address}`}>
                                 <div className="flex justify-start items-center gap-3 mt-2">
                                     <div className="avatar">
-                                        <div className="w-6 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                            <img src="/images/avatar_small.png" />
+                                        <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                            <img src={event.creator.avatar ?? '/images/avatar_small.png'} />
                                         </div>
                                     </div>
                                     <p className="text-primary font-bold">{event.creator.name}</p>
