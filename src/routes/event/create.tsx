@@ -59,8 +59,6 @@ export default function EventCreate(){
     const [endEventDateError, setEndDateEventError] = useState(false);
     const [price, setPrice] = useState(1);
 
-    console.log(stopSellTicketTime, endEventTime);
-
     const optionHandler = (option) => {
         const optionIndex = option.target.dataset.optionIndex
 

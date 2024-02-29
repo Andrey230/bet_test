@@ -84,7 +84,22 @@ export function saveUser(address: string, user: {}){
     });
 }
 
+export function saveUserAvatar(address: string, path: string){
+    let url = baseUrl + `/user/${address}/avatar`;
+
+    return fetch(url, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            path: path
+        }),
+    });
+}
+
 export function getProfileEvents(address: string){
+    console.log('wdw');
     let url = baseUrl + `/events/profile/${address}`;
 
     return fetch(url, {

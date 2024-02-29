@@ -34,7 +34,7 @@ export default function Root() {
         }
 
         return () => {
-
+            setLoading(true);
         };
     }, [connected, location]);
 
