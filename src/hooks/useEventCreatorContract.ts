@@ -18,8 +18,8 @@ export function useEventCreatorContract() {
     }, [client]);
 
     return {
-        createEvent: async (message: EventCreate) => {
-            const {sender} = getSender("createEvent");
+        createEvent: async (message: EventCreate, additionalParams = {}) => {
+            const {sender} = getSender("createEvent", additionalParams);
 
             await eventCreatorContract?.send(sender, {
                 value: toNano("0.15"),

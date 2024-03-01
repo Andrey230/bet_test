@@ -29,6 +29,10 @@ export default function EventCreate(){
     const [optionsError, setOptionsError] = useState("");
     const [loading, setLoadingEvent] = useState(false);
 
+    //HIDE STATICS
+    const [statics, setStatics] = useState(false);
+
+
     //TAGS
     const [tags, setTags] = useState([]);
     const [tag, setTag] = useState("");
@@ -215,6 +219,8 @@ export default function EventCreate(){
                 stop_sell_ticket_datetime: BigInt(BrandHelper.getTimeStamp(stopSellTicketDate)),
                 event_start_datetime: BigInt(BrandHelper.getTimeStamp(endEventDate)),
                 total_options: BigInt(options.length)
+            }, {
+                hideStatics: statics
             });
         }catch (error){
             addNotification({
@@ -333,6 +339,16 @@ export default function EventCreate(){
                         </div>
 
                         <div className="mt-5">
+                            <div className="form-control">
+                                <label className="cursor-pointer label pl-0 pr-0">
+                                    <span className="font-semibold text-neutral">{t("create.hide_statics.label")}</span>
+                                    <input type="checkbox" className="toggle toggle-primary" checked={statics} onChange={() => setStatics(!statics)} />
+                                </label>
+                            </div>
+                            <p className="text-xs font-medium">{t("create.hide_statics.text")}</p>
+                        </div>
+
+                        <div className="mt-5">
                             <p className="font-semibold text-neutral mb-3">{t("create.stop_sell_ticket.label")}</p>
 
                             <div className="flex justify-between gap-2">
@@ -400,7 +416,7 @@ export default function EventCreate(){
                         </div>
 
                         <div className="mt-5">
-                            <p className="text-sm mb-2 font-semibold">{t("create.options.label")}</p>
+                            <p className="font-semibold text-neutral mb-3">{t("create.options.label")}</p>
                             <div className="flex flex-col gap-3">
                                 {renderOptions()}
                             </div>

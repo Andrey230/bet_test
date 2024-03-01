@@ -104,6 +104,12 @@ export default function EventView(){
         }
     }
 
+    let showStatics = true;
+
+    if(event.hideStatics && event.state === 'active'){
+        showStatics = false;
+    }
+
     const btnRef = useRef(null);
 
     useEffect(() => {
@@ -193,7 +199,7 @@ export default function EventView(){
                             </div>
                         </div>
 
-                        {event.total_tickets > 0 ? (
+                        {event.total_tickets > 0 && showStatics ? (
                             <div className="mt-3"><EventDoughnut options={event.options} /></div>
                         ): ""}
 

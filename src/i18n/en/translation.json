@@ -105,7 +105,11 @@
       "label": "Options",
       "add": "Add option"
     },
-    "button": "Create"
+    "button": "Create",
+    "hide_statics" : {
+      "label" : "Hide statistics",
+      "text": "Statistics can be seen after the event is completed."
+    }
   },
   "about-us": {
     "title" : "Agora is a platform for participating in disputes and events.",
