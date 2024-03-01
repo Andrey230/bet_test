@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useEventContract} from "../hooks/useEventContract";
 import BrandHelper from "../helper/brandHelper";
 import {useTranslation} from "react-i18next";
+import { Link } from "react-router-dom";
 
 export default function EventWaitingCard({event}){
     const [winnerOption, setWinnerOptionInput] = useState(1);
@@ -39,6 +40,10 @@ export default function EventWaitingCard({event}){
         setLeftSeconds(remainingSeconds);
     }
 
+    const sortedOptions = event.options.sort((a, b) => b.amount - a.amount);
+
+    console.log(sortedOptions);
+
     useEffect(() => {
         const updateTime = () => {
             updateTimer();
@@ -71,7 +76,9 @@ export default function EventWaitingCard({event}){
                 </span>
                 </div>
 
-                <h2 className="font-bold text-xl text-neutral">{event.name}</h2>
+                <Link to={"/event/" + event._id}>
+                    <h2 className="font-bold text-xl text-primary">{event.name}</h2>
+                </Link>
 
                 <div>
                     <select className="select w-full max-w-xs bg-secondary-content" value={winnerOption} onChange={changeWinnerOption}>
