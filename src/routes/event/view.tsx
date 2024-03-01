@@ -105,7 +105,6 @@ export default function EventView(){
     }
 
     let showStatics = true;
-
     if(event.hideStatics && event.state === 'active'){
         showStatics = false;
     }
