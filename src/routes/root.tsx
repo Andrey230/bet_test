@@ -62,6 +62,9 @@ export default function Root() {
         WebApp.BackButton.onClick = () => {
             window.location.href = "/";
         };
+        WebApp.onEvent('backButtonClicked', () => {
+            window.location.href = "/";
+        })
         WebApp.ready();
     }, []);
 
