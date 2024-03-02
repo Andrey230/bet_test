@@ -1,4 +1,4 @@
-import { formatDistance } from 'date-fns';
+import {formatDistance, formatDistanceStrict} from 'date-fns';
 
 export default class BrandHelper{
     static getTimeStamp(date: Date): number{
@@ -11,7 +11,7 @@ export default class BrandHelper{
 
     static getDistance(from: Date, to: Date, addSuffix: boolean = false): string
     {
-        return formatDistance(from, to, {addSuffix: addSuffix});
+        return formatDistanceStrict(from, to, {addSuffix: addSuffix});
     }
 
     static getEventState(event): string

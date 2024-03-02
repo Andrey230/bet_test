@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import {checkUser, getProfileEvents, saveUser, saveUserAvatar} from "../../api/endpoints";
+import {checkUser, getEvents, getProfileEvents, saveUser, saveUserAvatar} from "../../api/endpoints";
 import EventGrid from "../../Components/EventGrid";
 import {useLoader, useNotification} from "../root";
 import {useTranslation} from "react-i18next";
@@ -11,9 +11,12 @@ import { put, del } from "@vercel/blob";
 import { NavLink } from "react-router-dom";
 const blobToken = import.meta.env.VITE_BLOB_READ_WRITE_TOKEN;
 
+const limit = 10;
+const maxImageSize = 4500000;
+
 export async function loader({ params }) {
     const address = params.address;
-    let events = [];
+    let defaultEvents = [];
     let eventCount = 0;
     let defaultUser = {
         name: "",
@@ -23,12 +26,14 @@ export async function loader({ params }) {
         avatar: "/images/avatar_small.png"
 
     };
+    let defaultHasNextPage = false;
 
 
-    await getProfileEvents(address).then((response) => response.json())
+    await getProfileEvents(address, {limit: limit}).then((response) => response.json())
         .then((data) => {
+            defaultHasNextPage = data.hasNextPage ?? false;
             eventCount = data.eventCount ?? 0;
-            events = data.events ?? [];
+            defaultEvents = data.events ?? [];
         })
         .catch((error) => console.log(error));
 
@@ -38,11 +43,11 @@ export async function loader({ params }) {
         })
         .catch((error) => console.log(error));
 
-    return { address, events, eventCount, defaultUser };
+    return { address, defaultEvents, eventCount, defaultUser, defaultHasNextPage };
 }
 
 export default function ProfileView(){
-    const { address, events, eventCount, defaultUser } = useLoaderData();
+    const { address, defaultEvents, eventCount, defaultUser, defaultHasNextPage } = useLoaderData();
 
     const {setLoading} = useLoader();
     const [t] = useTranslation("global");
@@ -50,11 +55,52 @@ export default function ProfileView(){
     const {connected} = useTonConnect();
     const [isOwner, setIsOwner] = useState(false);
     const [saving, setSaving] = useState(false);
+    const [events, setEvents] = useState(defaultEvents);
     const {notifications, addNotification} = useNotification();
     const [usernameExist, setUsernameExist] = useState(false);
     const [avatarUrl, setAvatarUrl] = useState("/images/avatar_small.png");
     const [user, setUser] = useState(defaultUser);
-    const maxImageSize = 4500000;
+    const [hasNextPage, setHasNextPage] = useState(defaultHasNextPage);
+    const [page, setPage] = useState(1);
+
+    const [loadingEvents, setLoadingEvents] = useState(false);
+
+    const handleScroll = () => {
+        if (
+            window.innerHeight + document.documentElement.scrollTop >=
+            document.documentElement.offsetHeight - 20 &&
+            !loadingEvents && hasNextPage
+        ) {
+            setLoadingEvents(true);
+        }
+    };
+
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [loadingEvents]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const nextPage = page + 1;
+            setLoadingEvents(true);
+            await getProfileEvents(address, {limit: limit, page: nextPage}).then((response) => response.json())
+                .then((data) => {
+                    setHasNextPage(data.hasNextPage ?? false);
+                    setEvents([...events, ...data.events ?? []]);
+                    setPage(nextPage);
+                })
+                .catch((error) => console.log(error));
+        };
+
+        if (loadingEvents && hasNextPage) {
+            fetchData();
+        }
+        setLoadingEvents(false);
+    }, [loadingEvents]);
 
     const changeAvatar = async (e) => {
 
@@ -249,10 +295,10 @@ export default function ProfileView(){
                     <div className="stat-title">{t("profile.total_events")}</div>
                     <div className="stat-value text-primary">{eventCount}</div>
                 </div>
-                <div className="stat">
-                    <div className="stat-title">{t("profile.total_likes")}</div>
-                    <div className="stat-value text-secondary">228</div>
-                </div>
+                {/*<div className="stat">*/}
+                {/*    <div className="stat-title">{t("profile.total_likes")}</div>*/}
+                {/*    <div className="stat-value text-secondary">228</div>*/}
+                {/*</div>*/}
             </div>
 
             {events.length > 0 ? <>

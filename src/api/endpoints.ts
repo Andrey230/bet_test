@@ -98,8 +98,14 @@ export function saveUserAvatar(address: string, path: string){
     });
 }
 
-export function getProfileEvents(address: string){
+export function getProfileEvents(address: string, params = {}){
     let url = baseUrl + `/events/profile/${address}`;
+
+    const paramsString = buildQueryString(params);
+
+    if(paramsString !== ''){
+        url = url + `?${paramsString}`;
+    }
 
     return fetch(url, {
         method: "GET"
