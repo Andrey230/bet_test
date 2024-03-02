@@ -53,7 +53,13 @@ export default function Root() {
         WebApp.expand();
         WebApp.enableClosingConfirmation();
         WebApp.setHeaderColor('#FFFFFF');
-        WebApp.BackButton = {isVisible: true};
+        WebApp.BackButton = {
+            isVisible: true,
+            onClick: () => {},
+            offClick: () => {},
+            show: () => {},
+            hide: () => {}
+        };
         WebApp.ready();
     }, []);
 
