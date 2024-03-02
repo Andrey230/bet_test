@@ -37,7 +37,7 @@ export default function Root() {
         }
 
         WebApp.onEvent('backButtonClicked', () => {
-            return  navigate(location.pathname);
+            window.location.href = prevUrl;
         });
 
         setPrevUrl(location.pathname);
