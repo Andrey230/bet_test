@@ -18,13 +18,16 @@ export async function loader({ params }) {
     const eventId = params.eventId;
     let event;
 
-    await getEvent(eventId).then((response) => response.json())
+    await getEvent(eventId).then((response) => {
+        if(response.status === 404){
+            throw new Error("event not found");
+        }
+        return response.json();
+    })
         .then((data) => {
             event = data;
         })
-        .catch((error) => console.log(error));
-
-
+        .catch((error) => redirect("/"));
 
     if(!event){
         return redirect("/");
