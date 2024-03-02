@@ -37,7 +37,7 @@ export default function Root() {
         }
 
         WebApp.BackButton.onClick = () => {
-            return navigate(prevUrl);
+            window.location.href = prevUrl;
         };
 
         setPrevUrl(location.pathname);
@@ -60,7 +60,7 @@ export default function Root() {
         WebApp.setHeaderColor('#FFFFFF');
         WebApp.BackButton.isVisible = true;
         WebApp.BackButton.onClick = () => {
-            return navigate(prevUrl);
+            window.location.href = prevUrl;
         };
         WebApp.ready();
     }, []);
