@@ -34,6 +34,10 @@ export default function Root() {
                 .catch((error) => console.log(error));
         }
 
+        if(location.pathname !== '/'){
+            WebApp.BackButton.isVisible = true;
+        }
+
         return () => {
             //setLoading(true);
         };
@@ -50,7 +54,6 @@ export default function Root() {
         WebApp.expand();
         WebApp.enableClosingConfirmation();
         WebApp.setHeaderColor('#FFFFFF');
-        WebApp.BackButton.isVisible = true;
         WebApp.onEvent('backButtonClicked', () => {
             window.location.href = "/";
         });
