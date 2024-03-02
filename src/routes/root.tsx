@@ -22,8 +22,10 @@ export default function Root() {
     const [waitingEventsCount, setWaitingEventsCount] = useState(0);
     const {wallet, connected} = useTonConnect();
     const location = useLocation();
+    const [prevUrl, setPrevUrl] = useState(location.pathname);
 
     useEffect(() => {
+
         if (connected) {
             getWaitingEvents(wallet?.toString())
                 .then((response) => response.json())
@@ -32,6 +34,8 @@ export default function Root() {
                 })
                 .catch((error) => console.log(error));
         }
+
+        setPrevUrl(location.pathname);
 
         return () => {
             //setLoading(true);
@@ -49,6 +53,7 @@ export default function Root() {
         WebApp.expand();
         WebApp.enableClosingConfirmation();
         WebApp.setHeaderColor('#FFFFFF');
+        WebApp.BackButton = {isVisible: true};
         WebApp.ready();
     }, []);
 
