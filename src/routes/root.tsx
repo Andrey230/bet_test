@@ -8,7 +8,7 @@ import {useTranslation} from "react-i18next";
 import WebApp from "@twa-dev/sdk";
 import {getWaitingEvents} from "../api/endpoints";
 import {useTonConnect} from "../hooks/useTonConnect";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const NotificationContext = createContext({});
 const LoaderContext = createContext({});
@@ -22,8 +22,6 @@ export default function Root() {
     const [waitingEventsCount, setWaitingEventsCount] = useState(0);
     const {wallet, connected} = useTonConnect();
     const location = useLocation();
-    let navigate = useNavigate();
-    const [prevUrl, setPrevUrl] = useState(location.pathname);
 
     useEffect(() => {
 
@@ -35,12 +33,6 @@ export default function Root() {
                 })
                 .catch((error) => console.log(error));
         }
-
-        WebApp.onEvent('backButtonClicked', () => {
-            window.location.href = prevUrl;
-        });
-
-        setPrevUrl(location.pathname);
 
         return () => {
             //setLoading(true);
@@ -59,6 +51,9 @@ export default function Root() {
         WebApp.enableClosingConfirmation();
         WebApp.setHeaderColor('#FFFFFF');
         WebApp.BackButton.isVisible = true;
+        WebApp.onEvent('backButtonClicked', () => {
+            window.location.href = "/";
+        });
         WebApp.ready();
     }, []);
 
