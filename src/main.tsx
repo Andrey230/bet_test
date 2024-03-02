@@ -48,10 +48,6 @@ const router = createBrowserRouter([
         path: "/",
         element: <Root />,
         children: [
-            // {
-            //     path: "/",
-            //     element: <Navigate to={"/app"} replace={true} />
-            // },
             {
                 path: "/",
                 element: <Home />,
@@ -86,6 +82,10 @@ const router = createBrowserRouter([
                 path: "profile/:address",
                 element: <ProfileView />,
                 loader: profileLoader,
+            },
+            {
+                path: "*",
+                element: <Navigate to={"/"} replace={true} />
             },
         ],
     },

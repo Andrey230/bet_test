@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData, redirect } from "react-router-dom"
 import { format } from 'date-fns';
 import {useEffect, useRef, useState} from "react";
 import {fromNano} from "ton-core";
@@ -27,7 +27,7 @@ export async function loader({ params }) {
 
 
     if(!event){
-        console.log("404");
+        return redirect("/");
     }
 
     return { event };
