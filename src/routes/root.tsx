@@ -36,9 +36,9 @@ export default function Root() {
                 .catch((error) => console.log(error));
         }
 
-        WebApp.BackButton.onClick = () => {
-            window.location.href = "/";
-        };
+        WebApp.onEvent('backButtonClicked', () => {
+            return  navigate(location.pathname);
+        });
 
         setPrevUrl(location.pathname);
 
@@ -59,12 +59,6 @@ export default function Root() {
         WebApp.enableClosingConfirmation();
         WebApp.setHeaderColor('#FFFFFF');
         WebApp.BackButton.isVisible = true;
-        WebApp.BackButton.onClick = () => {
-            window.location.href = "/";
-        };
-        WebApp.onEvent('backButtonClicked', () => {
-            window.location.href = "/";
-        })
         WebApp.ready();
     }, []);
 
