@@ -59,6 +59,9 @@ export default function Root() {
         WebApp.enableClosingConfirmation();
         WebApp.setHeaderColor('#FFFFFF');
         WebApp.BackButton.isVisible = true;
+        WebApp.BackButton.onClick = () => {
+            return navigate(prevUrl);
+        };
         WebApp.ready();
     }, []);
 
