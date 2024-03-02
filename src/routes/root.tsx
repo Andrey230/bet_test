@@ -34,9 +34,7 @@ export default function Root() {
                 .catch((error) => console.log(error));
         }
 
-        if(location.pathname !== '/'){
-            WebApp.BackButton.isVisible = true;
-        }
+        WebApp.BackButton.isVisible = location.pathname !== '/';
 
         return () => {
             //setLoading(true);
