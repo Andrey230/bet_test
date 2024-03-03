@@ -96,7 +96,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <I18nextProvider i18n={i18next} >
           <TonConnectUIProvider manifestUrl="https://bafkreicc6s2m6tr3onlvt67dd3pikzi5ppruj2u4u4kyxx2s5lsegfmu7q.ipfs.nftstorage.link/" actionsConfiguration={{
               twaReturnUrl: miniapp
-          }}>c
+          }}>
               <RouterProvider router={router} />
           </TonConnectUIProvider>
       </I18nextProvider>
