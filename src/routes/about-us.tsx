@@ -23,6 +23,7 @@ export default function AboutUs(){
             {/*</ul>*/}
 
             <p className="font-semibold text-lg text-neutral mt-4 mb-5">{t("about-us.footer")}</p>
+            <p className="text-xs mt-4 text-secondary font-semibold">{t("about-us.warning")}</p>
         </>
     );
 }
