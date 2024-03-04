@@ -87,9 +87,10 @@ export default function Header() {
                         </div>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
                             <li><a onClick={() => changeLanguage("en")}>en</a></li>
-                            <li><a onClick={() => changeLanguage("ua")}>ua</a></li>
-                            <li><a onClick={() => changeLanguage("pl")}>pl</a></li>
+                            {/*<li><a onClick={() => changeLanguage("ua")}>ua</a></li>*/}
+                            {/*<li><a onClick={() => changeLanguage("pl")}>pl</a></li>*/}
                             <li><a onClick={() => changeLanguage("ru")}>ru</a></li>
+                            <li><a onClick={() => changeLanguage("es")}>es</a></li>
                         </ul>
                     </div>
                     {connected ? (

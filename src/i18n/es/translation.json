@@ -1,0 +1,122 @@
+{
+  "header": {
+    "menu": {
+      "tickets": "Tus boletos",
+      "events": "Tus eventos",
+      "home": "Inicio",
+      "history": "Historial",
+      "logout": "Cerrar sesión",
+      "profile": "Perfil",
+      "about-us": "Preguntas frecuentes"
+    }
+  },
+  "main": {
+    "search": {
+      "placeholder": "Buscar evento por título, descripción, etiquetas..."
+    },
+    "categories": {
+      "label": "Categorías",
+      "top": "Eventos principales",
+      "new": "Nuevos eventos"
+    }
+  },
+  "notification": {
+    "waiting": "{{count}} evento(s) está esperando tu decisión. Solo tienes 24 horas para establecer la opción ganadora. Haz clic para ver",
+    "error": "Ups, algo salió mal...",
+    "success": "La transacción se envió correctamente. Los cambios se realizarán en 20-30 segundos",
+    "update_user": "Datos actualizados correctamente",
+    "update_user_avatar_error": "Carga solo archivos PNG y JPG. Tamaño máximo 3.5MB"
+  },
+  "event": {
+    "state": {
+      "active": "activo",
+      "completed": "completado",
+      "ticket_closed": "venta de boletos cerrada",
+      "canceled": "cancelado",
+      "waiting_winner": "esperando ganador"
+    },
+    "stop_sell_ticket": {
+      "label": "Detener venta de boletos"
+    },
+    "end_event": {
+      "label": "Fecha de finalización del evento"
+    },
+    "top_options": "Mejores opciones",
+    "take_part": {
+      "label": "Participar en el evento",
+      "button": "Votar"
+    },
+    "pick_option": "Elige tu opción",
+    "ticket_to_buy": "Boletos: {{count}}",
+    "cancel_after": "El evento se cancela después de:",
+    "set_winner": {
+      "button": "Establecer ganador"
+    },
+    "more_events": "Más eventos",
+    "empty": "No se encontraron eventos.",
+    "ticket_amount_placeholder": "Cantidad de boletos"
+  },
+  "profile": {
+    "title": "Perfil",
+    "your_events": "Eventos",
+    "your_tickets": "Tus boletos",
+    "total_events": "Eventos",
+    "total_likes": "Me gusta",
+    "tickets": "Boletos",
+    "waiting_events": "Eventos pendientes",
+    "history": "Historial",
+    "description": {
+      "placeholder": "p. ej. nombre de usuario de Telegram o tu canal..."
+    },
+    "empty_tickets": "Actualmente no tienes boletos. Es hora de participar en eventos.",
+    "empty_events": "La lista de eventos está vacía. Empieza a crearlos.",
+    "name": {
+      "placeholder": "Nombre de usuario",
+      "allowed_characters": "Ingresa solo letras, números y _",
+      "existed": "Nombre de usuario ya tomado"
+    },
+    "save": {
+      "button": "Guardar"
+    }
+  },
+  "create": {
+    "main_title": "Crear evento",
+    "title": {
+      "label": "Título",
+      "placeholder": "Real Madrid vs Barcelona... "
+    },
+    "description": {
+      "label": "Descripción",
+      "placeholder": "Describe cuándo, dónde y a qué hora tendrá lugar el evento..."
+    },
+    "stop_sell_ticket": {
+      "label": "Fecha de cierre de venta de boletos",
+      "error": "La fecha de cierre de venta de boletos debe ser anterior a la fecha de finalización del evento"
+    },
+    "end_event": {
+      "label": "Fecha de finalización del evento",
+      "error": "La fecha de finalización del evento no puede ser anterior a la fecha de cierre de venta de boletos"
+    },
+    "tags": {
+      "label": "Etiquetas",
+      "placeholder": "fútbol, cripto, e-sport..."
+    },
+    "options": {
+      "label": "Opciones",
+      "add": "Agregar opción"
+    },
+    "button": "Crear",
+    "hide_statics": {
+      "label": "Ocultar estadísticas",
+      "text": "Las estadísticas pueden ser vistas después de que el evento esté completado."
+    }
+  },
+  "about-us": {
+    "title": "Agora es una plataforma para participar en disputas y eventos.",
+    "list-creator": "<ul className=\"text-neutral\">\n                <li>1. Ve a la página de creación de eventos (+) y completa la información necesaria, incluyendo la fecha límite para la compra de boletos y la fecha de finalización del evento.</li>\n                <li>2. Después de que el evento haya terminado, determina la opción ganadora dentro de las 24 horas. Si esto no sucede, el evento será cancelado.</li>\n                <li>3. Después de determinar al ganador, recibirás el 3.5% del volumen total del evento, y la plataforma Agora recibirá el 1.5%.</li>\n                <li>Recuerda que eres responsable de determinar justamente al ganador y de completar el evento a tiempo.</li>\n            </ul>",
+    "creator-title": "¿Cómo crear un evento?",
+    "buyer-title": "¿Cómo participar en eventos?",
+    "footer": "¡Buena suerte participando y creando eventos en la plataforma Agora!",
+    "list-buyer": "<ul className=\"text-base text-neutral\">\n                <li>1. Conecta tu billetera.</li>\n                <li>2. Explora los eventos disponibles y elige el que deseas participar.</li>\n                <li>3. Compra boleto(s) para el evento que te interesa, especificando el número de boletos y seleccionando la opción adecuada. El costo de un boleto es igual a 1 TON.</li>\n                <li>4. Espera a que el creador del evento determine al ganador. Si has elegido la opción ganadora, puedes intercambiarla por una parte de las ganancias según el número de tus boletos.</li>\n                <li>Si el creador no determina al ganador dentro de las 24 horas posteriores al final del evento, puedes devolver tus boletos y recuperar tu dinero.</li>\n            </ul>"
+  }
+}

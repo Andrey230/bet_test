@@ -44,7 +44,7 @@
     "top_options": "Top options",
     "take_part": {
       "label": "Take part in the event",
-      "button": "Buy"
+      "button": "Vote"
     },
     "pick_option": "Pick your option",
     "ticket_to_buy": "Tickets: {{count}}",

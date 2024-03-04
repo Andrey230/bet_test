@@ -9,7 +9,7 @@ export default function AboutUs(){
 
     return (
         <>
-            <p className="text-lg text-neutral font-semibold">{t("about-us.title")}</p>
+            <p className="text-xl text-neutral font-semibold">{t("about-us.title")}</p>
             <p className="mt-4 font-semibold text-lg text-neutral">{t("about-us.buyer-title")}</p>
             <div dangerouslySetInnerHTML={{ __html: t("about-us.list-buyer") }} />
 

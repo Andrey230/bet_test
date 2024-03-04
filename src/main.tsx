@@ -19,8 +19,7 @@ import TicketsView from "./routes/tickets/view";
 import i18next from "i18next";
 import translation_en from './i18n/en/translation.json';
 import translation_ru from './i18n/ru/translation.json';
-import translation_pl from './i18n/pl/translation.json';
-import translation_ua from './i18n/ua/translation.json';
+import translation_es from './i18n/es/translation.json';
 import {I18nextProvider} from "react-i18next";
 const miniapp = import.meta.env.VITE_TELEGRAM_MINIAPP;
 
@@ -34,11 +33,8 @@ i18next.init({
         ru: {
             global: translation_ru
         },
-        pl: {
-            global: translation_pl
-        },
-        ua: {
-            global: translation_ua
+        es: {
+            global: translation_es
         }
     }
 });
