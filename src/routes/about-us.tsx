@@ -6,7 +6,6 @@ export default function AboutUs(){
     setLoading(false);
     const [t] = useTranslation("global");
 
-
     return (
         <>
             <p className="text-xl text-neutral font-semibold">{t("about-us.title")}</p>
