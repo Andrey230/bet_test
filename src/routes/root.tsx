@@ -9,10 +9,17 @@ import WebApp from "@twa-dev/sdk";
 import {getWaitingEvents} from "../api/endpoints";
 import {useTonConnect} from "../hooks/useTonConnect";
 import { NavLink, useLocation } from "react-router-dom";
+import {useTonConnectUI} from "@tonconnect/ui-react";
+const chain = import.meta.env.VITE_NETWORK;
 
 const NotificationContext = createContext({});
 const LoaderContext = createContext({});
 const RedirectContext = createContext({});
+
+const networks = {
+    testnet: -3,
+    mainnet: -239
+};
 
 export default function Root() {
 
@@ -20,10 +27,26 @@ export default function Root() {
     const [loading, setLoading] = useState(true);
     const [startRedirect, setStartRedirect] = useState(false);
     const [waitingEventsCount, setWaitingEventsCount] = useState(0);
-    const {wallet, connected} = useTonConnect();
+    const {wallet, connected, network} = useTonConnect();
     const location = useLocation();
+    const [tonConnectUI] = useTonConnectUI();
 
     useEffect(() => {
+
+        if(network){
+            if (chain in networks) {
+                const value = networks[chain];
+                if(value !== Number(network)){
+                    tonConnectUI.disconnect();
+                    addNotification({
+                        success: false,
+                        message: t("notification.network", {chain: chain})
+                    });
+                }
+            } else {
+                tonConnectUI.disconnect();
+            }
+        }
 
         if (connected) {
             getWaitingEvents(wallet?.toString())

@@ -25,7 +25,8 @@
     "error": "Ups, algo salió mal...",
     "success": "La transacción se envió correctamente. Los cambios se realizarán en 20-30 segundos",
     "update_user": "Datos actualizados correctamente",
-    "update_user_avatar_error": "Carga solo archivos PNG y JPG. Tamaño máximo 3.5MB"
+    "update_user_avatar_error": "Carga solo archivos PNG y JPG. Tamaño máximo 3.5MB",
+    "network": "Conecta tu billetera solo en la cadena {{chain}}."
   },
   "event": {
     "state": {

@@ -25,7 +25,8 @@
     "error": "Ups, something went wrong...",
     "success": "The transaction was sent successfully. Changes will take effect in 20-30 seconds",
     "update_user": "Data updated successfully",
-    "update_user_avatar_error" : "Upload only PNG and JPG files. Maximum size 3.5MB"
+    "update_user_avatar_error" : "Upload only PNG and JPG files. Maximum size 3.5MB",
+    "network": "Connect your wallet only on the {{chain}} chain."
   },
   "event": {
     "state": {
