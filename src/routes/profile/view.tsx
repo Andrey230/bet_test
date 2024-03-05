@@ -75,7 +75,6 @@ export default function ProfileView(){
         }
     };
 
-
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => {
