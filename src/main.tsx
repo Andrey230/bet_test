@@ -22,6 +22,7 @@ import translation_ru from './i18n/ru/translation.json';
 import translation_es from './i18n/es/translation.json';
 import {I18nextProvider} from "react-i18next";
 const miniapp = import.meta.env.VITE_TELEGRAM_MINIAPP;
+const manifest = import.meta.env.VITE_MANIFEST;
 
 i18next.init({
     interpolation: {escapeValue: false},
@@ -90,7 +91,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
       <I18nextProvider i18n={i18next} >
-          <TonConnectUIProvider manifestUrl="https://bafkreicc6s2m6tr3onlvt67dd3pikzi5ppruj2u4u4kyxx2s5lsegfmu7q.ipfs.nftstorage.link/" actionsConfiguration={{
+          <TonConnectUIProvider manifestUrl={manifest} actionsConfiguration={{
               twaReturnUrl: miniapp
           }}>
               <RouterProvider router={router} />
