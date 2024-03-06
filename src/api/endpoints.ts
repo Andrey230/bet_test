@@ -34,7 +34,6 @@ export function getEvents(params = {}){
     });
 }
 
-
 export function getEvent(address: string){
     let url = baseUrl + `/events/${address}`;
 
