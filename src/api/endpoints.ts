@@ -126,6 +126,19 @@ async function sendPinataUrl(formData){
     }
 }
 
+export async function deletePinataFile(uuid){
+    try{
+        await axios.delete(`https://api.pinata.cloud/pinning/unpin/${uuid}`, {
+            headers: {
+                accept: "application/json",
+                Authorization: PINATA_JWT
+            }
+        });
+    } catch (error) {
+        throw new error;
+    }
+}
+
 export async function uploadPinataJson(json){
     const formData = new FormData();
     const jsonString = JSON.stringify(json);

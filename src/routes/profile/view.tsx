@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import {checkUser, getEvents, getProfileEvents, saveUser, saveUserAvatar} from "../../api/endpoints";
+import {checkUser, getProfileEvents, saveUser, saveUserAvatar, uploadPinataFile, deletePinataFile} from "../../api/endpoints";
 import EventGrid from "../../Components/EventGrid";
 import {useLoader, useNotification} from "../root";
 import {useTranslation} from "react-i18next";
@@ -7,9 +7,7 @@ import {useTonAddress} from "@tonconnect/ui-react";
 import {Address} from "ton-core";
 import {useEffect, useState} from "react";
 import {useTonConnect} from "../../hooks/useTonConnect";
-import { put, del } from "@vercel/blob";
 import { NavLink } from "react-router-dom";
-const blobToken = import.meta.env.VITE_BLOB_READ_WRITE_TOKEN;
 
 const limit = 10;
 const maxImageSize = 4500000;
@@ -131,20 +129,15 @@ export default function ProfileView(){
             });
         }
 
-        const filename = `avatars/avatar.${format}`;
-
         try {
-            const {url} = await put(filename, file, {
-                access: 'public',
-                token: blobToken,
-            });
+            const image = await uploadPinataFile(file);
+            const pinataImageUrl = `https://apricot-secret-orangutan-556.mypinata.cloud/ipfs/${image}`;
 
-            await saveUserAvatar(address, url).then((response) => response.json())
+            await saveUserAvatar(address, pinataImageUrl).then((response) => response.json())
                 .then(async (data) => {
                     if(user.avatar){
-                        del(user.avatar, {
-                            token: blobToken
-                        });
+                        const hash = user.avatar.match(/ipfs\/([^/]+)/)[1];
+                        await deletePinataFile(hash);
                     }
 
                     addNotification({
