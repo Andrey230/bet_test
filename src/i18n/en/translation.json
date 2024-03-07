@@ -92,11 +92,13 @@
     },
     "stop_sell_ticket": {
       "label": "Ticket sale closing date",
-      "error": "Stop sell ticket date must be earlier than the end date of the event"
+      "error": "Please set the ticket sales end date before the event end date, and not later than the current date.",
+      "info": "This is the date when ticket sales for your event end. After this date, participants will no longer be able to purchase tickets."
     },
     "end_event": {
       "label": "End event date",
-      "error": "The end date of the event cannot be earlier than the stop ticket sale date"
+      "error": "Please make sure that the event end date does not precede the ticket sales end date and is not earlier than the current date.",
+      "info" : "This is the date when your event ends. The event creator has 24 hours to determine the winner."
     },
     "tags": {
       "label": "Tags",

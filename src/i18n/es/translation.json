@@ -92,11 +92,13 @@
     },
     "stop_sell_ticket": {
       "label": "Fecha de cierre de venta de boletos",
-      "error": "La fecha de cierre de venta de boletos debe ser anterior a la fecha de finalización del evento"
+      "error": "Por favor, establezca la fecha de finalización de la venta de boletos antes de la fecha de finalización del evento y no más tarde que la fecha actual.",
+      "info": "Esta es la fecha en la que finalizan las ventas de entradas para tu evento. Después de esta fecha, los participantes ya no podrán comprar entradas."
     },
     "end_event": {
       "label": "Fecha de finalización del evento",
-      "error": "La fecha de finalización del evento no puede ser anterior a la fecha de cierre de venta de boletos"
+      "error": "Por favor, asegúrese de que la fecha de finalización del evento no preceda a la fecha de finalización de la venta de boletos y no sea anterior a la fecha actual.",
+      "info": "Esta es la fecha en la que termina tu evento. El creador del evento tiene 24 horas para determinar al ganador."
     },
     "tags": {
       "label": "Etiquetas",

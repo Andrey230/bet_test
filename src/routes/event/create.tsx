@@ -53,6 +53,7 @@ export default function EventCreate(){
 
     //DATE
     const defaultStopSellTicketDate = new Date();
+    defaultStopSellTicketDate.setMinutes(defaultStopSellTicketDate.getMinutes() + 20);
 
     const defaultEndEventDate = new Date(defaultStopSellTicketDate);
     defaultEndEventDate.setMinutes(defaultEndEventDate.getMinutes() + 10);
@@ -269,6 +270,11 @@ export default function EventCreate(){
     }
 
     const checkEndEventDate = (date) => {
+        if(BrandHelper.getTimeStamp(date) <= BrandHelper.getTimeStamp(new Date())){
+            setEndDateEventError(true);
+            return;
+        }
+
         if(BrandHelper.getTimeStamp(stopSellTicketDate) >= BrandHelper.getTimeStamp(date)){
             setEndDateEventError(true);
         }else{
@@ -278,6 +284,12 @@ export default function EventCreate(){
     }
 
     const checkStopSellTicketDate = (date) => {
+
+        if(BrandHelper.getTimeStamp(date) <= BrandHelper.getTimeStamp(new Date())){
+            setStopSellTicketDateError(true);
+            return;
+        }
+
         if(BrandHelper.getTimeStamp(date) >= BrandHelper.getTimeStamp(endEventDate)){
             setStopSellTicketDateError(true);
         }else{
@@ -349,7 +361,18 @@ export default function EventCreate(){
                         </div>
 
                         <div className="mt-5">
-                            <p className="font-semibold text-neutral mb-3">{t("create.stop_sell_ticket.label")}</p>
+                            <p className="font-semibold text-neutral mb-3 flex justify-between">{t("create.stop_sell_ticket.label")}
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn btn-circle btn-ghost btn-xs text-info">
+                                        <svg tabIndex={0} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    </div>
+                                    <div tabIndex={0} className="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-64">
+                                        <div tabIndex={0} className="card-body">
+                                            <p className="text-xs">{t("create.stop_sell_ticket.info")}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p>
 
                             <div className="flex justify-between gap-2">
                                 <div className="w-2/3">
@@ -358,8 +381,6 @@ export default function EventCreate(){
                                         selected={stopSellTicketDate}
                                         onChange={stopSellTicketDateHandler}
                                         customInput={<StopSellTicketInput />}
-                                        showTimeInput
-                                        timeInputLabel="Time:"
                                         dateFormat="dd.MM.yyyy"
                                         minDate={new Date()}
                                         shouldCloseOnSelect={false}
@@ -372,7 +393,18 @@ export default function EventCreate(){
                         </div>
 
                         <div className="mt-5">
-                            <p className="font-semibold text-neutral mb-3">{t("create.end_event.label")}</p>
+                            <p className="font-semibold text-neutral mb-3 flex justify-between">{t("create.end_event.label")}
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn btn-circle btn-ghost btn-xs text-info">
+                                        <svg tabIndex={0} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    </div>
+                                    <div tabIndex={0} className="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-64">
+                                        <div tabIndex={0} className="card-body">
+                                            <p className="text-xs">{t("create.end_event.info")}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p>
                             <div className="flex gap-2 justify-between">
                                 <div className="w-2/3">
                                     <DatePicker
