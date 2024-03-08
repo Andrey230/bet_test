@@ -42,8 +42,6 @@ export default function EventWaitingCard({event}){
 
     const sortedOptions = event.options.sort((a, b) => b.amount - a.amount);
 
-    console.log(sortedOptions);
-
     useEffect(() => {
         const updateTime = () => {
             updateTimer();
@@ -81,9 +79,10 @@ export default function EventWaitingCard({event}){
                 </Link>
 
                 <div>
+
                     <select className="select w-full max-w-xs bg-secondary-content" value={winnerOption} onChange={changeWinnerOption}>
-                        {event.options.map((value, index) => (
-                            <option key={index} value={value.option}>{value.name}</option>
+                        {sortedOptions.map((value, index) => (
+                            <option key={index} value={value.option}>{value.name} ({value.amount})</option>
                         ))}
                     </select>
 
