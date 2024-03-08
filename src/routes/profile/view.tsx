@@ -108,6 +108,8 @@ export default function ProfileView(){
                 success: false,
                 message: t("notification.update_user_avatar_error")
             });
+
+            return;
         }else{
             setAvatarUrl(URL.createObjectURL(e.target.files[0]));
         }
@@ -127,6 +129,8 @@ export default function ProfileView(){
                 success: false,
                 message: t("notification.update_user_avatar_error")
             });
+
+            return;
         }
 
         try {
