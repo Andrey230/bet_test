@@ -6,6 +6,8 @@ import {useNotification} from "../routes/root";
 import {useTranslation} from "react-i18next";
 const miniapp = import.meta.env.VITE_TELEGRAM_MINIAPP;
 
+console.log(miniapp);
+
 export function useTonConnect(): {
     //sender: Sender;
     connected: boolean;
