@@ -5,7 +5,10 @@ import {useTranslation} from "react-i18next";
 import { Link } from "react-router-dom";
 
 export default function EventWaitingCard({event}){
-    const [winnerOption, setWinnerOptionInput] = useState(1);
+
+    const sortedOptions = event.options.sort((a, b) => b.amount - a.amount);
+
+    const [winnerOption, setWinnerOptionInput] = useState(sortedOptions[0].option);
     const [leftHours, setLeftHours] = useState(0);
     const [leftMinutes, setLeftMinutes] = useState(0);
     const [leftSeconds, setLeftSeconds] = useState(0);
@@ -40,7 +43,6 @@ export default function EventWaitingCard({event}){
         setLeftSeconds(remainingSeconds);
     }
 
-    const sortedOptions = event.options.sort((a, b) => b.amount - a.amount);
 
     useEffect(() => {
         const updateTime = () => {

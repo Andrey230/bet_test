@@ -4,6 +4,7 @@ import {Buffer} from "buffer";
 import {sendTransaction} from "../api/endpoints";
 import {useNotification} from "../routes/root";
 import {useTranslation} from "react-i18next";
+const miniapp = import.meta.env.VITE_TELEGRAM_MINIAPP;
 
 export function useTonConnect(): {
     //sender: Sender;
@@ -32,6 +33,9 @@ export function useTonConnect(): {
                                     },
                                 ],
                                 validUntil: Date.now() + 5 * 60 * 1000,
+                            }, {
+                                returnStrategy: "back",
+                                twaReturnUrl: miniapp
                             });
 
                             const getTxHash = (
