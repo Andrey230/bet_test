@@ -36,9 +36,8 @@ export function useTonConnect(): {
                                 ],
                                 validUntil: Date.now() + 5 * 60 * 1000,
                             }, {
-                                returnStrategy: "back",
-                                twaReturnUrl: miniapp,
-                                skipRedirectToWallet: "always"
+                                returnStrategy: miniapp,
+                                twaReturnUrl: miniapp
                             });
 
                             const getTxHash = (
