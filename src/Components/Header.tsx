@@ -21,14 +21,6 @@ export default function Header() {
 
     const { open } = useTonConnectModal();
 
-    useEffect(() => {
-        if(["ru", "en"].includes(i18n.language)){
-            setOptions({
-                language: i18n.language
-            });
-        }
-    }, [i18n.language]);
-
     const disconnectWallet = async () => {
         await tonConnectUI.disconnect()
     }
