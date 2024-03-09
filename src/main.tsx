@@ -93,7 +93,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
       <I18nextProvider i18n={i18next} >
           <TonConnectUIProvider manifestUrl={manifest} actionsConfiguration={{
-              twaReturnUrl: 'https://t.me/tc_twa_demo_bot/start'
+              twaReturnUrl: miniapp
           }}>
               <RouterProvider router={router} />
           </TonConnectUIProvider>
