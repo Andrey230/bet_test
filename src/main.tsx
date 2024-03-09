@@ -94,7 +94,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <I18nextProvider i18n={i18next} >
           <TonConnectUIProvider manifestUrl={manifest} actionsConfiguration={{
               twaReturnUrl: miniapp,
-              returnStrategy: miniapp
+              returnStrategy: 'back'
           }}>
               <RouterProvider router={router} />
           </TonConnectUIProvider>

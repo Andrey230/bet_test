@@ -36,7 +36,7 @@ export function useTonConnect(): {
                                 ],
                                 validUntil: Date.now() + 5 * 60 * 1000,
                             }, {
-                                returnStrategy: miniapp,
+                                returnStrategy: 'back',
                                 twaReturnUrl: miniapp
                             });
 
