@@ -10,6 +10,7 @@ import {getWaitingEvents} from "../api/endpoints";
 import {useTonConnect} from "../hooks/useTonConnect";
 import { NavLink, useLocation } from "react-router-dom";
 import {useTonConnectUI} from "@tonconnect/ui-react";
+import { Analytics } from "@vercel/analytics/react"
 const chain = import.meta.env.VITE_NETWORK;
 
 const NotificationContext = createContext({});
@@ -114,6 +115,7 @@ export default function Root() {
             <LoaderContext.Provider value={contextLoaderValues}>
                 <NotificationContext.Provider value={contextValues}>
                     <RedirectContext.Provider value={contextRedirectValues}>
+                        <Analytics/>
                         <Notifications />
                         <LoadingScreen />
                         <Header />
