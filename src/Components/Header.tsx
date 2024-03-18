@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import {useCookies} from "react-cookie";
 import {useEffect} from "react";
 import { useTonConnectModal } from '@tonconnect/ui-react';
+import WebApp from "@twa-dev/sdk";
 
 export default function Header() {
     const [cookies, setCookie, removeCookie] = useCookies();
