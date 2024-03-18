@@ -49,6 +49,7 @@ export default function Header() {
 
     return (
         <>
+            {WebApp.initData}
             <div className="navbar bg-base-100 relative z-20 shadow-lg">
                 <div className="flex-1">
                     <div className="flex items-center">
